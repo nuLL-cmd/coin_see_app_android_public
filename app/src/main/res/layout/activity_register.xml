@@ -47,6 +47,7 @@
                     android:textStyle="bold" />
                 <EditText
                     android:id="@+id/edtNome_register"
+                    android:paddingEnd="15dp"
                     android:layout_width="145dp"
                     android:layout_height="50dp"
                     android:singleLine="true"
@@ -70,6 +71,7 @@
                     android:layout_width="145dp"
                     android:layout_marginStart="5dp"
                     android:singleLine="true"
+                    android:paddingEnd="15dp"
                     android:layout_height="50dp"
                     android:background="@drawable/bg_edt"
                     android:layout_alignTop="@id/edtNome_register"
@@ -91,6 +93,7 @@
                 android:id="@+id/edtCoutry_register"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:paddingEnd="15dp"
                 android:background="@drawable/bg_edt"
                 android:textColor="#A2A2A2"
                 android:singleLine="true"
@@ -115,7 +118,8 @@
                 android:textColor="#A2A2A2"
                 android:layout_marginTop="10dp"
                 android:hint="example@gmail.com"
-                android:paddingStart="15dp" />
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp" />
 
             <TextView
                 android:id="@+id/txtPhone_register"
@@ -131,6 +135,7 @@
                 android:background="@drawable/bg_edt"
                 android:singleLine="true"
                 android:textColor="#A2A2A2"
+                android:paddingEnd="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="62 9 9349-1566"
                 android:paddingStart="20dp" />
@@ -147,6 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:singleLine="true"
+                android:paddingEnd="15dp"
                 android:inputType="numberPassword"
                 android:background="@drawable/bg_edt"
                 android:textColor="#A2A2A2"
