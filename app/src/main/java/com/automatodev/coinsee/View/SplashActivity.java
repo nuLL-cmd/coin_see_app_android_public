@@ -1,14 +1,13 @@
-package com.automatodev.coinsee.Activity;
+package com.automatodev.coinsee.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.animation.AlphaAnimation;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.automatodev.coinsee.R;
 
@@ -33,5 +32,12 @@ public class SplashActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void actLogin(View view){
+        if (!LoginActivity.status){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 }
