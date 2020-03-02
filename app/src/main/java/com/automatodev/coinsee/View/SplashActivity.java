@@ -40,4 +40,10 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    public void actRegister(View view){
+        if(!RegisterActivity.status){
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
+        }
+    }
 }

@@ -9,7 +9,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
         android:background="#fff"
         android:orientation="vertical"
@@ -21,28 +20,30 @@
             android:orientation="vertical"
             android:padding="25dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:fontFamily="sans-serif"
-                android:text="Login"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtTitle_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Login"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-
                 android:text="SEU EMAIL:"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/edtEmail_login"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_edt"
+                android:singleLine="true"
                 android:textColor="#A2A2A2"
                 android:layout_marginTop="10dp"
                 android:hint="example@gmail.com"
@@ -56,16 +57,20 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/edtPass_login"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textColor="#A2A2A2"
                 android:hint="******"
+                android:maxLength="6"
                 android:inputType="numberPassword"
+                android:singleLine="true"
                 android:background="@drawable/bg_edt"
                 android:paddingStart="20dp" />
 
             <Button
+                android:id="@+id/btnLogin_login"
                 style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -77,6 +82,7 @@
 
 
             <TextView
+                android:id="@+id/txtForgot_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -96,6 +102,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
                 android:background="#E2E0E0"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,6 +123,8 @@
                     android:layout_height="match_parent"
                     android:text="Registre-se"
                     android:textAlignment="center"
+                    android:clickable="true"
+                    android:onClick="actRegisterLogin"
                     android:layout_marginStart="5dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark"
