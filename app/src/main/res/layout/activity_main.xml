@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background = "#E7E7E7"
     android:orientation="vertical"
     tools:context=".View.MainActivity">
 
@@ -127,7 +128,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCoin_main"
-            android:background="#fff"
+
+            tools:listitem="@layout/layout_celula_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
