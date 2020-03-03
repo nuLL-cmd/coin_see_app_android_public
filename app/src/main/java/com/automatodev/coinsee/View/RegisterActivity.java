@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         status = true;
     }
 
-    public void actLoginRegister(View view){
+    public void actRegisterLogin(View view){
         if(!LoginActivity.status){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

@@ -34,13 +34,13 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    public void actLogin(View view){
+    public void actSplashLogin(View view){
         if (!LoginActivity.status){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
     }
-    public void actRegister(View view){
+    public void actSplashRegister(View view){
         if(!RegisterActivity.status){
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);

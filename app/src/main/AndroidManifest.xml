@@ -11,15 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".View.MainActivity">
-
-        </activity>
-        <activity android:name=".View.RegisterActivity">
-
-        </activity>
-        <activity android:name=".View.LoginActivity">
-
-        </activity>
+        <activity android:name=".View.ForgotActivity"></activity>
+        <activity android:name=".View.MainActivity"></activity>
+        <activity android:name=".View.RegisterActivity"></activity>
+        <activity android:name=".View.LoginActivity"></activity>
         <activity android:name=".View.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

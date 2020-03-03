@@ -29,11 +29,17 @@ public class LoginActivity extends AppCompatActivity {
         status = true;
     }
 
-    public void actRegisterLogin(View view){
+    public void actLoginRegister(View view){
         if (!RegisterActivity.status){
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
             finish();
+        }
+    }
+    public void actLoginForgot(View view){
+        if (!ForgotActivity.status){
+            Intent intent = new Intent(this, ForgotActivity.class);
+            startActivity(intent);
         }
     }
 }
