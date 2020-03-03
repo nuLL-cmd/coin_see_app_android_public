@@ -42,4 +42,11 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    public void actLoginMain(View view){
+        if (!MainActivity.status){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 }

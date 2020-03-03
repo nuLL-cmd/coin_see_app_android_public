@@ -69,17 +69,18 @@
                 android:background="@drawable/bg_edt"
                 android:paddingStart="20dp" />
 
+
             <Button
                 android:id="@+id/btnLogin_login"
                 style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
+                android:onClick="actLoginMain"
                 android:background="@drawable/bg_btn_splash"
                 android:text="Login"
                 android:textColor="#fff"
                 android:textSize="19sp" />
-
 
             <TextView
                 android:id="@+id/txtForgot_login"
