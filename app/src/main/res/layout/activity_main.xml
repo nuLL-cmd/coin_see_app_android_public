@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = "#E7E7E7"
+    android:background = "#F3F3F3"
     android:orientation="vertical"
     tools:context=".View.MainActivity">
 
@@ -15,14 +15,47 @@
         android:orientation="vertical"
         android:background="@color/colorPrimaryDark">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CoinSee"
-            android:textColor="#fff"
-            android:textSize="19sp"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"/>
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CoinSee"
+                android:layout_marginStart="25dp"
+                android:textColor="#fff"
+                android:textSize="19sp"
+
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ola! "
+                android:layout_toStartOf="@id/lblUser_main"
+                android:textColor="#fff"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/lblUser_main"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"
+                android:text="Marco"
+                android:gravity="end"
+                android:layout_marginEnd="25dp"
+                android:textColor="#fff"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,9 +68,9 @@
                 android:layout_alignStart="@id/relativeTitle_main"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#fff"
-                app:backgroundTint="@color/colorPrimaryDark"
+                app:backgroundTint="#fff"
                 android:src="@drawable/ic_money_24dp"
-                app:borderWidth="6dp"
+                app:borderWidth="0dp"
                 android:elevation="0dp"
                 android:layout_marginStart="25dp"/>
 
@@ -48,8 +81,8 @@
                 android:layout_alignEnd="@id/relativeTitle_main"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#fff"
-                app:backgroundTint="@color/colorPrimaryDark"
-                app:borderWidth="6dp"
+                app:backgroundTint="#fff"
+                app:borderWidth="0dp"
                 android:src="@drawable/ic_perm_24dp"
                 android:elevation="0dp"
                 android:layout_marginEnd="25dp"/>
@@ -58,12 +91,12 @@
                 android:id="@+id/fbProfile_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_favorite_24dp"
+                android:src="@drawable/ic_favorite_red_24dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#fff"
-                app:backgroundTint="@color/colorPrimaryDark"
-                app:borderWidth="6dp"
+                app:backgroundTint="#fff"
+                app:borderWidth="0dp"
                 android:elevation="0dp"
                 android:layout_marginEnd="25dp"/>
 
@@ -84,7 +117,7 @@
                     android:layout_marginStart="25dp"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:textAlignment="center"
                     android:text="Favoritos"/>
 
@@ -94,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:textAlignment="center"
                     android:text="Bolsa"/>
 
@@ -104,7 +137,7 @@
                     android:layout_marginEnd="25dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:textAlignment="center"
                     android:text="Perfil"/>
             </RelativeLayout>
@@ -128,7 +161,6 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCoin_main"
-
             tools:listitem="@layout/layout_celula_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
