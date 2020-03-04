@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="350dp"
         android:orientation="vertical"
         android:background="@color/colorPrimaryDark">
 
@@ -65,27 +65,26 @@
                 android:id="@+id/fbBolsa_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@id/relativeTitle_main"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#fff"
                 app:backgroundTint="#fff"
                 android:src="@drawable/ic_money_24dp"
                 app:borderWidth="0dp"
                 android:elevation="0dp"
-                android:layout_marginStart="25dp"/>
+                android:layout_marginStart="35dp"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fbFav_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@id/relativeTitle_main"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#fff"
                 app:backgroundTint="#fff"
                 app:borderWidth="0dp"
                 android:src="@drawable/ic_perm_24dp"
                 android:elevation="0dp"
-                android:layout_marginEnd="25dp"/>
+                android:layout_marginEnd="35dp"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fbProfile_main"
@@ -101,49 +100,41 @@
                 android:layout_marginEnd="25dp"/>
 
 
-            <RelativeLayout
-                android:id="@+id/relativeTitle_main"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/bg_relative_main">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/fbProfile_main"
+
+                android:textColor="#fff"
+                android:layout_below="@id/fbProfile_main"
+                android:layout_marginTop="10sp"
+                android:textAlignment="center"
+                android:text="Favoritos"/>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="#fff"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="5dp"
-                    android:textAlignment="center"
-                    android:text="Favoritos"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/fbBolsa_main"
+                android:layout_alignStart="@id/fbBolsa_main"
+                android:layout_alignEnd="@id/fbBolsa_main"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                android:text="Bolsa"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/fbFav_main"
+                android:textColor="#fff"
+                android:layout_below="@id/fbFav_main"
+                android:layout_alignEnd="@id/fbFav_main"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:text="Perfil"/>
 
 
-                <TextView
-                    android:layout_width="57dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="#fff"
-                    android:textAlignment="center"
-                    android:text="Bolsa"/>
-
-                <TextView
-                    android:layout_width="57dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:textColor="#fff"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="5dp"
-                    android:textAlignment="center"
-                    android:text="Perfil"/>
-            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -156,7 +147,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCoin_main"
         android:background="@drawable/bg_relative_main"
-        android:layout_marginTop="-25dp"
+        android:layout_marginTop="-200dp"
         android:padding="10sp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
