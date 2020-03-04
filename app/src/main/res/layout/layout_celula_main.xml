@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-    app:cardElevation="10dp"
+    app:cardElevation="3dp"
     android:orientation="vertical"
     android:layout_marginBottom="10dp"
     android:layout_width="match_parent"
@@ -14,31 +14,69 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/txtCoin_layout"
+            android:id="@+id/txtName_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dólar Comercial"/>
 
 
         <ImageView
-            android:id="@+id/imgCoin_layout"
+            android:id="@+id/imgCode_layout"
             android:layout_width="28dp"
             android:src="@drawable/usa"
-            android:layout_below="@+id/txtCoin_layout"
+            android:layout_below="@+id/txtName_layout"
             android:layout_marginTop="8dp"
             android:layout_height="28dp"/>
 
         <TextView
-            android:id="@+id/txtCoinAB_layout"
+            android:id="@+id/txtCode_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="USD"
-            android:layout_toEndOf="@id/imgCoin_layout"
-            android:layout_alignTop="@id/imgCoin_layout"
-            android:layout_alignBottom="@id/imgCoin_layout"
+            android:layout_toEndOf="@id/imgCode_layout"
+            android:layout_alignTop="@id/imgCode_layout"
+            android:layout_alignBottom="@id/imgCode_layout"
             android:gravity="center"
             android:textStyle="bold"
             android:layout_marginStart="10dp"/>
+
+
+        <TextView
+            android:id="@+id/txtIn_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--->"
+            android:layout_toEndOf="@id/txtCode_layout"
+            android:layout_alignTop="@id/txtCode_layout"
+            android:layout_alignBottom="@id/txtCode_layout"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+        <ImageView
+            android:id="@+id/imgCodeIn_layout"
+            android:layout_width="28dp"
+            android:src="@drawable/brl"
+            android:layout_toEndOf="@id/txtIn_layout"
+            android:layout_alignTop="@id/txtCode_layout"
+            android:layout_alignBottom="@id/txtCode_layout"
+
+            android:layout_height="28dp"/>
+
+
+        <TextView
+            android:id="@+id/txtCodeIn_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BRL"
+            android:layout_toEndOf="@id/imgCodeIn_layout"
+            android:layout_alignTop="@id/imgCodeIn_layout"
+            android:layout_alignBottom="@id/imgCodeIn_layout"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"/>
+
+
 
         <TextView
             android:id="@+id/txtCoinValue_layout"
@@ -49,17 +87,17 @@
             android:text="$4.39"
             android:textColor="#034885"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@id/txtCoin_layout"/>
+            android:layout_alignTop="@id/txtName_layout"/>
 
 
         <TextView
             android:id="@+id/txtHigh_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:text="$4.41"
-            android:layout_below="@id/imgCoin_layout"
+            android:layout_below="@id/imgCode_layout"
             android:layout_marginTop="20sp"
             android:drawableStart="@drawable/ic_arrowup_4dp"/>
 
@@ -71,14 +109,15 @@
             android:layout_above="@id/viewVar_layout"
             android:layout_alignStart="@id/viewVar_layout"
             android:layout_alignEnd="@id/viewVar_layout"
+            android:textSize="10sp"
             android:textAlignment="center"/>
 
         <View
             android:id="@+id/viewVar_layout"
             android:layout_width="wrap_content"
             android:layout_height="3dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
             android:layout_alignBottom="@id/txtHigh_layout"
             android:background="#DBDBDB"
             android:layout_toStartOf="@id/txtLow_layout"
@@ -89,7 +128,7 @@
             android:id="@+id/txtLow_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:text="$4.28"
             android:layout_alignBottom="@id/txtHigh_layout"
@@ -104,7 +143,7 @@
             android:text="2020-03-03"
             android:layout_below="@id/txtHigh_layout"
             android:layout_marginTop="10dp"
-            android:layout_alignEnd="@id/txtHigh_layout"
+            android:textSize="13sp"
             android:textAlignment="center"
             android:textStyle="italic"/>
         <TextView
@@ -112,6 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="11:48:00"
+            android:textSize="13sp"
             android:layout_alignStart="@id/txtDate_layout"
             android:layout_below="@id/txtDate_layout"
             android:layout_marginTop="5dp"
@@ -124,6 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.55%"
+            android:textSize="10sp"
             android:layout_alignStart="@id/viewVar_layout"
             android:layout_below="@id/viewVar_layout"
             android:layout_marginTop="5dp"
@@ -132,8 +173,8 @@
 
         <ImageView
             android:id="@+id/imgFav_layout"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:src="@drawable/ic_favorite_red_24dp"
             android:layout_alignBottom="@id/txtHour_layout"
             android:layout_alignParentEnd="true"/>

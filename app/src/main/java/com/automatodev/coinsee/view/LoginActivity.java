@@ -1,4 +1,4 @@
-package com.automatodev.coinsee.View;
+package com.automatodev.coinsee.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 

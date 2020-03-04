@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background = "#F3F3F3"
     android:orientation="vertical"
-    tools:context=".View.MainActivity">
+    tools:context=".view.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -116,6 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_centerHorizontal="true"
+                    android:textColor="#fff"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="5dp"
                     android:textAlignment="center"
@@ -128,6 +129,7 @@
                     android:layout_marginStart="25dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="5dp"
+                    android:textColor="#fff"
                     android:textAlignment="center"
                     android:text="Bolsa"/>
 
@@ -136,6 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="25dp"
                     android:layout_alignParentEnd="true"
+                    android:textColor="#fff"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="5dp"
                     android:textAlignment="center"
@@ -150,22 +153,16 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginTop="-40dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCoin_main"
+        android:background="@drawable/bg_relative_main"
+        android:layout_marginTop="-25dp"
+        android:padding="10sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        tools:listitem="@layout/layout_celula_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:orientation="vertical"
-        android:layout_gravity="end">
+        android:layout_height="match_parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCoin_main"
-            tools:listitem="@layout/layout_celula_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-
-    </LinearLayout>
 
 </LinearLayout>
