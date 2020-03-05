@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.automatodev.coinsee.R;
 import com.automatodev.coinsee.controller.CoinEntity;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         showData();
     }
+
+    //F3F3F3 cor
 
     @Override
     protected void onStart() {
@@ -61,4 +65,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerCoin_main.setAdapter(coinAdapter);
 
     }
+
+    public void actMainProfile(View view){
+        if(!ProfileActivity.status){
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);;
+
+        }
+    }
+
 }

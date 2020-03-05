@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.RegisterActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="25dp"
+            android:background="#fff">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgBack_profile"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_btn_back"
+                    android:onClick="backTest"
+                    android:src="@drawable/ic_arrow_gray_32p"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:id="@+id/txtTitle_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/imgBack_profile"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="sans-serif"
+                    android:text="Perfil"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgUser_profile"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:src="@mipmap/ic_user_round" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtNome_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="NOME :"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/edtNome_profile"
+                    android:paddingEnd="15dp"
+                    android:layout_width="145dp"
+                    android:layout_height="50dp"
+                    android:singleLine="true"
+                    android:background="@drawable/bg_edt"
+                    android:layout_below="@id/txtNome_profile"
+                    android:textColor="#A2A2A2"
+                    android:layout_marginTop="10dp"
+                    android:hint="Nome"
+                    android:paddingStart="20dp" />
+
+                <TextView
+                    android:id="@+id/txtSobre_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="SOBRENOME :"
+                    android:layout_alignStart="@id/edtSobre_profile"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/edtSobre_profile"
+                    android:layout_width="145dp"
+                    android:layout_marginStart="5dp"
+                    android:singleLine="true"
+                    android:paddingEnd="15dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_edt"
+                    android:layout_alignTop="@id/edtNome_profile"
+                    android:layout_alignBottom="@id/edtNome_profile"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="#A2A2A2"
+                    android:hint="Sobrenome"
+                    android:paddingStart="20dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtCountry_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="PAIS :"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/edtCoutry_profile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:enabled="false"
+                android:paddingEnd="15dp"
+                android:background="@drawable/bg_edt"
+                android:textColor="#A2A2A2"
+                android:singleLine="true"
+                android:layout_marginTop="10dp"
+                android:hint="Brasil"
+                android:paddingStart="20dp" />
+
+
+            <TextView
+                android:id="@+id/txtEmail_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="EMAIL :"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/edtEmail_profile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:enabled="false"
+                android:singleLine="true"
+                android:background="@drawable/bg_edt"
+                android:textColor="#A2A2A2"
+                android:layout_marginTop="10dp"
+                android:hint="example@gmail.com"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp" />
+
+            <TextView
+                android:id="@+id/txtPhone_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="CELULAR :"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/edtPhone_profile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_edt"
+                android:singleLine="true"
+                android:textColor="#A2A2A2"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:hint="62 9 9349-1566"
+                android:paddingStart="20dp" />
+
+            <TextView
+                android:id="@+id/txtPass_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="SENHA :"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/edtPass_profile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:singleLine="true"
+                android:paddingEnd="15dp"
+                android:inputType="numberPassword"
+                android:enabled="false"
+                android:background="@drawable/bg_edt"
+                android:textColor="#A2A2A2"
+                android:layout_marginTop="10dp"
+                android:hint="******"
+                android:maxLength="6"
+                android:paddingStart="20dp" />
+
+            <Button
+                android:id="@+id/btnSave_profile"
+                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/bg_btn_splash"
+                android:text="Salvar"
+                android:textColor="#fff"
+                android:textSize="19sp" />
+
+        </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+</ScrollView>

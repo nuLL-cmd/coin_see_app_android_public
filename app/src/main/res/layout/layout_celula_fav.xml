@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    android:layout_marginStart="25dp"
+    android:layout_marginEnd="25dp"
+    android:layout_marginBottom="30dp"
+    app:cardCornerRadius="10dp"
+    android:orientation="vertical"
+    app:cardElevation="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="20sp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgCoin_layoutFav"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignBottom="@id/txtName_layoutFav"
+            android:layout_alignTop="@id/txtCode_layoutFav"
+            android:src="@drawable/usa"/>
+
+        <TextView
+            android:id="@+id/txtCode_layoutFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USD"
+            android:layout_toEndOf="@id/imgCoin_layoutFav"
+            android:layout_marginStart="20sp"
+            android:textStyle="bold"
+            android:textColor="#363636"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/txtName_layoutFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dolar Comercial"
+            android:layout_below="@id/txtCode_layoutFav"
+            android:layout_alignStart="@id/txtCode_layoutFav"
+            android:layout_marginTop="10dp"/>
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:background="@drawable/bg_btn_back"
+            android:src="@drawable/ic_trash_32dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
