@@ -69,7 +69,15 @@ public class MainActivity extends AppCompatActivity {
     public void actMainProfile(View view){
         if(!ProfileActivity.status){
             Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);;
+            startActivity(intent);
+
+        }
+    }
+
+    public void actMainFav(View view){
+        if(!FavActivity.status){
+            Intent intent = new Intent(this, FavActivity.class);
+            startActivity(intent);
 
         }
     }
