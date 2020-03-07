@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinsee.R;
@@ -64,4 +65,5 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler>{
             imgFav_layout = itemView.findViewById(R.id.imgFav_layout);
         }
     }
+
 }

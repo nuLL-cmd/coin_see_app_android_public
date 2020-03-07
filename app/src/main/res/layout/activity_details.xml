@@ -30,6 +30,7 @@
                     android:layout_height="32dp"
                     android:background="@drawable/bg_btn_back"
                     android:layout_marginTop="40dp"
+                    android:onClick="actDetailsMain"
                     android:layout_marginStart="25dp"
                     android:src="@drawable/ic_arrow_gray_32p"
                     />

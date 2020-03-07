@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.automatodev.coinsee.R;
@@ -77,14 +78,22 @@ public class FavActivity extends AppCompatActivity {
             @Override
             public void onIntemClick(int position) {
                 favAdapter.notifyItemChanged(position);
-                BottomSheetDialog bt = new BottomSheetDialog(FavActivity.this, R.style.BottomSheetDialogTheme);
+                final BottomSheetDialog bt = new BottomSheetDialog(FavActivity.this, R.style.BottomSheetDialogTheme);
                 View view = getLayoutInflater().inflate(R.layout.layout_bottom_bar_fav,null);
                 Button btnDetails_btFav = view.findViewById(R.id.btnDetails_btFav);
+                ImageButton imgClose_btFav = view.findViewById(R.id.imgClose_btFav);
                 btnDetails_btFav.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
                         Intent intent = new Intent(FavActivity.this, DetailsActivity.class);
+                        DetailsActivity.type = 1;
                         startActivity(intent);
+                    }
+                });
+                imgClose_btFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bt.dismiss();
                     }
                 });
                 bt.setContentView(view);

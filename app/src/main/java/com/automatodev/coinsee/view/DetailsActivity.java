@@ -2,12 +2,14 @@ package com.automatodev.coinsee.view;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.automatodev.coinsee.R;
@@ -28,12 +30,17 @@ import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
 
+    public static int type;
+
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        ImageButton imgBack_details = findViewById(R.id.imgBack_details);
 
+        if (type == 1)
+            imgBack_details.setVisibility(View.INVISIBLE);
 
         showGraph();
 
@@ -146,6 +153,9 @@ public class DetailsActivity extends AppCompatActivity {
                 return df.format(value);
             }
         };
+    }
+    public void actDetailsMain(View view){
+        NavUtils.navigateUpFromSameTask(DetailsActivity.this);
     }
 
 }
