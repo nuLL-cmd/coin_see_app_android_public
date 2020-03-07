@@ -1,4 +1,4 @@
-package com.automatodev.coinsee.view;
+package com.automatodev.coinsee.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;

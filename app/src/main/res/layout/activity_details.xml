@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
-        tools:context=".view.DetailsActivity">
+        tools:context=".view.activity.DetailsActivity">
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"

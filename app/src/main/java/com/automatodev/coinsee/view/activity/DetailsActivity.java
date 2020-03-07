@@ -1,4 +1,4 @@
-package com.automatodev.coinsee.view;
+package com.automatodev.coinsee.view.activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.automatodev.coinsee.R;
 import com.github.mikephil.charting.charts.LineChart;

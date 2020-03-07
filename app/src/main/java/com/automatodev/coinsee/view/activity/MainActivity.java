@@ -1,4 +1,4 @@
-package com.automatodev.coinsee.view;
+package com.automatodev.coinsee.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.automatodev.coinsee.R;
 import com.automatodev.coinsee.controller.CoinEntity;
