@@ -76,66 +76,78 @@
 
             </RelativeLayout>
 
-            <androidx.cardview.widget.CardView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="6dp"
-                android:layout_marginStart="40dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:layout_marginEnd="40dp"
+                android:layout_marginStart="40dp"
+                android:background="@drawable/bg_relative_details"
                 android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/bg_relative_details"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$4.39"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$4.39"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="13"
+                    android:shadowColor="#A13F3F3F"
+                    android:drawableStart="@drawable/ic_arrowup_4dp"
+                    android:textSize="25sp"
+                    android:drawablePadding="10dp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtHigh_details"
+                    android:layout_marginStart="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$4.26"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="13"
+                    android:shadowColor="#A13F3F3F"
+                    android:drawableStart="@drawable/ic_arrowdown_24dp"
+                    android:drawablePadding="10dp"
+                    android:textSize="25sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtLow_details"
+                    android:layout_marginStart="25dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alta"
+                    android:textColor="#0084ff"
 
-                        android:drawableStart="@drawable/ic_arrowup_4dp"
-                        android:textSize="25sp"
-                        android:drawablePadding="10dp"
-                        android:textStyle="bold"
-                        android:id="@+id/txtHigh_details"
-                        android:layout_marginStart="20dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$4.26"
+                    android:layout_below="@id/txtHigh_details"
+                    android:layout_alignStart="@id/txtHigh_details"
+                    android:layout_alignEnd="@id/txtHigh_details"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Baixa"
+                    android:textColor="#dd4b39"
+                    android:layout_below="@id/txtLow_details"
+                    android:layout_alignStart="@id/txtLow_details"
+                    android:layout_alignEnd="@id/txtLow_details"
+                    android:textAlignment="center"/>
+            </RelativeLayout>
 
-                        android:drawableStart="@drawable/ic_arrowdown_24dp"
-                        android:drawablePadding="10dp"
-                        android:textSize="25sp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="20dp"
-                        android:textStyle="bold"
-                        android:id="@+id/txtLow_details"
-                        android:layout_marginStart="25dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Alta"
-                        android:textColor="#0084ff"
 
-                        android:layout_below="@id/txtHigh_details"
-                        android:layout_alignStart="@id/txtHigh_details"
-                        android:layout_alignEnd="@id/txtHigh_details"
-                        android:textAlignment="center"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Baixa"
-                        android:textColor="#dd4b39"
-                        android:layout_below="@id/txtLow_details"
-                        android:layout_alignStart="@id/txtLow_details"
-                        android:layout_alignEnd="@id/txtLow_details"
-                        android:textAlignment="center"/>
-                </RelativeLayout>
+            <!--     <androidx.cardview.widget.CardView
+                     android:layout_width="match_parent"
+                     app:cardCornerRadius="10dp"
+                     app:cardElevation="6dp"
+                     android:layout_marginStart="40dp"
+                     android:layout_marginEnd="40dp"
+                     android:layout_height="wrap_content">
 
-            </androidx.cardview.widget.CardView>
+
+
+                 </androidx.cardview.widget.CardView>-->
 
 
 

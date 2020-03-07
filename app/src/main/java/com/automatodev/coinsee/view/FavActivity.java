@@ -8,14 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.automatodev.coinsee.R;
 import com.automatodev.coinsee.controller.CoinEntity;
-import com.automatodev.coinsee.view.adapter.CoinAdapter;
 import com.automatodev.coinsee.view.adapter.FavAdapter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -36,7 +33,7 @@ public class FavActivity extends AppCompatActivity {
         recyclerFav_fav = findViewById(R.id.recyclerFav_fav);
 
         showData();
-        onClick();
+        sClick();
     }
     @Override
     protected void onStart() {
@@ -73,7 +70,7 @@ public class FavActivity extends AppCompatActivity {
         NavUtils.navigateUpFromSameTask(this);
     }
 
-    public void onClick(){
+    private void sClick(){
         favAdapter.setOnItemClickListener(new FavAdapter.OnItemClickListener() {
             @Override
             public void onIntemClick(int position) {
@@ -87,7 +84,9 @@ public class FavActivity extends AppCompatActivity {
                     public void onClick(View v){
                         Intent intent = new Intent(FavActivity.this, DetailsActivity.class);
                         DetailsActivity.type = 1;
+                        bt.dismiss();
                         startActivity(intent);
+
                     }
                 });
                 imgClose_btFav.setOnClickListener(new View.OnClickListener() {

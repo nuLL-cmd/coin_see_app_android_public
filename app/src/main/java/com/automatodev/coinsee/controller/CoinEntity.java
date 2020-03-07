@@ -1,9 +1,12 @@
 package com.automatodev.coinsee.controller;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class CoinEntity {
+public class CoinEntity implements Parcelable {
 
     private String code;
     private String codein;
@@ -36,6 +39,34 @@ public class CoinEntity {
 
     public CoinEntity() {
     }
+
+    protected CoinEntity(Parcel in) {
+        code = in.readString();
+        codein = in.readString();
+        name = in.readString();
+        high = in.readDouble();
+        low = in.readDouble();
+        varBid = in.readDouble();
+        pctChange = in.readDouble();
+        bid = in.readDouble();
+        ask = in.readDouble();
+        timestamp = in.readLong();
+        create_date = in.readString();
+        urlCoin = in.readString();
+        fav = in.readByte() != 0;
+    }
+
+    public static final Creator<CoinEntity> CREATOR = new Creator<CoinEntity>() {
+        @Override
+        public CoinEntity createFromParcel(Parcel in) {
+            return new CoinEntity(in);
+        }
+
+        @Override
+        public CoinEntity[] newArray(int size) {
+            return new CoinEntity[size];
+        }
+    };
 
     public String getCode() {
         return code;
@@ -151,5 +182,27 @@ public class CoinEntity {
         result.put("fav",fav);
 
         return result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(code);
+        dest.writeString(codein);
+        dest.writeString(name);
+        dest.writeDouble(high);
+        dest.writeDouble(low);
+        dest.writeDouble(varBid);
+        dest.writeDouble(pctChange);
+        dest.writeDouble(bid);
+        dest.writeDouble(ask);
+        dest.writeLong(timestamp);
+        dest.writeString(create_date);
+        dest.writeString(urlCoin);
+        dest.writeByte((byte) (fav ? 1 : 0));
     }
 }

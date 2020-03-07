@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.automatodev.coinsee.R;
 import com.automatodev.coinsee.controller.CoinEntity;
@@ -30,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerCoin_main = findViewById(R.id.recyclerCoin_main);
 
         showData();
+        sClick();
     }
 
-    //F3F3F3 cor
 
     @Override
     protected void onStart() {
@@ -51,15 +54,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerCoin_main.hasFixedSize();
         recyclerCoin_main.setLayoutManager(new LinearLayoutManager(this));
 
-        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,true));
-        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
-        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
-        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,true));
         coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
         coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
         coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
         coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
-        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,true));
+        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
+        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
+        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
+        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
+        coinEntityList.add(new CoinEntity("USA","BRL","Dolar Comercial",null,false));
 
         coinAdapter = new CoinAdapter(coinEntityList, this);
         recyclerCoin_main.setAdapter(coinAdapter);
@@ -80,6 +83,24 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+    }
+
+    private void sClick(){
+        coinAdapter.setOnItemClickListener(new CoinAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                coinAdapter.notifyItemChanged(position);
+                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFavItemClick(int position) {
+
+
+
+            }
+        });
     }
 
 }
