@@ -78,9 +78,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#fff"
-                app:backgroundTint="#fff"
-                android:src="@drawable/ic_money_24dp"
-                app:borderWidth="0dp"
+                app:backgroundTint="#1E88E5"
+                android:src="@drawable/ic_home_32dp"
+                app:borderWidth="10dp"
                 android:elevation="0dp"
                 android:layout_marginStart="35dp"/>
 
@@ -130,11 +130,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/fbBolsa_main"
+                android:textStyle="bold"
                 android:layout_alignStart="@id/fbBolsa_main"
                 android:layout_alignEnd="@id/fbBolsa_main"
                 android:textColor="#fff"
                 android:textAlignment="center"
-                android:text="Bolsa"/>
+                android:text="Inicio"/>
 
             <TextView
                 android:layout_width="wrap_content"

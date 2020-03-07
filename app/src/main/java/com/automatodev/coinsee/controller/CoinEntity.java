@@ -28,6 +28,12 @@ public class CoinEntity {
         this.fav = fav;
     }
 
+    public CoinEntity(String code, String name, String urlCoin) {
+        this.code = code;
+        this.name = name;
+        this.urlCoin = urlCoin;
+    }
+
     public CoinEntity() {
     }
 

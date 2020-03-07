@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
         status = false;
     }
 
-    public void backTest(View view){
+    public void actProfileMain(View view){
         NavUtils.navigateUpFromSameTask(this);
     }
 }

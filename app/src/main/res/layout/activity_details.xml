@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        tools:context=".view.DetailsActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorPrimaryDark"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ImageButton
+                    android:id="@+id/imgBack_details"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_btn_back"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="25dp"
+                    android:src="@drawable/ic_arrow_gray_32p"
+                    />
+
+                <TextView
+                    android:id="@+id/txtNome_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dolar Comercial"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignTop="@id/imgBack_details"
+                    android:layout_alignBottom="@id/imgBack_details"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="$4.39"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+
+                    android:textSize="50dp"
+                    android:shadowColor="#A13F3F3F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="60"
+                    android:id="@+id/txtNow_details"
+                    android:layout_below="@id/txtNome_details"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="25dp"
+                    android:layout_marginStart="25dp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgUser_fav"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="25dp"
+                    android:layout_alignTop="@id/txtNome_details"
+                    android:src="@mipmap/ic_user_round" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/bg_relative_details"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$4.39"
+
+                    android:drawableStart="@drawable/ic_arrowup_4dp"
+                    android:textSize="25sp"
+                    android:drawablePadding="10dp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtHigh_details"
+                    android:layout_marginStart="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$4.26"
+
+                    android:drawableStart="@drawable/ic_arrowdown_24dp"
+                    android:drawablePadding="10dp"
+                    android:textSize="25sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtLow_details"
+                    android:layout_marginStart="25dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alta"
+                    android:textColor="#0084ff"
+
+                    android:layout_below="@id/txtHigh_details"
+                    android:layout_alignStart="@id/txtHigh_details"
+                    android:layout_alignEnd="@id/txtHigh_details"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Baixa"
+                    android:textColor="#dd4b39"
+                    android:layout_below="@id/txtLow_details"
+                    android:layout_alignStart="@id/txtLow_details"
+                    android:layout_alignEnd="@id/txtLow_details"
+                    android:textAlignment="center"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/bg_linear_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Range da semana"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+
+                    android:textColor="#9C9C9C"
+                 />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp"
+                    android:layout_margin="15dp"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:id="@+id/imgCode_details"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/usa"/>
+                        <TextView
+                            android:id="@+id/txtCode_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="USD"
+                            android:layout_toEndOf="@id/imgCode_details"
+                            android:layout_alignTop="@id/imgCode_details"
+                            android:layout_alignBottom="@id/imgCode_details"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginStart="10dp"/>
+
+                        <TextView
+                            android:id="@+id/txtIn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--->"
+                            android:layout_toEndOf="@id/txtCode_layout"
+                            android:layout_alignTop="@id/txtCode_layout"
+                            android:layout_alignBottom="@id/txtCode_layout"
+                            android:gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"/>
+
+
+                        <ImageView
+                            android:id="@+id/imgCodeIn_layout"
+                            android:layout_width="32dp"
+                            android:src="@drawable/brl"
+                            android:layout_toEndOf="@id/txtIn_layout"
+                            android:layout_alignTop="@id/txtCode_layout"
+                            android:layout_alignBottom="@id/txtCode_layout"
+
+                            android:layout_height="32dp"/>
+
+                        <TextView
+                            android:id="@+id/txtCodeIn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="BRL"
+                            android:layout_toEndOf="@id/imgCodeIn_layout"
+                            android:layout_alignTop="@id/imgCodeIn_layout"
+                            android:layout_alignBottom="@id/imgCodeIn_layout"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginStart="10dp"/>
+
+                        <ImageView
+                            android:id="@+id/imgFav_layout"
+                            android:layout_width="28dp"
+                            android:layout_gravity="start"
+                            android:layout_height="28dp"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_favorite_red_24dp" />
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_margin="15dp"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_height="210dp">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginBottom="10dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+

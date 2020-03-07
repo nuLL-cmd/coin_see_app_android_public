@@ -4,10 +4,10 @@
     android:background="#fff"
     android:layout_marginStart="25dp"
     android:layout_marginEnd="25dp"
-    android:layout_marginBottom="30dp"
+    android:layout_marginBottom="25dp"
     app:cardCornerRadius="10dp"
     android:orientation="vertical"
-    app:cardElevation="10dp"
+    app:cardElevation="6dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -45,8 +45,9 @@
             android:layout_marginTop="10dp"/>
 
         <ImageButton
+            android:id="@+id/btnDelete_layoutFav"
             android:layout_width="48dp"
-            android:background="@drawable/bg_btn_back"
+            android:background="@drawable/bg_btn_trash"
             android:src="@drawable/ic_trash_32dp"
             android:layout_height="48dp"
             android:layout_centerVertical="true"

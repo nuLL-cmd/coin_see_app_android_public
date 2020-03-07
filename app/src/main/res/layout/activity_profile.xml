@@ -33,7 +33,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:background="@drawable/bg_btn_back"
-                    android:onClick="backTest"
+                    android:onClick="actProfileMain"
                     android:src="@drawable/ic_arrow_gray_32p"
                     android:layout_centerVertical="true"/>
 
@@ -45,7 +45,7 @@
                     android:layout_centerVertical="true"
                     android:fontFamily="sans-serif"
                     android:text="Perfil"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="30sp"
                     android:textStyle="bold" />
