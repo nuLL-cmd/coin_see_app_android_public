@@ -6,17 +6,15 @@ import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.automatodev.coinsee.R;
-import com.automatodev.coinsee.controller.CoinEntity;
+import com.automatodev.coinsee.controller.entidade.CoinEntity;
 import com.automatodev.coinsee.view.adapter.FavAdapter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;

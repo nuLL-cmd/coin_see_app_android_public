@@ -1,4 +1,4 @@
-package com.automatodev.coinsee.controller;
+package com.automatodev.coinsee.controller.entidade;
 
 import android.os.Parcel;
 import android.os.Parcelable;

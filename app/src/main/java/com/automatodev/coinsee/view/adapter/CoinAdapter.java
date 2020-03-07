@@ -1,19 +1,16 @@
 package com.automatodev.coinsee.view.adapter;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinsee.R;
-import com.automatodev.coinsee.controller.CoinEntity;
-import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.automatodev.coinsee.controller.entidade.CoinEntity;
 
 import java.util.List;
 

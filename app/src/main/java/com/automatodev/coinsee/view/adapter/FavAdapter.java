@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinsee.R;
-import com.automatodev.coinsee.controller.CoinEntity;
+import com.automatodev.coinsee.controller.entidade.CoinEntity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 

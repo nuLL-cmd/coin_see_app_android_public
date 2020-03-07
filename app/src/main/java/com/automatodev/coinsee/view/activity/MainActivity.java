@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.automatodev.coinsee.R;
-import com.automatodev.coinsee.controller.CoinEntity;
+import com.automatodev.coinsee.controller.entidade.CoinEntity;
 import com.automatodev.coinsee.view.adapter.CoinAdapter;
 
 import java.util.ArrayList;
