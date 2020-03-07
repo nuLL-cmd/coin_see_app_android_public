@@ -9,12 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.automatodev.coinsee.R;
 import com.automatodev.coinsee.controller.CoinEntity;
 import com.automatodev.coinsee.view.adapter.CoinAdapter;
 import com.automatodev.coinsee.view.adapter.FavAdapter;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -75,8 +77,19 @@ public class FavActivity extends AppCompatActivity {
             @Override
             public void onIntemClick(int position) {
                 favAdapter.notifyItemChanged(position);
-                Intent intent = new Intent(FavActivity.this, DetailsActivity.class);
-                startActivity(intent);
+                BottomSheetDialog bt = new BottomSheetDialog(FavActivity.this, R.style.BottomSheetDialogTheme);
+                View view = getLayoutInflater().inflate(R.layout.layout_bottom_bar_fav,null);
+                Button btnDetails_btFav = view.findViewById(R.id.btnDetails_btFav);
+                btnDetails_btFav.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        Intent intent = new Intent(FavActivity.this, DetailsActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                bt.setContentView(view);
+                bt.setCancelable(true);
+                bt.show();
             }
 
             @Override
