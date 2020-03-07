@@ -276,7 +276,7 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="-30dp"
         app:civ_border_color="#f3f3f3"
-        app:civ_border_width="10dp"
+        app:civ_border_width="20dp"
         android:src="@drawable/usa_256"
         android:layout_alignTop="@id/rel_one"/>
 
