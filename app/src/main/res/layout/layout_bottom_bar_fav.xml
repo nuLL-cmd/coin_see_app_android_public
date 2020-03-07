@@ -1,284 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#00FFFFFF"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rel_one"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/bg_linear_fav">
-
-        <ImageButton
-            android:id="@+id/imgClose_btFav"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@drawable/bg_btn_back"
-            android:layout_marginEnd="25dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_close_32dp"
-            android:layout_alignParentEnd="true"/>
-
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rel_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical"
-            android:background="#f3f3f3">
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_linear_fav">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dolar Comercial"
-                android:textAlignment="textStart"
-                android:layout_marginEnd="25dp"
-                android:textSize="30sp"
-                android:shadowColor="#A1868585"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="15"
-                android:textStyle="bold"
-                android:textColor="#444141"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp"
-                android:id="@+id/txtNome_btFav"
-              />
-
-            <androidx.cardview.widget.CardView
-                app:cardCornerRadius="10dp"
-                app:cardElevation="6dp"
-                android:orientation="vertical"
-                android:layout_marginTop="25sp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="30dp"
+                android:background="#f3f3f3"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:padding="20dp"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/txtName_btFav"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/txtNameTitle_btFav"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Dólar Comercial"/>
-
-
-                    <ImageView
-                        android:id="@+id/imgCode_btFav"
-                        android:layout_width="28dp"
-                        android:src="@drawable/usa"
-                        android:layout_below="@+id/txtName_btFav"
-                        android:layout_marginTop="8dp"
-                        android:layout_height="28dp"/>
-
-                    <TextView
-                        android:id="@+id/txtCode_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="USD"
-                        android:layout_toEndOf="@id/imgCode_btFav"
-                        android:layout_alignTop="@id/imgCode_btFav"
-                        android:layout_alignBottom="@id/imgCode_btFav"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:layout_marginStart="10dp"/>
-
-
-                    <TextView
-                        android:id="@+id/txtIn_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="--->"
-                        android:layout_toEndOf="@id/txtCode_btFav"
-                        android:layout_alignTop="@id/txtCode_btFav"
-                        android:layout_alignBottom="@id/txtCode_btFav"
-                        android:gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"/>
-
-                    <ImageView
-                        android:id="@+id/imgCodeIn_btFav"
-                        android:layout_width="28dp"
-                        android:src="@drawable/brl"
-                        android:layout_toEndOf="@id/txtIn_btFav"
-                        android:layout_alignTop="@id/txtCode_btFav"
-                        android:layout_alignBottom="@id/txtCode_btFav"
-
-                        android:layout_height="28dp"/>
-
-
-                    <TextView
-                        android:id="@+id/txtCodeIn_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="BRL"
-                        android:layout_toEndOf="@id/imgCodeIn_btFav"
-                        android:layout_alignTop="@id/imgCodeIn_btFav"
-                        android:layout_alignBottom="@id/imgCodeIn_btFav"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:layout_marginStart="10dp"/>
-
-
-
-                    <TextView
-                        android:id="@+id/txtCoinValue_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:text="$4.39"
-                        android:textColor="#034885"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignTop="@id/txtName_btFav"/>
-
-
-                    <TextView
-                        android:id="@+id/txtHigh_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:text="$4.41"
-                        android:layout_below="@id/imgCode_btFav"
-                        android:layout_marginTop="20sp"
-                        android:drawableStart="@drawable/ic_arrowup_4dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Variação"
-                        android:layout_marginBottom="5dp"
-                        android:layout_above="@id/viewVar_btFav"
-                        android:layout_alignStart="@id/viewVar_btFav"
-                        android:layout_alignEnd="@id/viewVar_btFav"
-                        android:textSize="10sp"
-                        android:textAlignment="center"/>
-
-                    <View
-                        android:id="@+id/viewVar_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="3dp"
                         android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:layout_alignBottom="@id/txtHigh_btFav"
-                        android:background="#DBDBDB"
-                        android:layout_toStartOf="@id/txtLow_btFav"
-                        android:layout_toEndOf="@id/txtHigh_btFav"
-                        />
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_toStartOf="@id/imgCodeTitle_btFav"
+                        android:shadowColor="#A1868585"
+                        android:shadowDx="3"
+                        android:shadowDy="3"
+                        android:shadowRadius="15"
+                        android:text="Dolar Comercial"
+                        android:textAlignment="textStart"
+                        android:textColor="#444141"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/txtLow_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:text="$4.28"
-                        android:layout_alignBottom="@id/txtHigh_btFav"
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgCodeTitle_btFav"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignTop="@id/txtHigh_btFav"
-                        android:drawableStart="@drawable/ic_arrowdown_24dp"/>
-
-                    <TextView
-                        android:id="@+id/txtDate_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2020-03-03"
-                        android:layout_below="@id/txtHigh_btFav"
-                        android:layout_marginTop="35dp"
-                        android:textSize="13sp"
-                        android:textAlignment="center"
-                        android:textStyle="italic"/>
-
-                    <TextView
-                        android:id="@+id/txtSeparator_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" - "
-                        android:layout_marginStart="5dp"
-                        android:layout_alignTop="@id/txtDate_btFav"
-                        android:layout_alignBottom="@id/txtDate_btFav"
-                        android:gravity="center"
-                        android:layout_toEndOf="@id/txtDate_btFav"/>
-
-                    <TextView
-                        android:id="@+id/txtHour_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="11:48:00"
-                        android:textSize="13sp"
-                        android:layout_toEndOf="@id/txtSeparator_btFav"
-                        android:layout_alignTop="@id/txtSeparator_btFav"
-                        android:layout_alignBottom="@id/txtSeparator_btFav"
-                        android:layout_marginStart="5dp"
-                        android:textAlignment="center"
-                        android:textStyle="italic"/>
-
-                    <TextView
-                        android:id="@+id/txtPercent_btFav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0.55%"
-                        android:textSize="10sp"
-                        android:layout_alignStart="@id/viewVar_btFav"
-                        android:layout_below="@id/viewVar_btFav"
-                        android:layout_marginTop="5dp"
-                        android:layout_alignEnd="@id/viewVar_btFav"
-                        android:textAlignment="center" />
-
-                    <ImageView
-                        android:id="@+id/imgFav_btFav"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/ic_favorite_red_24dp"
-                        android:layout_alignBottom="@id/txtHour_btFav"
-                        android:layout_alignParentEnd="true"/>
-
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/usa_256"
+                        app:civ_border_color="#f3f3f3"
+                        app:civ_border_width="10dp" />
 
                 </RelativeLayout>
 
-            </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="25sp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp">
 
-            <Button
-                android:id="@+id/btnDetails_btFav"
-                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_btn_splash"
-                android:text="Detalhes"
-                android:textColor="#fff"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:shadowRadius="30"
-                android:layout_marginBottom="20dp"
-                android:textSize="19sp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
 
-        </LinearLayout>
-    </RelativeLayout>
+                        <TextView
+                            android:id="@+id/txtName_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dólar Comercial" />
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgCodeTitle_btFav"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="-30dp"
-        app:civ_border_color="#f3f3f3"
-        app:civ_border_width="20dp"
-        android:src="@drawable/usa_256"
-        android:layout_alignTop="@id/rel_one"/>
+                        <ImageView
+                            android:id="@+id/imgCode_btFav"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_below="@+id/txtName_btFav"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/usa" />
+
+                        <TextView
+                            android:id="@+id/txtCode_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/imgCode_btFav"
+                            android:layout_alignBottom="@id/imgCode_btFav"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@id/imgCode_btFav"
+                            android:gravity="center"
+                            android:text="USD"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/txtIn_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/txtCode_btFav"
+                            android:layout_alignBottom="@id/txtCode_btFav"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@id/txtCode_btFav"
+                            android:gravity="center"
+                            android:text="--->" />
+
+                        <ImageView
+                            android:id="@+id/imgCodeIn_btFav"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_alignTop="@id/txtCode_btFav"
+                            android:layout_alignBottom="@id/txtCode_btFav"
+                            android:layout_toEndOf="@id/txtIn_btFav"
+
+                            android:src="@drawable/brl" />
+
+
+                        <TextView
+                            android:id="@+id/txtCodeIn_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/imgCodeIn_btFav"
+                            android:layout_alignBottom="@id/imgCodeIn_btFav"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@id/imgCodeIn_btFav"
+                            android:gravity="center"
+                            android:text="BRL"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/txtCoinValue_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/txtName_btFav"
+                            android:layout_alignParentEnd="true"
+                            android:text="$4.39"
+                            android:textColor="#034885"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/txtHigh_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/imgCode_btFav"
+                            android:layout_marginTop="20sp"
+                            android:drawableStart="@drawable/ic_arrowup_4dp"
+                            android:text="$4.41"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/viewVar_btFav"
+                            android:layout_alignStart="@id/viewVar_btFav"
+                            android:layout_alignEnd="@id/viewVar_btFav"
+                            android:layout_marginBottom="5dp"
+                            android:text="Variação"
+                            android:textAlignment="center"
+                            android:textSize="10sp" />
+
+                        <View
+                            android:id="@+id/viewVar_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="3dp"
+                            android:layout_alignBottom="@id/txtHigh_btFav"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginEnd="25dp"
+                            android:layout_toStartOf="@id/txtLow_btFav"
+                            android:layout_toEndOf="@id/txtHigh_btFav"
+                            android:background="#DBDBDB" />
+
+                        <TextView
+                            android:id="@+id/txtLow_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/txtHigh_btFav"
+                            android:layout_alignBottom="@id/txtHigh_btFav"
+                            android:layout_alignParentEnd="true"
+                            android:drawableStart="@drawable/ic_arrowdown_24dp"
+                            android:text="$4.28"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtDate_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtHigh_btFav"
+                            android:layout_marginTop="35dp"
+                            android:text="2020-03-03"
+                            android:textAlignment="center"
+                            android:textSize="13sp"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:id="@+id/txtSeparator_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/txtDate_btFav"
+                            android:layout_alignBottom="@id/txtDate_btFav"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@id/txtDate_btFav"
+                            android:gravity="center"
+                            android:text=" - " />
+
+                        <TextView
+                            android:id="@+id/txtHour_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/txtSeparator_btFav"
+                            android:layout_alignBottom="@id/txtSeparator_btFav"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@id/txtSeparator_btFav"
+                            android:text="11:48:00"
+                            android:textAlignment="center"
+                            android:textSize="13sp"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:id="@+id/txtPercent_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/viewVar_btFav"
+                            android:layout_alignStart="@id/viewVar_btFav"
+                            android:layout_alignEnd="@id/viewVar_btFav"
+                            android:layout_marginTop="5dp"
+                            android:text="0.55%"
+                            android:textAlignment="center"
+                            android:textSize="10sp" />
+
+                        <ImageView
+                            android:id="@+id/imgFav_btFav"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_alignBottom="@id/txtHour_btFav"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_favorite_red_24dp" />
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnClose_btFav"
+                    style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_btn_splash"
+                    android:shadowRadius="30"
+                    android:text="Fechar"
+                    android:textColor="#fff"
+                    android:textSize="19sp" />
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="210dp"
+                            android:layout_margin="15dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
+
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/chart_btFav"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginBottom="10dp" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </ScrollView>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
 
 
 </RelativeLayout>

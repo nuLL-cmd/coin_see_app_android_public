@@ -29,17 +29,11 @@ import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    public static int type;
-
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        ImageButton imgBack_details = findViewById(R.id.imgBack_details);
-
-        if (type == 1)
-            imgBack_details.setVisibility(View.INVISIBLE);
 
         showGraph();
 
@@ -153,6 +147,7 @@ public class DetailsActivity extends AppCompatActivity {
             }
         };
     }
+    //Metodo que volta da activity main para a details
     public void actDetailsMain(View view){
         NavUtils.navigateUpFromSameTask(DetailsActivity.this);
     }
