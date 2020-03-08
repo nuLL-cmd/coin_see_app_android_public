@@ -86,8 +86,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:textStyle="bold|italic"
+            android:textStyle="italic"
             android:text="$4.39"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="13"
+            android:shadowColor="#76B6EE"
             android:textColor="@color/colorPrimaryDark"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/txtName_layout"/>

@@ -104,7 +104,7 @@
                              android:drawableStart="@drawable/ic_arrowup_4dp"
                              android:textSize="25sp"
                              android:drawablePadding="10dp"
-                             android:textStyle="bold"
+
                              android:id="@+id/txtHigh_details"
                              android:layout_marginStart="20dp"/>
                          <TextView
@@ -120,7 +120,6 @@
                              android:textSize="25sp"
                              android:layout_alignParentEnd="true"
                              android:layout_marginEnd="20dp"
-                             android:textStyle="bold"
                              android:id="@+id/txtLow_details"
                              android:layout_marginStart="25dp"/>
                          <TextView
