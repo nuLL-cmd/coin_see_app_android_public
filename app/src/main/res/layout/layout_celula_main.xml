@@ -6,8 +6,8 @@
     app:cardElevation="10dp"
     android:orientation="vertical"
     android:layout_marginBottom="10dp"
-    android:layout_marginStart="25dp"
-    android:layout_marginEnd="25dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -26,7 +26,7 @@
         <ImageView
             android:id="@+id/imgCode_layout"
             android:layout_width="28dp"
-            android:src="@drawable/usa"
+            android:src="@drawable/usd"
             android:layout_below="@+id/txtName_layout"
             android:layout_marginTop="8dp"
             android:layout_height="28dp"/>
@@ -86,9 +86,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:textStyle="bold"
+            android:textStyle="bold|italic"
             android:text="$4.39"
-            android:textColor="#034885"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/txtName_layout"/>
 
@@ -140,37 +140,23 @@
             android:drawableStart="@drawable/ic_arrowdown_24dp"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_height="wrap_content"
+            android:text="Ultima cotação:"
+            android:textStyle="italic"
+            android:layout_below="@id/txtHigh_layout"
+            android:textColor="#dd4b39"
+            android:id="@+id/txtLastCot_layout"/>
+
+        <TextView
             android:id="@+id/txtDate_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2020-03-03"
-            android:layout_below="@id/txtHigh_layout"
-            android:layout_marginTop="35dp"
-            android:textSize="13sp"
-            android:textAlignment="center"
-            android:textStyle="italic"/>
+            android:layout_below="@id/txtLastCot_layout"
 
-        <TextView
-            android:id="@+id/txtSeparator_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" - "
-            android:layout_marginStart="5dp"
-            android:layout_alignTop="@id/txtDate_layout"
-            android:layout_alignBottom="@id/txtDate_layout"
-            android:gravity="center"
-            android:layout_toEndOf="@id/txtDate_layout"/>
-
-        <TextView
-            android:id="@+id/txtHour_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="11:48:00"
             android:textSize="13sp"
-            android:layout_toEndOf="@id/txtSeparator_layout"
-            android:layout_alignTop="@id/txtSeparator_layout"
-            android:layout_alignBottom="@id/txtSeparator_layout"
-            android:layout_marginStart="5dp"
             android:textAlignment="center"
             android:textStyle="italic"/>
 
@@ -180,6 +166,7 @@
             android:layout_height="wrap_content"
             android:text="0.55%"
             android:textSize="10sp"
+            android:textColor="#43A047"
             android:layout_alignStart="@id/viewVar_layout"
             android:layout_below="@id/viewVar_layout"
             android:layout_marginTop="5dp"
@@ -192,7 +179,7 @@
             android:clickable="true"
             android:layout_height="28dp"
             android:src="@drawable/ic_favorite_red_24dp"
-            android:layout_alignBottom="@id/txtHour_layout"
+            android:layout_alignBottom="@id/txtDate_layout"
             android:layout_alignParentEnd="true"/>
 
 
