@@ -3,8 +3,8 @@ package com.automatodev.coinsee.controller.service;
 import android.app.Activity;
 import android.util.Log;
 
-import com.automatodev.coinsee.controller.entidade.CoinDaddy;
 import com.automatodev.coinsee.controller.entidade.CoinChildr;
+import com.automatodev.coinsee.controller.entidade.CoinDaddy;
 import com.automatodev.coinsee.models.RequestService;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +34,6 @@ public class CoinService {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         request = retrofit.create(RequestService.class);
-
         Call<CoinDaddy> call = request.requestAll();
         call.enqueue(new Callback<CoinDaddy>() {
             @Override
@@ -57,9 +56,11 @@ public class CoinService {
                     coinChildrList.add(daddyTests.getxRP());
                     coinChildrList.add(daddyTests.getuSDT());
                 }
-
-                retrofitCallback.onSucces(coinChildrList);
-
+                try {
+                    retrofitCallback.onSucces(coinChildrList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -67,7 +68,32 @@ public class CoinService {
                 Log.i("logx", "Error: " + t.getMessage(), t);
             }
         });
-
         return coinChildrList;
+    }
+
+    public void requestRangeDays(String value, final RetrofitCallback callback) {
+        final List<CoinChildr> childerList = new ArrayList<>();
+        retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        request = retrofit.create(RequestService.class);
+        Call<List<CoinChildr>> call = request.requestRangeDay(value, 7);
+        call.enqueue(new Callback<List<CoinChildr>>() {
+            @Override
+            public void onResponse(Call<List<CoinChildr>> call, Response<List<CoinChildr>> response) {
+                List<CoinChildr> childrsAux = response.body();
+                if (childrsAux != null) {
+                    childerList.addAll(childrsAux);
+                }
+                try {
+                    callback.onSucces(childerList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CoinChildr>> call, Throwable t) {
+                Log.e("logx", "Error: " + t.getMessage(), t);
+            }
+        });
     }
 }

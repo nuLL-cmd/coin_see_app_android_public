@@ -3,6 +3,7 @@ package com.automatodev.coinsee.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static boolean status;
+    private ProgressBar progressChart_main;
     private RecyclerView recyclerCoin_main;
     private CoinAdapter coinAdapter;
     private List<CoinChildr> coinChildrList;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerCoin_main = findViewById(R.id.recyclerCoin_main);
+        progressChart_main = findViewById(R.id.progressChart_main);
         task = new CoinService(this);
         getData();
     }
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData() {
+
         coinChildrList = new ArrayList<>();
         recyclerCoin_main.hasFixedSize();
         recyclerCoin_main.setLayoutManager(new LinearLayoutManager(this));
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     coinChildrList.get(i).setUlrPhoto(resources[i]);
                 coinAdapter = new CoinAdapter(coinChildrList, MainActivity.this);
                 recyclerCoin_main.setAdapter(coinAdapter);
+                progressChart_main.setVisibility(View.GONE);
                 sClick();
             }
         });
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 coinAdapter.notifyItemChanged(position);
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                intent.putExtra("value",coinChildrList.get(position));
                 startActivity(intent);
             }
 
@@ -93,5 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFavItemClick(int position) {
             }
         });
+    }
+    public void refreshData(View view){
     }
 }

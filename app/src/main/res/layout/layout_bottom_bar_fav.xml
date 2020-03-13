@@ -46,24 +46,22 @@
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <ImageView
                         android:id="@+id/imgCodeTitle_btFav"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="15dp"
-                        android:src="@drawable/usa_256"
-                        app:civ_border_color="#f3f3f3"
-                        app:civ_border_width="10dp" />
+                        android:src="@drawable/eth" />
 
                 </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="25sp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical"
                     app:cardCornerRadius="10dp"
@@ -145,7 +143,10 @@
                             android:layout_alignTop="@id/txtName_btFav"
                             android:layout_alignParentEnd="true"
                             android:text="$4.39"
-                            android:textColor="#034885"
+                            android:shadowDx="3"
+                            android:shadowDy="3"
+                            android:shadowRadius="13"
+                            android:shadowColor="#AAA9A9"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -199,36 +200,23 @@
                             android:id="@+id/txtDate_btFav"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/txtHigh_btFav"
-                            android:layout_marginTop="35dp"
+                            android:layout_below="@id/txtLastCot_btFav"
                             android:text="2020-03-03"
                             android:textAlignment="center"
+                            android:textColor="#FB8C00"
                             android:textSize="13sp"
                             android:textStyle="italic" />
 
                         <TextView
-                            android:id="@+id/txtSeparator_btFav"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/txtDate_btFav"
-                            android:layout_alignBottom="@id/txtDate_btFav"
-                            android:layout_marginStart="5dp"
-                            android:layout_toEndOf="@id/txtDate_btFav"
-                            android:gravity="center"
-                            android:text=" - " />
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_height="wrap_content"
+                        android:text="Atualizado:"
+                        android:textStyle="bold"
+                        android:layout_below="@id/txtHigh_btFav"
+                        android:textColor="#FB8C00"
+                        android:id="@+id/txtLastCot_btFav"/>
 
-                        <TextView
-                            android:id="@+id/txtHour_btFav"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/txtSeparator_btFav"
-                            android:layout_alignBottom="@id/txtSeparator_btFav"
-                            android:layout_marginStart="5dp"
-                            android:layout_toEndOf="@id/txtSeparator_btFav"
-                            android:text="11:48:00"
-                            android:textAlignment="center"
-                            android:textSize="13sp"
-                            android:textStyle="italic" />
 
                         <TextView
                             android:id="@+id/txtPercent_btFav"
@@ -246,7 +234,7 @@
                             android:id="@+id/imgFav_btFav"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
-                            android:layout_alignBottom="@id/txtHour_btFav"
+                            android:layout_alignBottom="@id/txtDate_btFav"
                             android:layout_alignParentEnd="true"
                             android:src="@drawable/ic_favorite_red_24dp" />
 
@@ -261,9 +249,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/bg_btn_splash"
                     android:shadowRadius="30"
                     android:text="Fechar"
@@ -280,23 +268,41 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="210dp"
-                            android:layout_margin="15dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="6dp">
 
-                            <com.github.mikephil.charting.charts.LineChart
-                                android:id="@+id/chart_btFav"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="200dp"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:layout_marginBottom="10dp" />
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:text="Últimas alterações"
+                                    android:textAlignment="center"
+                                    android:textSize="14sp"/>
+
+
+
+                                <com.github.mikephil.charting.charts.LineChart
+                                    android:id="@+id/chart_btFav"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="200dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginBottom="10dp" />
+
+                            </LinearLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
                 </ScrollView>

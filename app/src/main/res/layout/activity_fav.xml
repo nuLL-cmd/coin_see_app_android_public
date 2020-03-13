@@ -6,12 +6,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F3F3"
+    android:background="#fff"
     tools:context=".view.activity.FavActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_marginTop="25dp"
+        android:background="#fff"
         android:layout_height="wrap_content">
 
 
@@ -20,10 +21,12 @@
             android:layout_width="32dp"
             android:onClick="actFavMain"
             android:layout_height="32dp"
+            android:layout_alignBottom="@id/imgUser_fav"
+            android:layout_alignTop="@id/imgUser_fav"
             android:background="@drawable/bg_btn_back"
             android:layout_marginStart="25dp"
             android:src="@drawable/ic_arrow_gray_32p"
-            android:layout_centerVertical="true"/>
+         />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgUser_fav"
@@ -32,29 +35,27 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="end"
             android:layout_marginEnd="25dp"
-            android:layout_centerVertical="true"
+
             android:src="@mipmap/ic_user_round" />
 
+
+
+        <TextView
+            android:id="@+id/txtTitle_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aqui estão listados as suas cotações favoritas"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/imgUser_fav"
+            />
     </RelativeLayout>
 
 
 
-    <TextView
-        android:id="@+id/txtTitle_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="Aqui estão listados as suas cotações favoritas"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        android:textSize="25dp"
-        android:shadowColor="#A1868585"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="17"
-        android:textColor="#363636"
-        android:layout_marginTop="25dp"
-        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFav_fav"

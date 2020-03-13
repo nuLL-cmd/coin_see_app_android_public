@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-    app:cardElevation="10dp"
+    app:cardElevation="3dp"
     android:orientation="vertical"
     android:layout_marginBottom="10dp"
     android:layout_marginStart="20dp"
@@ -86,13 +86,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:textStyle="italic"
+            android:textStyle="bold"
+
             android:text="$4.39"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="13"
-            android:shadowColor="#76B6EE"
-            android:textColor="@color/colorPrimaryDark"
+            android:shadowColor="#AAA9A9"
+
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/txtName_layout"/>
 
@@ -147,10 +148,10 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
-            android:text="Ultima cotação:"
-            android:textStyle="italic"
+            android:text="Atualizado em:"
+            android:textStyle="bold"
+            android:textColor="#FB8C00"
             android:layout_below="@id/txtHigh_layout"
-            android:textColor="#dd4b39"
             android:id="@+id/txtLastCot_layout"/>
 
         <TextView
@@ -159,7 +160,7 @@
             android:layout_height="wrap_content"
             android:text="2020-03-03"
             android:layout_below="@id/txtLastCot_layout"
-
+            android:textColor="#FB8C00"
             android:textSize="13sp"
             android:textAlignment="center"
             android:textStyle="italic"/>
@@ -170,6 +171,7 @@
             android:layout_height="wrap_content"
             android:text="0.55%"
             android:textSize="10sp"
+            android:textStyle="bold"
             android:textColor="#43A047"
             android:layout_alignStart="@id/viewVar_layout"
             android:layout_below="@id/viewVar_layout"

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinsee.R;
-import com.automatodev.coinsee.controller.entidade.CoinEntity;
+import com.automatodev.coinsee.controller.entidade.CoinChildr;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
@@ -19,14 +19,14 @@ import java.util.List;
 
 public class FavAdapter extends RecyclerView.Adapter<FavAdapter.DataHandler> {
     private Activity context;
-    private List<CoinEntity> coinEntityList;
+    private List<CoinChildr> coinEntityList;
     private  OnItemClickListener listener;
 
     public interface OnItemClickListener{
         void onIntemClick(int position);
         void onDeleteClick(int position);
     }
-    public FavAdapter(Activity context, List<CoinEntity> coinEntityList) {
+    public FavAdapter(Activity context, List<CoinChildr> coinEntityList) {
         this.context = context;
         this.coinEntityList = coinEntityList;
     }
@@ -43,11 +43,11 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.DataHandler> {
 
     @Override
     public void onBindViewHolder(@NonNull DataHandler holder, int position) {
-        CoinEntity coinEntity = coinEntityList.get(position);
+        CoinChildr coinEntity = coinEntityList.get(position);
         holder.txtName_layoutFav.setText(coinEntity.getName());
         holder.txtCode_layoutFav.setText(coinEntity.getCode());
 
-        Glide.with(context).load(coinEntity.getUrlCoin())
+        Glide.with(context).load(coinEntity.getUlrPhoto())
                 .placeholder(R.drawable.usa)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.imgCoin_layoutFav);

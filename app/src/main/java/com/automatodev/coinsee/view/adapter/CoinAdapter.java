@@ -16,21 +16,22 @@ import com.automatodev.coinsee.controller.service.ConvertData;
 
 import java.util.List;
 
-public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler>{
+public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
     private final Activity context;
     private List<CoinChildr> coinChildrs;
     private OnItemClickListener listener;
     private ConvertData convertData;
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
-        void onFavItemClick(int position);
 
+        void onFavItemClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+
     public CoinAdapter(List<CoinChildr> coinChildrs, Activity context) {
         this.context = context;
         this.coinChildrs = coinChildrs;
@@ -40,8 +41,8 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler>{
     @NonNull
     @Override
     public CoinAdapter.DataHandler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_celula_main,parent, false);
-        return new DataHandler(view,listener);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_celula_main, parent, false);
+        return new DataHandler(view, listener);
     }
 
     @Override
@@ -54,11 +55,12 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler>{
         holder.txtHigh_layout.setText(coinChildr.getHigh());
         holder.txtLow_layout.setText(coinChildr.getLow());
         holder.txtCoinValue_layout.setText(convertData.convertDecimal(coinChildr.getBid()));
-        holder.txtDate_layout.setText(coinChildr.getCreate_date());
-        holder.txtPercent_layout.setText(coinChildr.getPctChange()+"%");
+        if (coinChildr.getTimestamp().length() > 10)
+            holder.txtDate_layout.setText(convertData.convertDate(coinChildr.getTimestamp().substring(0, 10)));
+        else
+            holder.txtDate_layout.setText(convertData.convertDate(coinChildr.getTimestamp()));
+        holder.txtPercent_layout.setText(coinChildr.getPctChange() + "%");
         holder.imgCode_layout.setImageResource(coinChildr.getUlrPhoto());
-
-
     }
 
     @Override
@@ -78,10 +80,8 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler>{
         private TextView txtDate_layout;
         private TextView txtPercent_layout;
 
-
         public DataHandler(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-
             txtName_layout = itemView.findViewById(R.id.txtName_layout);
             txtCode_layout = itemView.findViewById(R.id.txtCode_layout);
             txtCodeIn_layout = itemView.findViewById(R.id.txtCodeIn_layout);
@@ -92,11 +92,10 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler>{
             txtCoinValue_layout = itemView.findViewById(R.id.txtCoinValue_layout);
             txtDate_layout = itemView.findViewById(R.id.txtDate_layout);
             txtPercent_layout = itemView.findViewById(R.id.txtPercent_layout);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null){
+                    if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION)
                             listener.onItemClick(position);
@@ -106,7 +105,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler>{
             imgFav_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null){
+                    if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION)
                             listener.onFavItemClick(position);
@@ -115,5 +114,4 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler>{
             });
         }
     }
-
 }

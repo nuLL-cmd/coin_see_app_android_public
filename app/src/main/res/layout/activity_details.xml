@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:fillViewport="true">
 
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".view.activity.DetailsActivity">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:background="#F3F3F3"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -28,247 +28,304 @@
                     android:id="@+id/imgBack_details"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:background="@drawable/bg_btn_back"
-                    android:layout_marginTop="40dp"
-                    android:onClick="actDetailsMain"
                     android:layout_marginStart="25dp"
-                    android:src="@drawable/ic_arrow_gray_32p"
-                    />
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/bg_btn_back"
+                    android:onClick="actDetailsMain"
+                    android:src="@drawable/ic_arrow_gray_32p" />
 
                 <TextView
                     android:id="@+id/txtNome_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dolar Comercial"
-                    android:textStyle="bold"
-                    android:layout_centerHorizontal="true"
                     android:layout_alignTop="@id/imgBack_details"
                     android:layout_alignBottom="@id/imgBack_details"
-                    android:gravity="center"/>
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="Detalhes"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtCoinValue_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$4.39"
-                    android:textAlignment="center"
-
-
-                    android:textSize="50dp"
+                    android:layout_below="@id/txtNome_details"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="25dp"
+                    android:layout_marginStart="25dp"
                     android:shadowColor="#A13F3F3F"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="40"
-                    android:id="@+id/txtNow_details"
-                    android:layout_below="@id/txtNome_details"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="25dp"
-                    android:layout_marginStart="25dp"/>
+                    android:text="$4.39"
+                    android:textAlignment="center"
+                    android:textSize="50dp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgUser_fav"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_alignTop="@id/txtNome_details"
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="end"
                     android:layout_marginEnd="25dp"
-                    android:layout_alignTop="@id/txtNome_details"
                     android:src="@mipmap/ic_user_round" />
 
             </RelativeLayout>
 
 
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="10dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="6dp"
+                android:layout_marginStart="20dp"
+                app:cardElevation="6dp"
+                android:layout_marginEnd="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="20dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtName_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dólar Comercial"/>
 
 
-                 <androidx.cardview.widget.CardView
-                     android:layout_width="match_parent"
-                     app:cardCornerRadius="50dp"
-                     app:cardElevation="6dp"
-                     android:layout_marginStart="40dp"
-                     android:layout_marginEnd="40dp"
-                     android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/imgCode_details"
+                        android:layout_width="28dp"
+                        android:src="@drawable/usd"
+                        android:layout_below="@+id/txtName_details"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="28dp"/>
 
-                     <RelativeLayout
-                         android:layout_width="match_parent"
-                         android:paddingTop="10dp"
-                         android:paddingBottom="10dp"
-                         android:layout_height="wrap_content">
-
-                         <TextView
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="$4.39"
-                             android:shadowDx="3"
-                             android:shadowDy="3"
-                             android:shadowRadius="13"
-                             android:shadowColor="#A13F3F3F"
-                             android:drawableStart="@drawable/ic_arrowup_4dp"
-                             android:textSize="25sp"
-                             android:drawablePadding="10dp"
-
-                             android:id="@+id/txtHigh_details"
-                             android:layout_marginStart="20dp"/>
-                         <TextView
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="$4.26"
-                             android:shadowDx="3"
-                             android:shadowDy="3"
-                             android:shadowRadius="13"
-                             android:shadowColor="#A13F3F3F"
-                             android:drawableStart="@drawable/ic_arrowdown_24dp"
-                             android:drawablePadding="10dp"
-                             android:textSize="25sp"
-                             android:layout_alignParentEnd="true"
-                             android:layout_marginEnd="20dp"
-                             android:id="@+id/txtLow_details"
-                             android:layout_marginStart="25dp"/>
-                         <TextView
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="Alta"
-                             android:textColor="#0084ff"
-
-                             android:layout_below="@id/txtHigh_details"
-                             android:layout_alignStart="@id/txtHigh_details"
-                             android:layout_alignEnd="@id/txtHigh_details"
-                             android:textAlignment="center"/>
-                         <TextView
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:text="Baixa"
-                             android:textColor="#dd4b39"
-                             android:layout_below="@id/txtLow_details"
-                             android:layout_alignStart="@id/txtLow_details"
-                             android:layout_alignEnd="@id/txtLow_details"
-                             android:textAlignment="center"/>
-                     </RelativeLayout>
-
-                 </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/txtCode_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="USD"
+                        android:layout_toEndOf="@id/imgCode_details"
+                        android:layout_alignTop="@id/imgCode_details"
+                        android:layout_alignBottom="@id/imgCode_details"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"/>
 
 
+                    <TextView
+                        android:id="@+id/txtIn_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--->"
+                        android:layout_toEndOf="@id/txtCode_details"
+                        android:layout_alignTop="@id/txtCode_details"
+                        android:layout_alignBottom="@id/txtCode_details"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/imgCodeIn_details"
+                        android:layout_width="28dp"
+                        android:src="@drawable/brl"
+                        android:layout_toEndOf="@id/txtIn_layout"
+                        android:layout_alignTop="@id/txtCode_details"
+                        android:layout_alignBottom="@id/txtCode_details"
+
+                        android:layout_height="28dp"/>
+
+
+                    <TextView
+                        android:id="@+id/txtCodeIn_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BRL"
+                        android:layout_toEndOf="@id/imgCodeIn_details"
+                        android:layout_alignTop="@id/imgCodeIn_details"
+                        android:layout_alignBottom="@id/imgCodeIn_details"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"/>
+
+
+
+                    <TextView
+                        android:id="@+id/txtHigh_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="$4.41"
+                        android:layout_below="@id/imgCode_details"
+                        android:layout_marginTop="20sp"
+                        android:drawableStart="@drawable/ic_arrowup_4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Variação"
+                        android:layout_marginBottom="5dp"
+                        android:layout_above="@id/viewVar_layout"
+                        android:layout_alignStart="@id/viewVar_layout"
+                        android:layout_alignEnd="@id/viewVar_layout"
+                        android:textSize="10sp"
+                        android:textAlignment="center"/>
+
+                    <View
+                        android:id="@+id/viewVar_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_alignBottom="@id/txtHigh_details"
+                        android:background="#DBDBDB"
+                        android:layout_toStartOf="@id/txtLow_details"
+                        android:layout_toEndOf="@id/txtHigh_details"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtLow_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="$4.28"
+                        android:layout_alignBottom="@id/txtHigh_details"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@id/txtHigh_details"
+                        android:drawableStart="@drawable/ic_arrowdown_24dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fechamento:"
+                        android:textColor="#1E88E5"
+                        android:textStyle="bold"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@id/txtLastCot_layout"
+                        android:id="@+id/txtLastAtt_layout"/>
+
+                    <TextView
+                        android:id="@+id/txtDateAtt_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#1E88E5"
+                        android:text="2020-03-03"
+                        android:layout_below="@id/txtLastAtt_layout"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="13sp"
+                        android:textAlignment="center"
+                        android:textStyle="italic"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_height="wrap_content"
+                        android:text="Atualizado:"
+                        android:textColor="#FB8C00"
+                        android:textStyle="bold"
+                        android:layout_below="@id/txtHigh_details"
+                        android:id="@+id/txtLastCot_layout"/>
+
+                    <TextView
+                        android:id="@+id/txtDate_details"
+                        android:textColor="#FB8C00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2020-03-03"
+                        android:layout_below="@id/txtLastCot_layout"
+
+                        android:textSize="13sp"
+                        android:textAlignment="center"
+                        android:textStyle="italic"/>
+
+                    <TextView
+                        android:id="@+id/txtPercent_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.55%"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textColor="#43A047"
+                        android:layout_alignStart="@id/viewVar_layout"
+                        android:layout_below="@id/viewVar_layout"
+                        android:layout_marginTop="5dp"
+                        android:layout_alignEnd="@id/viewVar_layout"
+                        android:textAlignment="center" />
+
+                    <ImageView
+                        android:id="@+id/imgFav_details"
+                        android:layout_width="48dp"
+                        android:clickable="true"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_favorite_red_24dp"
+                        android:layout_alignParentEnd="true"/>
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="3dp"
+                android:background="#fff"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:background="#f3f3f3">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Range da semana"
-                    android:textAlignment="center"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-
-                    android:textColor="#9C9C9C"
-                 />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    app:cardCornerRadius="50dp"
-                    app:cardElevation="6dp"
-                    android:layout_margin="15dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:layout_marginEnd="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-
-                        <ImageView
-                            android:id="@+id/imgCode_details"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/usa"/>
-                        <TextView
-                            android:id="@+id/txtCode_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="USD"
-                            android:layout_toEndOf="@id/imgCode_details"
-                            android:layout_alignTop="@id/imgCode_details"
-                            android:layout_alignBottom="@id/imgCode_details"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:layout_marginStart="10dp"/>
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/txtIn_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="--->"
-                            android:layout_toEndOf="@id/txtCode_layout"
-                            android:layout_alignTop="@id/txtCode_layout"
-                            android:layout_alignBottom="@id/txtCode_layout"
-                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
                             android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"/>
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/lbl_titleGraph_details"
+                            android:layout_marginBottom="10dp"
+                            android:text="Ultimas alterações"
+                            android:textSize="14sp" />
 
-
-                        <ImageView
-                            android:id="@+id/imgCodeIn_layout"
-                            android:layout_width="32dp"
-                            android:src="@drawable/brl"
-                            android:layout_toEndOf="@id/txtIn_layout"
-                            android:layout_alignTop="@id/txtCode_layout"
-                            android:layout_alignBottom="@id/txtCode_layout"
-
-                            android:layout_height="32dp"/>
-
-                        <TextView
-                            android:id="@+id/txtCodeIn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="BRL"
-                            android:layout_toEndOf="@id/imgCodeIn_layout"
-                            android:layout_alignTop="@id/imgCodeIn_layout"
-                            android:layout_alignBottom="@id/imgCodeIn_layout"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:layout_marginStart="10dp"/>
-
-                        <ImageView
-                            android:id="@+id/imgFav_layout"
-                            android:layout_width="28dp"
-                            android:layout_gravity="start"
-                            android:layout_height="28dp"
-                            android:layout_alignParentEnd="true"
-                            android:src="@drawable/ic_favorite_red_24dp" />
-
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="210dp"
+                            android:layout_marginStart="3dp"
+                            android:layout_below="@id/lbl_titleGraph_details"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="10dp" />
 
                     </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_margin="15dp"
-                    app:cardElevation="6dp"
-                    app:cardCornerRadius="10dp"
-                    android:layout_height="210dp">
-
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/chart"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
+                    <ProgressBar
+                        android:id="@+id/progressChart_details"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_height="match_parent"
+
+                        android:background="#fff" />
 
                 </androidx.cardview.widget.CardView>
-
 
 
             </LinearLayout>
