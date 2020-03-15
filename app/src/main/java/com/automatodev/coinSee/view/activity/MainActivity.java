@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.entidade.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.CoinService;
-import com.automatodev.coinSee.controller.service.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.view.adapter.CoinAdapter;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 

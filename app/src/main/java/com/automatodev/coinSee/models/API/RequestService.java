@@ -1,7 +1,7 @@
 package com.automatodev.coinSee.models.API;
 
-import com.automatodev.coinSee.controller.entidade.CoinChildr;
-import com.automatodev.coinSee.controller.entidade.CoinDaddy;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinDaddy;
 
 import java.util.List;
 

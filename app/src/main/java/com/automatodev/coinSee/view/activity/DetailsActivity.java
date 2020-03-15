@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.entidade.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.CoinService;
 import com.automatodev.coinSee.controller.service.ConvertData;
-import com.automatodev.coinSee.controller.service.RetrofitCallback;
-import com.automatodev.coinSee.view.components.ChartLine;
+import com.automatodev.coinSee.controller.callback.RetrofitCallback;
+import com.automatodev.coinSee.view.component.ChartLine;
 import com.github.mikephil.charting.charts.LineChart;
 
 import java.util.List;

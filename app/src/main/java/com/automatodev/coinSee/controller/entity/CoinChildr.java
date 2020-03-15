@@ -1,5 +1,5 @@
 
-package com.automatodev.coinSee.controller.entidade;
+package com.automatodev.coinSee.controller.entity;
 
 
 import android.os.Parcel;

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.entidade.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.ConvertData;
 
 import java.util.List;

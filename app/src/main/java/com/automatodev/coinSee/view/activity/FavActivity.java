@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.entidade.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.CoinService;
 import com.automatodev.coinSee.controller.service.ConvertData;
-import com.automatodev.coinSee.controller.service.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.view.adapter.FavAdapter;
-import com.automatodev.coinSee.view.components.ChartLine;
+import com.automatodev.coinSee.view.component.ChartLine;
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 

@@ -3,8 +3,9 @@ package com.automatodev.coinSee.controller.service;
 import android.app.Activity;
 import android.util.Log;
 
-import com.automatodev.coinSee.controller.entidade.CoinChildr;
-import com.automatodev.coinSee.controller.entidade.CoinDaddy;
+import com.automatodev.coinSee.controller.callback.RetrofitCallback;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinDaddy;
 import com.automatodev.coinSee.models.API.RequestService;
 
 import org.jetbrains.annotations.NotNull;

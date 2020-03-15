@@ -1,4 +1,4 @@
-package com.automatodev.coinSee.view.components;
+package com.automatodev.coinSee.view.component;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -7,7 +7,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.automatodev.coinSee.controller.entidade.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.ConvertData;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;

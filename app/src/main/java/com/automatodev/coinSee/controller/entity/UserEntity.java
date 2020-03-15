@@ -1,4 +1,4 @@
-package com.automatodev.coinSee.controller.entidade;
+package com.automatodev.coinSee.controller.entity;
 
 public class UserEntity {
     String userName;

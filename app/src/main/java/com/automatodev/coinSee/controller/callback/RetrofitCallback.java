@@ -1,6 +1,6 @@
-package com.automatodev.coinSee.controller.service;
+package com.automatodev.coinSee.controller.callback;
 
-import com.automatodev.coinSee.controller.entidade.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 
 import java.util.List;
 

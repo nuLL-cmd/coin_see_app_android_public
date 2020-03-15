@@ -10,19 +10,18 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.models.Firebase.AuthFirebase;
+import com.automatodev.coinSee.controller.service.AuthService;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView imgLogo_splash;
     private ImageView imgTitle_splash;
     private Animation animation;
-    private AuthFirebase auth;
-
+    private AuthService authService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        auth = new AuthFirebase(this);
+        authService = new AuthService(this);
         imgLogo_splash = findViewById(R.id.imgLogo_splash);
         imgTitle_splash = findViewById(R.id.imgTitle_splash);
         animation = AnimationUtils.loadAnimation(this, R.anim.push_down);
@@ -48,7 +47,8 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        auth.actLoginMain();
+        authService.verifyUserAndLogin();
+
 
     }
 
