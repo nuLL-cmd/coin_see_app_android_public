@@ -1,12 +1,16 @@
 package com.automatodev.coinSee.models.Firebase;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
+import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.view.activity.MainActivity;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -18,7 +22,6 @@ public class AuthFirebase {
     private Activity context;
     private FirebaseAuth auth;
 
-
     public AuthFirebase(Activity context) {
         this.context = context;
 
@@ -26,29 +29,34 @@ public class AuthFirebase {
     }
 
     public void login(String email, String pass){
-        final AlertDialog alerta = new AlertDialog.Builder(context).create();
-        alerta.setTitle("Titulo");
-        alerta.setMessage("Aguarde...");
-        alerta.show();
+
+        final ProgressBar progress = context.findViewById(R.id.spin_kit_login);
+        ThreeBounce three = new ThreeBounce();
+        progress.setIndeterminateDrawable(three);
+        progress.setVisibility(View.VISIBLE);
+
 
         auth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            alerta.dismiss();
+
                             actLoginMain();
+
                         }
                     }
                 }).addOnFailureListener(context, new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                alerta.dismiss();
+
+                progress.setVisibility(View.GONE);
+
                 AlertDialog.Builder alerta = new AlertDialog.Builder(context);
                 alerta.setTitle("Usuario");
                 alerta.setMessage("Verifique seu email e/ou senha \nVerifique tambem sua conexão com a internet :D");
                 alerta.setPositiveButton("Entendi", null);
-                alerta.show();;
+                alerta.show();
             }
         });
 

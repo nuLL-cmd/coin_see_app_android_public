@@ -17,7 +17,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         auth = new AuthFirebase(this);
     }
     @Override
@@ -47,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     public void actLoginMain(View view){
-       auth.login("teste@gmail.com","402866");
+       auth.login("teste@gmail.com", "402866");
     }
 
 }

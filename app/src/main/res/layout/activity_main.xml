@@ -163,15 +163,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCoin_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/layout_celula_main" />
+            android:layout_height="match_parent" />
 
-        <ProgressBar
+        <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/progressChart_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff" />
-
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            app:SpinKit_Color="@color/colorPrimaryDark"
+            android:background="#FFF"/>
     </RelativeLayout>
 
 

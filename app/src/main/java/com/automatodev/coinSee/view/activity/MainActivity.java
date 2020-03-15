@@ -3,6 +3,8 @@ package com.automatodev.coinSee.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.automatodev.coinSee.controller.entidade.CoinChildr;
 import com.automatodev.coinSee.controller.service.CoinService;
 import com.automatodev.coinSee.controller.service.RetrofitCallback;
 import com.automatodev.coinSee.view.adapter.CoinAdapter;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static boolean status;
+    private Animation animation;
     private ProgressBar progressChart_main;
     private RecyclerView recyclerCoin_main;
     private CoinAdapter coinAdapter;
@@ -37,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerCoin_main = findViewById(R.id.recyclerCoin_main);
         progressChart_main = findViewById(R.id.progressChart_main);
+        ThreeBounce three = new ThreeBounce();
+        progressChart_main.setIndeterminateDrawable(three);
         task = new CoinService(this);
+        animation = AnimationUtils.loadAnimation(this, R.anim.push_right);
+
         getData();
     }
 
@@ -65,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 coinAdapter = new CoinAdapter(coinChildrList, MainActivity.this);
                 recyclerCoin_main.setAdapter(coinAdapter);
                 progressChart_main.setVisibility(View.GONE);
+                recyclerCoin_main.setAnimation(animation);
                 sClick();
             }
 

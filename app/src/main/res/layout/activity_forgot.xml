@@ -89,15 +89,21 @@
                 android:orientation="horizontal"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/automatodev"
-                    android:textAlignment="center"
+                <ImageView
+                    android:id="@+id/imgLinkedin_splash2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="20dp"
                     android:clickable="true"
-                    android:onClick="actRegisterLogin"
-                    android:layout_marginStart="5dp"
-                    android:gravity="center"/>
+                    android:src="@drawable/linkedin_blue_48" />
+
+                <ImageView
+                    android:id="@+id/imgFacebook_splash2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="20dp"
+                    android:clickable="true"
+                    android:src="@drawable/face_blue_48" />
 
 
             </LinearLayout>

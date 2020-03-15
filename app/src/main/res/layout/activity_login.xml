@@ -94,6 +94,17 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold" />
 
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit_login"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/colorPrimaryDark" />
+
         </LinearLayout>
 
         <LinearLayout
