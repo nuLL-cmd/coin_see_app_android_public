@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "478291548253",
+    "firebase_url": "https://coinsee-7cbb3.firebaseio.com",
+    "project_id": "coinsee-7cbb3",
+    "storage_bucket": "coinsee-7cbb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478291548253:android:5d655f8f4aeefe02f1d5b4",
+        "android_client_info": {
+          "package_name": "com.automatodev.coinSee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478291548253-hkk58hno17l00gup2lmct75r7uonpp6s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.automatodev.coinSee",
+            "certificate_hash": "683cd02d7e7cbd94d219abd73a4addf2de0f362f"
+          }
+        },
+        {
+          "client_id": "478291548253-mvo765jce7113lgm6t3l46a04vmkd22o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsq9Aq5BwT4icYGUciWeZJleBX0swYn4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478291548253-mvo765jce7113lgm6t3l46a04vmkd22o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

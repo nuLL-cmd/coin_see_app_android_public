@@ -7,13 +7,13 @@
     android:layout_width="match_parent"
     android:background="#fff"
     android:fillViewport="true"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="vertical"
         android:background="#fff"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".view.activity.RegisterActivity">
 
         <LinearLayout
@@ -190,14 +190,29 @@
                 android:maxLength="6"
                 android:paddingStart="20dp" />
 
+
             <Button
                 android:id="@+id/btnSave_profile"
                 style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/bg_btn_splash"
-                android:text="Salvar"
+                android:text="Atualizar"
+                android:textColor="#fff"
+                android:textSize="19sp" />
+
+            <Button
+                android:id="@+id/btnsignOut_profile"
+                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:onClick="logout"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_btn_splash"
+                android:text="Logout"
                 android:textColor="#fff"
                 android:textSize="19sp" />
 

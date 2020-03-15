@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.automatodev.coinsee">
+    package="com.automatodev.coinSee">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -13,33 +13,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.activity.DetailsActivity"
-            android:parentActivityName=".view.activity.MainActivity"
+        <activity android:name="com.automatodev.coinSee.view.activity.DetailsActivity"
+            android:parentActivityName="com.automatodev.coinSee.view.activity.MainActivity"
         >
 
         </activity>
         <activity
-            android:name=".view.activity.FavActivity"
-            android:parentActivityName=".view.activity.FavActivity">
+            android:name="com.automatodev.coinSee.view.activity.FavActivity"
+            android:parentActivityName="com.automatodev.coinSee.view.activity.FavActivity">
 
         </activity>
         <activity
-            android:name=".view.activity.ProfileActivity"
-            android:parentActivityName=".view.activity.ProfileActivity">
+            android:name="com.automatodev.coinSee.view.activity.ProfileActivity"
+            android:parentActivityName="com.automatodev.coinSee.view.activity.ProfileActivity">
 
         </activity>
-        <activity android:name=".view.activity.ForgotActivity" />
-        <activity android:name=".view.activity.MainActivity">
+        <activity android:name="com.automatodev.coinSee.view.activity.ForgotActivity" />
+        <activity android:name="com.automatodev.coinSee.view.activity.MainActivity">
+
+        </activity>
+        <activity android:name="com.automatodev.coinSee.view.activity.RegisterActivity" />
+        <activity android:name="com.automatodev.coinSee.view.activity.LoginActivity" />
+        <activity android:name="com.automatodev.coinSee.view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".view.activity.RegisterActivity" />
-        <activity android:name=".view.activity.LoginActivity" />
-        <activity android:name=".view.activity.SplashActivity">
-
         </activity>
 
         <meta-data

@@ -142,11 +142,11 @@
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@id/txtName_btFav"
                             android:layout_alignParentEnd="true"
-                            android:text="$4.39"
+                            android:shadowColor="#AAA9A9"
                             android:shadowDx="3"
                             android:shadowDy="3"
                             android:shadowRadius="13"
-                            android:shadowColor="#AAA9A9"
+                            android:text="$4.39"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -208,14 +208,14 @@
                             android:textStyle="italic" />
 
                         <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_height="wrap_content"
-                        android:text="Atualizado:"
-                        android:textStyle="bold"
-                        android:layout_below="@id/txtHigh_btFav"
-                        android:textColor="#FB8C00"
-                        android:id="@+id/txtLastCot_btFav"/>
+                            android:id="@+id/txtLastCot_btFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtHigh_btFav"
+                            android:layout_marginTop="25dp"
+                            android:text="Atualizado:"
+                            android:textColor="#FB8C00"
+                            android:textStyle="bold" />
 
 
                         <TextView
@@ -240,6 +240,12 @@
 
 
                     </RelativeLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progressDetails_btFav"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#fff" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -303,6 +309,12 @@
                                     android:layout_marginBottom="10dp" />
 
                             </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/progressChart_btFav"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#fff" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
                 </ScrollView>

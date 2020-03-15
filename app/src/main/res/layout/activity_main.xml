@@ -81,7 +81,6 @@
                 android:layout_below="@id/lblTitle_main"
                 android:backgroundTint="#fff"
                 android:elevation="0dp"
-                android:onClick="refreshData"
                 android:src="@drawable/ic_refreshdp"
                 app:backgroundTint="@color/colorPrimaryDark"
                 app:borderWidth="10dp" />
