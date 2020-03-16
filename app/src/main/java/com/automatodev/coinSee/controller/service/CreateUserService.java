@@ -30,6 +30,7 @@ public class CreateUserService {
         final AlertDialog alerta = new AlertDialog.Builder(context).create();
         View view = context.getLayoutInflater().inflate(R.layout.progress_login,null);
         alerta.setView(view);
+        alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         alerta.show();
         createUserFirebase.createUser(email, pass, new FirebaseCallback() {
             @Override
@@ -37,6 +38,7 @@ public class CreateUserService {
             }
             @Override
             public void onSuccessCreateUser(Task<AuthResult> task, final FirebaseUser firebaseUser) {
+                userEntity.setUserUid(createUserFirebase.getUser().getUid());
                 if (task.isSuccessful()){
                     saveUserFirebase.saveNewUser(firebaseUser.getUid(), userEntity, new FirebaseCallback() {
                         @Override

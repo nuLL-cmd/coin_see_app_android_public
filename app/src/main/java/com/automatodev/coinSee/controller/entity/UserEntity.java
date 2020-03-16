@@ -7,6 +7,7 @@ public class UserEntity {
     private String userEmail;
     private long userPhone;
     private String userPhoto;
+    private String userUid;
 
     public UserEntity() {
     }
@@ -45,5 +46,13 @@ public class UserEntity {
 
     public void setUserPhoto(String userPhoto) {
         this.userPhoto = userPhoto;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
     }
 }

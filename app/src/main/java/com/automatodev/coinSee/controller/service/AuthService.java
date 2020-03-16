@@ -3,6 +3,7 @@ package com.automatodev.coinSee.controller.service;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -29,7 +30,7 @@ public class AuthService {
     }
 
     public void serviceLogin(String email, String pass) {
-        View v = context.getLayoutInflater().inflate(R.layout.progress_login,null);
+        View v = context.getLayoutInflater().inflate(R.layout.progress_login, null);
         TextView txtLabel_progress = v.findViewById(R.id.txtLabel_progress);
         txtLabel_progress.setText("Só um momento...");
         final AlertDialog alerta = new AlertDialog.Builder(context).create();
@@ -52,11 +53,20 @@ public class AuthService {
             @Override
             public void onFailure(Exception e) {
                 alerta.dismiss();
-                AlertDialog.Builder alerta = new AlertDialog.Builder(context);
-                alerta.setTitle("Ops!");
-                alerta.setMessage("Favor verifique se seu email e/ou senha estão corretos\nDá uma checada tambem na sua internet :D");
-                alerta.setPositiveButton("Entendi", null);
-                alerta.show();
+                final AlertDialog alertaEmpty = new AlertDialog.Builder(context).create();
+                View v = context.getLayoutInflater().inflate(R.layout.layout_message, null);
+                TextView txtLabel_message = v.findViewById(R.id.txtLabel_message);
+                txtLabel_message.setText("Verifique se seu email e/ou senha estão corretos\nDá uma checada também na sua internet :D");
+                Button btnDismiss_message = v.findViewById(R.id.btnDismiss_message);
+                btnDismiss_message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertaEmpty.dismiss();
+                    }
+                });
+                alertaEmpty.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                alertaEmpty.setView(v);
+                alertaEmpty.show();
             }
 
             @Override
@@ -74,5 +84,4 @@ public class AuthService {
             context.finish();
         }
     }
-
 }
