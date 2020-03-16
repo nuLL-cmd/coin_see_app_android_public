@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
-import com.automatodev.coinSee.controller.service.ConvertData;
+import com.automatodev.coinSee.controller.service.ConvertDataService;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
     private final Activity context;
     private List<CoinChildr> coinChildrs;
     private OnItemClickListener listener;
-    private ConvertData convertData;
+    private ConvertDataService convertDataService;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -35,7 +35,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
     public CoinAdapter(List<CoinChildr> coinChildrs, Activity context) {
         this.context = context;
         this.coinChildrs = coinChildrs;
-        this.convertData = new ConvertData();
+        this.convertDataService = new ConvertDataService();
     }
 
     @NonNull
@@ -54,11 +54,11 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
         holder.imgFav_layout.setImageResource(R.drawable.ic_favorite_border_32dp);
         holder.txtHigh_layout.setText(coinChildr.getHigh());
         holder.txtLow_layout.setText(coinChildr.getLow());
-        holder.txtCoinValue_layout.setText(convertData.convertDecimal(coinChildr.getBid()));
+        holder.txtCoinValue_layout.setText(convertDataService.convertDecimal(coinChildr.getBid()));
         if (coinChildr.getTimestamp().length() > 10)
-            holder.txtDate_layout.setText(convertData.convertDate(coinChildr.getTimestamp().substring(0, 10)));
+            holder.txtDate_layout.setText(convertDataService.convertDate(coinChildr.getTimestamp().substring(0, 10)));
         else
-            holder.txtDate_layout.setText(convertData.convertDate(coinChildr.getTimestamp()));
+            holder.txtDate_layout.setText(convertDataService.convertDate(coinChildr.getTimestamp()));
         holder.txtPercent_layout.setText(coinChildr.getPctChange() + "%");
         holder.imgCode_layout.setImageResource(coinChildr.getUlrPhoto());
     }

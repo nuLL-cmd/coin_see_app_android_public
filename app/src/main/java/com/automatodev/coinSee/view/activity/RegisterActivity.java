@@ -40,4 +40,13 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    public void teste(View view){
+
+        final android.app.AlertDialog alerta = new android.app.AlertDialog.Builder(this).create();
+        View v = this.getLayoutInflater().inflate(R.layout.progress_login,null);
+        alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        alerta.setView(v);
+        alerta.show();
+    }
 }

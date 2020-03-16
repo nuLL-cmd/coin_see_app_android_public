@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public class ConvertData {
+public class ConvertDataService {
     private DateFormat dateFormat;
     private Locale locale;
     private NumberFormat numberFormat;

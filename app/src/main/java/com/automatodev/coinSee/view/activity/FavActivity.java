@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.CoinService;
-import com.automatodev.coinSee.controller.service.ConvertData;
+import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.view.adapter.FavAdapter;
 import com.automatodev.coinSee.view.component.ChartLine;
@@ -35,7 +35,7 @@ public class FavActivity extends AppCompatActivity {
     private FavAdapter favAdapter;
     private ChartLine chartLine;
     private CoinService coinService;
-    private ConvertData convertData;
+    private ConvertDataService convertDataService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class FavActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fav);
         recyclerFav_fav = findViewById(R.id.recyclerFav_fav);
         coinService = new CoinService(this);
-        convertData = new ConvertData();
+        convertDataService = new ConvertDataService();
         showData();
     }
 
@@ -92,13 +92,13 @@ public class FavActivity extends AppCompatActivity {
 
                     @Override
                     public void onSucces(CoinChildr coinChildr0) throws InterruptedException {
-                        txtCoinValue_btFav.setText(convertData.convertDecimal(coinChildr0.getBid()));
+                        txtCoinValue_btFav.setText(convertDataService.convertDecimal(coinChildr0.getBid()));
                         txtName_btFav.setText(coinChildr0.getName());
                         txtHigh_btFav.setText(coinChildr0.getHigh());
                         txtLow_btFav.setText(coinChildr0.getLow());
                         txtPercent_btFav.setText(coinChildr0.getPctChange() + "%");
                         txtCode_btFav.setText(coinChildr0.getCode());
-                        txtDate_btFav.setText(convertData.convertDate(coinChildr0.getTimestamp()));
+                        txtDate_btFav.setText(convertDataService.convertDate(coinChildr0.getTimestamp()));
                         txtCodeIn_btFav.setText(coinChildr0.getCodein());
                         progressDetails_btFav.setVisibility(View.GONE);;
                         txtNameTitle_btFav.setText(coinChildr0.getName());

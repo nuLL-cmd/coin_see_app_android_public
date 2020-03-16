@@ -8,7 +8,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.automatodev.coinSee.controller.entity.CoinChildr;
-import com.automatodev.coinSee.controller.service.ConvertData;
+import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -28,14 +28,14 @@ public class ChartLine {
     private Activity context;
     private LineChart chartGlobal;
     private List<CoinChildr> valueList;
-    private ConvertData convertData;
+    private ConvertDataService convertDataService;
 
 
     public ChartLine(Activity context, LineChart chartGlobal, List<CoinChildr> valueList) {
         this.context = context;
         this.chartGlobal = chartGlobal;
         this.valueList = valueList;
-        convertData = new ConvertData();
+        convertDataService = new ConvertDataService();
     }
 
 
@@ -53,13 +53,13 @@ public class ChartLine {
         entradaTestes.add(new Entry(6f, 4.34f));
         //Lista contendo as datas que substituira os valores de X no objeto Entry dentro do grafico
         final List<String> mxData = new ArrayList<>();
-        mxData.add(convertData.convertDayMonth(valueList.get(6).getTimestamp()));
-        mxData.add(convertData.convertDayMonth(valueList.get(5).getTimestamp()));
-        mxData.add(convertData.convertDayMonth(valueList.get(4).getTimestamp()));
-        mxData.add(convertData.convertDayMonth(valueList.get(3).getTimestamp()));
-        mxData.add(convertData.convertDayMonth(valueList.get(2).getTimestamp()));
-        mxData.add(convertData.convertDayMonth(valueList.get(1).getTimestamp()));
-        mxData.add(convertData.convertDayMonth(valueList.get(0).getTimestamp()));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(6).getTimestamp()));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(5).getTimestamp()));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(4).getTimestamp()));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(3).getTimestamp()));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(2).getTimestamp()));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(1).getTimestamp()));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(0).getTimestamp()));
 
         //Configuração de dados do eixo X
         XAxis xAxis = chartGlobal.getXAxis(); //Inicia o eixo X

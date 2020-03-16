@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.models.Firebase.RequestAuth;
+import com.automatodev.coinSee.models.Firebase.AuthFirebase;
 
 public class ProfileActivity extends AppCompatActivity {
-    private RequestAuth auth;
+    private AuthFirebase auth;
     public static boolean status;
 
     @Override
@@ -19,7 +19,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        auth = new RequestAuth(this);
+        auth = new AuthFirebase(this);
     }
 
     @Override

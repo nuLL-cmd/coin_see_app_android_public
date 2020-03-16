@@ -6,7 +6,7 @@ import android.util.Log;
 import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.CoinDaddy;
-import com.automatodev.coinSee.models.API.RequestService;
+import com.automatodev.coinSee.models.API.RequestAPI;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +23,7 @@ public class CoinService {
 
     private Activity context;
     private Retrofit retrofit;
-    private RequestService request;
+    private RequestAPI request;
     private String baseUrl = "https://economia.awesomeapi.com.br/";
 
     public CoinService(Activity context) {
@@ -34,7 +34,7 @@ public class CoinService {
         final List<CoinChildr> coinChildrList = new ArrayList<>();
         retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create()).build();
-        request = retrofit.create(RequestService.class);
+        request = retrofit.create(RequestAPI.class);
         Call<CoinDaddy> call = request.requestAll();
         call.enqueue(new Callback<CoinDaddy>() {
             @Override
@@ -75,7 +75,7 @@ public class CoinService {
 
     public void requestRangeDays(String value, final RetrofitCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-        request = retrofit.create(RequestService.class);
+        request = retrofit.create(RequestAPI.class);
         Call<List<CoinChildr>> call = request.requestRangeDay(value, 7);
         call.enqueue(new Callback<List<CoinChildr>>() {
             @Override
@@ -102,7 +102,7 @@ public class CoinService {
     public void requestSingle(final String value, final RetrofitCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create())
                 .build();
-        request = retrofit.create(RequestService.class);
+        request = retrofit.create(RequestAPI.class);
         Call<CoinDaddy> call = request.requestSingle(value);
         call.enqueue(new Callback<CoinDaddy>() {
             @Override

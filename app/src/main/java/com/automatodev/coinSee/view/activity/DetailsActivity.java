@@ -14,7 +14,7 @@ import androidx.core.app.NavUtils;
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.CoinService;
-import com.automatodev.coinSee.controller.service.ConvertData;
+import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.view.component.ChartLine;
 import com.github.mikephil.charting.charts.LineChart;
@@ -34,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView imgFav_details;
     private TextView txtDate_details;
     private TextView txtDateAtt_details;
-    private  ConvertData convertData;
+    private ConvertDataService convertDataService;
     private CoinService task;
     private ProgressBar progressChart_details;
     private ChartLine chartLine;
@@ -62,7 +62,7 @@ public class DetailsActivity extends AppCompatActivity {
         txtDateAtt_details = findViewById(R.id.txtDateAtt_details);
         progressChart_details = findViewById(R.id.progressChart_details);
          lineChart = findViewById(R.id.chart);
-        convertData = new ConvertData();
+        convertDataService = new ConvertDataService();
 
         getData();
     }
@@ -71,7 +71,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         CoinChildr coinChildr = getIntent().getParcelableExtra("value");
         if (coinChildr != null) {
-        txtCoinValue_details.setText(convertData.convertDecimal(coinChildr.getBid()));
+        txtCoinValue_details.setText(convertDataService.convertDecimal(coinChildr.getBid()));
         txtName_details.setText(coinChildr.getName());
         txtHigh_details.setText(coinChildr.getHigh());
         txtLow_details.setText(coinChildr.getLow());
@@ -82,9 +82,9 @@ public class DetailsActivity extends AppCompatActivity {
         imgCodeIn_details.setImageResource(R.drawable.brl);
         imgFav_details.setImageResource(R.drawable.ic_favorite_red_24dp);
         if (coinChildr.getTimestamp().length() > 10)
-            txtDate_details.setText(convertData.convertDate(coinChildr.getTimestamp().substring(0,10)));
+            txtDate_details.setText(convertDataService.convertDate(coinChildr.getTimestamp().substring(0,10)));
         else
-            txtDate_details.setText(convertData.convertDate(coinChildr.getTimestamp()));
+            txtDate_details.setText(convertDataService.convertDate(coinChildr.getTimestamp()));
         txtDateAtt_details.setText(coinChildr.getCreate_date());
         getDataChart(coinChildr.getCode()+"-"+coinChildr.getCodein());
         }
