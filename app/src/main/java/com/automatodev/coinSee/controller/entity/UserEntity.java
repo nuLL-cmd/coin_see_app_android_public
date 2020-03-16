@@ -1,12 +1,12 @@
 package com.automatodev.coinSee.controller.entity;
 
 public class UserEntity {
-    String userName;
-    String userLastName;
-    String userCountry;
-    String userEmail;
-    long userPhone;
-    String userPhoto;
+    private String userName;
+    private String userLastName;
+    private String userCountry;
+    private String userEmail;
+    private long userPhone;
+    private String userPhoto;
 
     public UserEntity() {
     }
