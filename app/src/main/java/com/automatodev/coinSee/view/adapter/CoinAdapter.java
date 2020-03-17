@@ -13,14 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import java.util.List;
 
 public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
-    private final Activity context;
+    private Activity context;
     private List<CoinChildr> coinChildrs;
     private OnItemClickListener listener;
     private ConvertDataService convertDataService;
+
+    public void setCoinChildrs(List<CoinChildr> coinChildrs) {
+        this.coinChildrs = coinChildrs;
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -60,7 +66,8 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
         else
             holder.txtDate_layout.setText(convertDataService.convertDate(coinChildr.getTimestamp()));
         holder.txtPercent_layout.setText(coinChildr.getPctChange() + "%");
-        holder.imgCode_layout.setImageResource(coinChildr.getUlrPhoto());
+        Glide.with(context).load(coinChildr.getUlrPhoto()).transition(DrawableTransitionOptions.withCrossFade())
+                .into(holder.imgCode_layout);
     }
 
     @Override

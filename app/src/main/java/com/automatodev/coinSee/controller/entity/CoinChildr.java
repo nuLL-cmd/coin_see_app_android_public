@@ -33,10 +33,10 @@ public class CoinChildr implements Parcelable {
     @Expose
     private String varBid;
 
-    private int ulrPhoto;
+    private String ulrPhoto;
     private boolean fav;
 
-    public CoinChildr(String code, String codein, String name, int ulrPhoto, boolean fav) {
+    public CoinChildr(String code, String codein, String name, String ulrPhoto, boolean fav) {
         this.code = code;
         this.codein = codein;
         this.name = name;
@@ -66,7 +66,7 @@ public class CoinChildr implements Parcelable {
         pctChange = in.readString();
         timestamp = in.readString();
         varBid = in.readString();
-        ulrPhoto = in.readInt();
+        ulrPhoto = in.readString();
         fav = in.readByte() != 0;
     }
 
@@ -170,11 +170,11 @@ public class CoinChildr implements Parcelable {
         this.varBid = varBid;
     }
 
-    public int getUlrPhoto() {
+    public String getUlrPhoto() {
         return ulrPhoto;
     }
 
-    public void setUlrPhoto(int ulrPhoto) {
+    public void setUlrPhoto(String ulrPhoto) {
         this.ulrPhoto = ulrPhoto;
     }
 
@@ -204,7 +204,7 @@ public class CoinChildr implements Parcelable {
         dest.writeString(pctChange);
         dest.writeString(timestamp);
         dest.writeString(varBid);
-        dest.writeInt(ulrPhoto);
+        dest.writeString(ulrPhoto);
         dest.writeByte((byte) (fav ? 1 : 0));
     }
 }

@@ -5,7 +5,6 @@ import android.app.Activity;
 import androidx.annotation.Nullable;
 
 import com.automatodev.coinSee.controller.callback.FirestoreCallback;
-import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -17,11 +16,11 @@ public class GetUserFirebase {
 
     public GetUserFirebase(Activity context) {
         this.context = context;
+        firestore = FirebaseFirestore.getInstance();
     }
 
-    public void getUserFirebase(String uid, final FirestoreCallback firestoreCallback){
-        UserEntity userEntity = new UserEntity();
-        firestore.collection("users").document("uid")
+    public void getUserInFirebase(String uid, final FirestoreCallback firestoreCallback){
+        firestore.collection("users").document(uid)
                 .addSnapshotListener(context, new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {

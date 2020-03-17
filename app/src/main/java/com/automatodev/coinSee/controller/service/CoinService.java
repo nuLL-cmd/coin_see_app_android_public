@@ -1,7 +1,9 @@
 package com.automatodev.coinSee.controller.service;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
@@ -30,17 +32,19 @@ public class CoinService {
         this.context = context;
     }
 
-    public List<CoinChildr> requestAll(final RetrofitCallback callback) {
-        final List<CoinChildr> coinChildrList = new ArrayList<>();
+    public void requestAll(final RetrofitCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         request = retrofit.create(RequestAPI.class);
         Call<CoinDaddy> call = request.requestAll();
+        Toast.makeText(context, "teste: "+request.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "teste: "+call.toString(), Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<CoinDaddy>() {
             @Override
             public void onResponse(@NotNull Call<CoinDaddy> call, @NotNull Response<CoinDaddy> response) {
                 CoinDaddy daddyTests = response.body();
-
+                List<CoinChildr> coinChildrList = new ArrayList<>();
+                Toast.makeText(context, "teste: "+response.code(), Toast.LENGTH_SHORT).show();
                 if (daddyTests != null) {
                     coinChildrList.add(daddyTests.getuSD());
                     coinChildrList.add(daddyTests.getaRS());
@@ -59,7 +63,7 @@ public class CoinService {
                     coinChildrList.add(daddyTests.getuSDT());
                     try {
                         callback.onSucces(coinChildrList);
-                    } catch (Exception e) {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -67,10 +71,13 @@ public class CoinService {
 
             @Override
             public void onFailure(@NotNull Call<CoinDaddy> call, @NotNull Throwable t) {
-                Log.i("logx", "Error: " + t.getMessage(), t);
+                Log.e("logx", "Error: " + t.getMessage(), t);
+                AlertDialog.Builder alerta  = new AlertDialog.Builder(context);
+                alerta.setMessage(t.getMessage()+"\n\n"+t.toString());
+                alerta.show();
             }
         });
-        return coinChildrList;
+
     }
 
     public void requestRangeDays(String value, final RetrofitCallback callback) {

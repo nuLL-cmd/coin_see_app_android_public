@@ -30,7 +30,6 @@ import java.util.List;
 public class FavActivity extends AppCompatActivity {
 
     public static boolean status;
-    private List<CoinChildr> coinChildrList;
     private RecyclerView recyclerFav_fav;
     private FavAdapter favAdapter;
     private ChartLine chartLine;
@@ -42,25 +41,21 @@ public class FavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
         recyclerFav_fav = findViewById(R.id.recyclerFav_fav);
+
         coinService = new CoinService(this);
         convertDataService = new ConvertDataService();
-        showData();
-    }
 
-    private void showData() {
         recyclerFav_fav.hasFixedSize();
         recyclerFav_fav.setLayoutManager(new LinearLayoutManager(this));
-        coinChildrList = new ArrayList<>();
-        CoinChildr coinChildr = getIntent().getParcelableExtra("value");
-        coinChildrList.add(coinChildr);
-        if (coinChildrList.size() != 0) {
-            favAdapter = new FavAdapter(this, coinChildrList);
-            recyclerFav_fav.setAdapter(favAdapter);
-            sClick();
-        }
+       
     }
 
-    private void sClick() {
+    private void getDataFav() {
+        List<CoinChildr> list = new ArrayList<>();
+            sClick(list);
+    }
+
+    private void sClick(final List<CoinChildr> coinChildrList) {
         favAdapter.setOnItemClickListener(new FavAdapter.OnItemClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override

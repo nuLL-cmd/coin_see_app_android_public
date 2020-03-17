@@ -17,6 +17,8 @@ import com.automatodev.coinSee.controller.service.CoinService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.view.component.ChartLine;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.github.mikephil.charting.charts.LineChart;
 
 import java.util.List;
@@ -78,7 +80,7 @@ public class DetailsActivity extends AppCompatActivity {
         txtPercent_details.setText(coinChildr.getPctChange()+"%");
         txtCode_details.setText(coinChildr.getCode());
         txtCodeIn_details.setText(coinChildr.getCodein());
-        imgCode_details.setImageResource(coinChildr.getUlrPhoto());
+        Glide.with(this).load(coinChildr.getUlrPhoto()).transition(DrawableTransitionOptions.withCrossFade()).into(imgCode_details);
         imgCodeIn_details.setImageResource(R.drawable.brl);
         imgFav_details.setImageResource(R.drawable.ic_favorite_red_24dp);
         if (coinChildr.getTimestamp().length() > 10)
