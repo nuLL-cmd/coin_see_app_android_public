@@ -1,4 +1,4 @@
-package com.automatodev.coinSee.controller.service;
+package com.automatodev.coinSee.controller.service.firebase;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.view.View;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.FirebaseCallback;
+import com.automatodev.coinSee.controller.callback.FAuthCallback;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.models.Firebase.CreateUserFirebase;
-import com.automatodev.coinSee.models.Firebase.SaveUserFirebase;
+import com.automatodev.coinSee.models.firebase.CreateUserFirebase;
+import com.automatodev.coinSee.models.firebase.SaveUserFirebase;
 import com.automatodev.coinSee.view.activity.MainActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,7 +32,7 @@ public class CreateUserService {
         alerta.setView(view);
         alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         alerta.show();
-        createUserFirebase.createUser(email, pass, new FirebaseCallback() {
+        createUserFirebase.createUser(email, pass, new FAuthCallback() {
             @Override
             public void onSuccessLogin(Task<AuthResult> task) {
             }
@@ -40,7 +40,7 @@ public class CreateUserService {
             public void onSuccessCreateUser(Task<AuthResult> task, final FirebaseUser firebaseUser) {
                 userEntity.setUserUid(createUserFirebase.getUser().getUid());
                 if (task.isSuccessful()){
-                    saveUserFirebase.saveNewUser(firebaseUser.getUid(), userEntity, new FirebaseCallback() {
+                    saveUserFirebase.saveNewUser(firebaseUser.getUid(), userEntity, new FAuthCallback() {
                         @Override
                         public void onSuccessLogin(Task<AuthResult> task) {
                         }

@@ -55,12 +55,27 @@
 
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerFav_fav"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/layout_celula_fav"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="25dp">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressFav_fav"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:background="#FFF"
+            app:SpinKit_Color="@color/colorPrimaryDark" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerFav_fav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/layout_celula_fav" />
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -14,19 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.FirestoreCallback;
+import com.automatodev.coinSee.controller.callback.FCoinCallback;
+import com.automatodev.coinSee.controller.callback.FUserCallback;
 import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.controller.service.CoinService;
-import com.automatodev.coinSee.controller.service.GetUserService;
+import com.automatodev.coinSee.controller.service.API.CoinService;
+import com.automatodev.coinSee.controller.service.firebase.FavCoinService;
+import com.automatodev.coinSee.controller.service.firebase.GetUserService;
 import com.automatodev.coinSee.view.adapter.CoinAdapter;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private CircleImageView imgUser_main;
 
     public static boolean status;
-
+    private String uid;
     String urls[] = {"https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fusd.png?alt=media&token=6ee6ec10-ee9c-4483-96d6-e401111f3761",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fars.png?alt=media&token=7a40539c-4d57-41de-ab11-3160c08d654a",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Faud.png?alt=media&token=0cdf86c1-81f3-4206-8fca-584306774567",
@@ -59,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private Animation anim2;
     private CoinAdapter coinAdapter;
     private CoinService task;
-    private UserEntity userEntity;
+    private UserEntity userMain;
     private GetUserService getUserService;
+    private FavCoinService favCoinService;
     SwipeRefreshLayout sw;
 
     @Override
@@ -79,25 +83,43 @@ public class MainActivity extends AppCompatActivity {
         task = new CoinService(this);
         getUserService = new GetUserService(this);
         coinAdapter = new CoinAdapter(null, MainActivity.this);
+        favCoinService = new FavCoinService(this);
         recyclerCoin_main.hasFixedSize();
         recyclerCoin_main.setLayoutManager(new LinearLayoutManager(this));
-
         getDataUser();
         getData();
-
         sw.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 task.requestAll(new RetrofitCallback() {
                     @Override
-                    public void onSucces(List<CoinChildr> coinChildrList) {
-                        for (int i = 0; i < coinChildrList.size(); i++)
-                            coinChildrList.get(i).setUlrPhoto(urls[i]);
-                        coinAdapter.setCoinChildrs(coinChildrList);
-                        progressChart_main.setVisibility(View.GONE);
-                        recyclerCoin_main.setAdapter(coinAdapter);
-                        sClick(coinChildrList);
-                        sw.setRefreshing(false);
+                    public void onSucces(final List<CoinChildr> coinChildrList) {
+                        favCoinService.getFavCoinService(uid, new FCoinCallback() {
+                            @Override
+                            public void onComplete(Task<QuerySnapshot> task) {
+                            }
+
+                            @Override
+                            public void onCompleteReturn(List<CoinChildr> list) {
+                                for (int i = 0; i < coinChildrList.size(); i++)
+                                    coinChildrList.get(i).setUlrPhoto(urls[i]);
+                                for (int i = 0; i < coinChildrList.size(); i++) {
+                                    for (int j = 0; j < list.size(); j++) {
+                                        if (coinChildrList.get(i).getName().equals(list.get(j).getName()))
+                                            coinChildrList.get(i).setFav(list.get(j).isFav());
+                                    }
+                                }
+                                coinAdapter.setCoinChildrs(coinChildrList);
+                                progressChart_main.setVisibility(View.GONE);
+                                recyclerCoin_main.setAdapter(coinAdapter);
+                                sClick(coinChildrList);
+                                sw.setRefreshing(false);
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+                            }
+                        });
                     }
 
                     @Override
@@ -127,27 +149,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData() {
-
         task.requestAll(new RetrofitCallback() {
             @Override
-            public void onSucces(List<CoinChildr> coinChildrList) {
-                List<CoinChildr> fav = new ArrayList<>();
-                int count = fav.size();
-                for (int i = 0; i < coinChildrList.size(); i++)
-                    coinChildrList.get(i).setUlrPhoto(urls[i]);
+            public void onSucces(final List<CoinChildr> coinChildrList) {
+                favCoinService.getFavCoinService(uid, new FCoinCallback() {
+                    @Override
+                    public void onComplete(Task<QuerySnapshot> task) {
+                    }
 
-                for (int i = 0; i< coinChildrList.size(); i++){
-                  for (int j = 0; j< fav.size(); j++){
-                      if (coinChildrList.get(i).getName().equals(fav.get(j).getName()))
-                          coinChildrList.get(i).setFav(fav.get(j).isFav());
-                  }
+                    @Override
+                    public void onCompleteReturn(List<CoinChildr> list) {
+                        for (int i = 0; i < coinChildrList.size(); i++)
+                            coinChildrList.get(i).setUlrPhoto(urls[i]);
+                        for (int i = 0; i < coinChildrList.size(); i++) {
+                            for (int j = 0; j < list.size(); j++) {
+                                if (coinChildrList.get(i).getName().equals(list.get(j).getName()))
+                                    coinChildrList.get(i).setFav(list.get(j).isFav());
+                            }
+                        }
+                        coinAdapter.setCoinChildrs(coinChildrList);
+                        recyclerCoin_main.setAdapter(coinAdapter);
+                        progressChart_main.setVisibility(View.GONE);
+                        recyclerCoin_main.setAnimation(anim2);
+                        sClick(coinChildrList);
+                    }
 
-                }
-                coinAdapter.setCoinChildrs(coinChildrList);
-                recyclerCoin_main.setAdapter(coinAdapter);
-                progressChart_main.setVisibility(View.GONE);
-                recyclerCoin_main.setAnimation(anim2);
-                sClick(coinChildrList);
+                    @Override
+                    public void onFailure(Exception e) {
+                    }
+                });
             }
 
             @Override
@@ -189,23 +219,29 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle = getIntent().getExtras();
         if (bundle != null) {
-            String uid = bundle.getString("uid");
-            getUserService.serviceGetUser(uid, new FirestoreCallback() {
+            uid = bundle.getString("uid");
+            getUserService.serviceGetUser(uid, new FUserCallback() {
                 @Override
                 public void onEventListener(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 }
 
                 @Override
                 public void onEventSucccess(UserEntity userEntity) {
-                    lblUser_main.setText(userEntity.getUserName());
-                    Glide.with(MainActivity.this).load(userEntity.getUserPhoto()).into(imgUser_main);
+                    try {
+                        userMain = userEntity;
+                        lblUser_main.setText(userEntity.getUserName());
+                        Glide.with(MainActivity.this).load(userEntity.getUserPhoto()).into(imgUser_main);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             });
         }
     }
-    public void actMainFav(View view){
-        Intent intent = new Intent(this, FavActivity.class);
-        startActivity(intent);
 
+    public void actMainFav(View view) {
+        Intent intent = new Intent(this, FavActivity.class);
+        intent.putExtra("user", userMain);
+        startActivity(intent);
     }
 }

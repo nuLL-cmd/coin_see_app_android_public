@@ -1,4 +1,4 @@
-package com.automatodev.coinSee.controller.service;
+package com.automatodev.coinSee.controller.service.API;
 
 import android.app.Activity;
 import android.app.AlertDialog;

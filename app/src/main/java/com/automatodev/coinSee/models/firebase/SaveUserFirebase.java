@@ -1,10 +1,10 @@
-package com.automatodev.coinSee.models.Firebase;
+package com.automatodev.coinSee.models.firebase;
 
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-import com.automatodev.coinSee.controller.callback.FirebaseCallback;
+import com.automatodev.coinSee.controller.callback.FAuthCallback;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,7 +19,7 @@ public class SaveUserFirebase {
         this.context = context;
         firestore = FirebaseFirestore.getInstance();
     }
-    public void saveNewUser(String uid, UserEntity userEntity, final FirebaseCallback callback){
+    public void saveNewUser(String uid, UserEntity userEntity, final FAuthCallback callback){
         firestore.collection("users").document(uid)
                 .set(userEntity)
                 .addOnCompleteListener(context, new OnCompleteListener<Void>() {

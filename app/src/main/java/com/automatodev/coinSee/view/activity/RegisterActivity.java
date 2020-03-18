@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.controller.service.CreateUserService;
+import com.automatodev.coinSee.controller.service.firebase.CreateUserService;
 
 public class RegisterActivity extends AppCompatActivity {
 

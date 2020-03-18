@@ -10,7 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.service.AuthService;
+import com.automatodev.coinSee.controller.service.firebase.AuthService;
 
 public class LoginActivity extends AppCompatActivity {
 

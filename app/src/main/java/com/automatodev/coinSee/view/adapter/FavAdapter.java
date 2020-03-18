@@ -99,4 +99,12 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.DataHandler> {
 
         }
     }
+
+    public List<CoinChildr> getCoinEntityList() {
+        return coinEntityList;
+    }
+
+    public void setCoinEntityList(List<CoinChildr> coinEntityList) {
+        this.coinEntityList = coinEntityList;
+    }
 }

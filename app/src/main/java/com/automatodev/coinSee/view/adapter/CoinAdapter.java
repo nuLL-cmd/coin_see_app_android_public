@@ -57,7 +57,11 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
         holder.txtCodeIn_layout.setText(coinChildr.getCodein());
         holder.txtCode_layout.setText(coinChildr.getCode());
         holder.txtName_layout.setText(coinChildr.getName());
-        holder.imgFav_layout.setImageResource(R.drawable.ic_favorite_border_32dp);
+        if (coinChildr.isFav())
+        holder.imgFav_layout.setImageResource(R.drawable.ic_favorite_red_24dp);
+        else
+            holder.imgFav_layout.setImageResource(R.drawable.ic_favorite_border_32dp);
+
         holder.txtHigh_layout.setText(coinChildr.getHigh());
         holder.txtLow_layout.setText(coinChildr.getLow());
         holder.txtCoinValue_layout.setText(convertDataService.convertDecimal(coinChildr.getBid()));

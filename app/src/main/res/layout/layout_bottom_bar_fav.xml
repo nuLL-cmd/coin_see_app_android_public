@@ -51,8 +51,7 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/eth" />
+                        android:layout_marginEnd="15dp" />
 
                 </RelativeLayout>
 
@@ -84,8 +83,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_below="@+id/txtName_btFav"
-                            android:layout_marginTop="8dp"
-                            android:src="@drawable/usa" />
+                            android:layout_marginTop="8dp" />
 
                         <TextView
                             android:id="@+id/txtCode_btFav"
@@ -119,8 +117,7 @@
                             android:layout_alignTop="@id/txtCode_btFav"
                             android:layout_alignBottom="@id/txtCode_btFav"
                             android:layout_toEndOf="@id/txtIn_btFav"
-
-                            android:src="@drawable/brl" />
+                            />
 
 
                         <TextView

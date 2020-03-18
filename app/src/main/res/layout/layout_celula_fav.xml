@@ -22,7 +22,7 @@
             android:layout_height="48dp"
             android:layout_alignBottom="@id/txtName_layoutFav"
             android:layout_alignTop="@id/txtCode_layoutFav"
-            android:src="@drawable/usa"/>
+          />
 
         <TextView
             android:id="@+id/txtCode_layoutFav"

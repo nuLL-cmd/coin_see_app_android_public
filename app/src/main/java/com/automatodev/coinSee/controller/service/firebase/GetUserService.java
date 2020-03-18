@@ -1,10 +1,10 @@
-package com.automatodev.coinSee.controller.service;
+package com.automatodev.coinSee.controller.service.firebase;
 
 import android.app.Activity;
 
-import com.automatodev.coinSee.controller.callback.FirestoreCallback;
+import com.automatodev.coinSee.controller.callback.FUserCallback;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.models.Firebase.GetUserFirebase;
+import com.automatodev.coinSee.models.firebase.GetUserFirebase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
@@ -17,13 +17,13 @@ public class GetUserService {
         getUserFirebase = new GetUserFirebase(this.context);
     }
 
-    public void serviceGetUser(String uid, final FirestoreCallback firestoreCallback){
+    public void serviceGetUser(String uid, final FUserCallback FUserCallback){
 
-        getUserFirebase.getUserInFirebase(uid, new FirestoreCallback() {
+        getUserFirebase.getUserInFirebase(uid, new FUserCallback() {
             @Override
             public void onEventListener(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 userEntity = documentSnapshot.toObject(UserEntity.class);
-                firestoreCallback.onEventSucccess(userEntity);
+                FUserCallback.onEventSucccess(userEntity);
             }
 
             @Override

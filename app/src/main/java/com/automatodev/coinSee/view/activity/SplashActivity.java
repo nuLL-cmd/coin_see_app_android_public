@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.service.AuthService;
+import com.automatodev.coinSee.controller.service.firebase.AuthService;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView imgLogo_splash;

@@ -3,6 +3,8 @@ package com.automatodev.coinSee.view.activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -15,17 +17,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinSee.R;
+import com.automatodev.coinSee.controller.callback.FCoinCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
-import com.automatodev.coinSee.controller.service.CoinService;
+import com.automatodev.coinSee.controller.entity.UserEntity;
+import com.automatodev.coinSee.controller.service.API.CoinService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.automatodev.coinSee.controller.callback.RetrofitCallback;
+import com.automatodev.coinSee.controller.service.firebase.FavCoinService;
 import com.automatodev.coinSee.view.adapter.FavAdapter;
 import com.automatodev.coinSee.view.component.ChartLine;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FavActivity extends AppCompatActivity {
 
@@ -34,32 +45,68 @@ public class FavActivity extends AppCompatActivity {
     private FavAdapter favAdapter;
     private ChartLine chartLine;
     private CoinService coinService;
+    private Animation animation;
     private ConvertDataService convertDataService;
+    private CircleImageView imgUser_fav;
+    private FavCoinService favCoinService;
+    private ProgressBar progressFav_fav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
         recyclerFav_fav = findViewById(R.id.recyclerFav_fav);
+        imgUser_fav = findViewById(R.id.imgUser_fav);
 
         coinService = new CoinService(this);
         convertDataService = new ConvertDataService();
+        favCoinService = new FavCoinService(this);
+        progressFav_fav = findViewById(R.id.progressFav_fav);
 
+        favAdapter = new FavAdapter(this, null);
+        animation = AnimationUtils.loadAnimation(this, R.anim.push_left);
+        ThreeBounce three = new ThreeBounce();
+        progressFav_fav.setIndeterminateDrawable(three);
         recyclerFav_fav.hasFixedSize();
         recyclerFav_fav.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+            UserEntity userEntity = getIntent().getParcelableExtra("user");
+            Glide.with(this).load(userEntity.getUserPhoto()).placeholder(R.drawable.ic_user_round).into(imgUser_fav);
+            getDataFav(userEntity.getUserUid());
+
        
     }
 
-    private void getDataFav() {
-        List<CoinChildr> list = new ArrayList<>();
-            sClick(list);
+    private void getDataFav(String uid) {
+            favCoinService.getFavCoinService(uid, new FCoinCallback() {
+                @Override
+                public void onComplete(Task<QuerySnapshot> task) {
+                }
+
+                @Override
+                public void onCompleteReturn(List<CoinChildr> list) {
+                    favAdapter.setCoinEntityList(list);
+                    recyclerFav_fav.setAdapter(favAdapter);
+                    progressFav_fav.setVisibility(View.GONE);
+                    recyclerFav_fav.setAnimation(animation);
+                    sClick(list);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                }
+            });
+
+
     }
 
     private void sClick(final List<CoinChildr> coinChildrList) {
         favAdapter.setOnItemClickListener(new FavAdapter.OnItemClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
-            public void onIntemClick(int position) {
+            public void onIntemClick(final int position) {
                 favAdapter.notifyItemChanged(position);
                 final BottomSheetDialog bt = new BottomSheetDialog(FavActivity.this, R.style.BottomSheetDialogTheme);
                 final View view = getLayoutInflater().inflate(R.layout.layout_bottom_bar_fav, null);
@@ -71,7 +118,7 @@ public class FavActivity extends AppCompatActivity {
                 final TextView txtLow_btFav = view.findViewById(R.id.txtLow_btFav);
                 final TextView txtPercent_btFav = view.findViewById(R.id.txtPercent_btFav);
                 final ImageView imgCode_btFav = view.findViewById(R.id.imgCode_btFav);
-                final ImageView imgCodeIn_btFav = view.findViewById(R.id.imgCodeIn_btFav);
+                final ImageView imgCodeTitle_btFav = view.findViewById(R.id.imgCodeTitle_btFav);
                 final ImageView imgFav_btFav = view.findViewById(R.id.imgFav_btFav);
                 final TextView txtCode_btFav = view.findViewById(R.id.txtCode_btFav);
                 final TextView txtDate_btFav = view.findViewById(R.id.txtDate_btFav);
@@ -97,6 +144,12 @@ public class FavActivity extends AppCompatActivity {
                         txtCodeIn_btFav.setText(coinChildr0.getCodein());
                         progressDetails_btFav.setVisibility(View.GONE);;
                         txtNameTitle_btFav.setText(coinChildr0.getName());
+
+                        Glide.with(FavActivity.this).load(coinChildrList.get(position).getUlrPhoto())
+                                .transition(DrawableTransitionOptions.withCrossFade()).into(imgCodeTitle_btFav);
+
+                        Glide.with(FavActivity.this).load(coinChildrList.get(position).getUlrPhoto())
+                                .transition(DrawableTransitionOptions.withCrossFade()).into(imgCode_btFav);
                     }
                 });
                 coinService.requestRangeDays(coinChildrList.get(position).getCode() + "-" + "BRL", new RetrofitCallback() {
@@ -144,4 +197,6 @@ public class FavActivity extends AppCompatActivity {
     public void actFavMain(View view) {
         NavUtils.navigateUpFromSameTask(this);
     }
+
+
 }

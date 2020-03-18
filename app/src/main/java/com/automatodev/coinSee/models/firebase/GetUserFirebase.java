@@ -1,10 +1,10 @@
-package com.automatodev.coinSee.models.Firebase;
+package com.automatodev.coinSee.models.firebase;
 
 import android.app.Activity;
 
 import androidx.annotation.Nullable;
 
-import com.automatodev.coinSee.controller.callback.FirestoreCallback;
+import com.automatodev.coinSee.controller.callback.FUserCallback;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,12 +19,12 @@ public class GetUserFirebase {
         firestore = FirebaseFirestore.getInstance();
     }
 
-    public void getUserInFirebase(String uid, final FirestoreCallback firestoreCallback){
+    public void getUserInFirebase(String uid, final FUserCallback FUserCallback){
         firestore.collection("users").document(uid)
                 .addSnapshotListener(context, new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                        firestoreCallback.onEventListener(documentSnapshot, e );
+                        FUserCallback.onEventListener(documentSnapshot, e );
                     }
                 });
 

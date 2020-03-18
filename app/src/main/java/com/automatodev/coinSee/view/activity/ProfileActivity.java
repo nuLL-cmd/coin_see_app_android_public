@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.models.Firebase.AuthFirebase;
+import com.automatodev.coinSee.models.firebase.AuthFirebase;
 
 public class ProfileActivity extends AppCompatActivity {
     private AuthFirebase auth;

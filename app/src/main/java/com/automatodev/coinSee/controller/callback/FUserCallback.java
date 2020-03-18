@@ -4,7 +4,7 @@ import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public interface FirestoreCallback {
+public interface FUserCallback {
 
     void onEventListener(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e);
 

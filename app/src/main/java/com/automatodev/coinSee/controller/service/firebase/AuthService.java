@@ -1,4 +1,4 @@
-package com.automatodev.coinSee.controller.service;
+package com.automatodev.coinSee.controller.service.firebase;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.FirebaseCallback;
-import com.automatodev.coinSee.models.Firebase.AuthFirebase;
+import com.automatodev.coinSee.controller.callback.FAuthCallback;
+import com.automatodev.coinSee.models.firebase.AuthFirebase;
 import com.automatodev.coinSee.view.activity.MainActivity;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +38,7 @@ public class AuthService {
         alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         alerta.setView(v);
         alerta.show();
-        requestAu.requestLogin(email, pass, new FirebaseCallback() {
+        requestAu.requestLogin(email, pass, new FAuthCallback() {
             @Override
             public void onSuccessLogin(Task<AuthResult> task) {
                 if (task.isSuccessful()) {

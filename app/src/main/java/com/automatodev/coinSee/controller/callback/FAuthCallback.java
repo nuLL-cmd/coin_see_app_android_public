@@ -4,7 +4,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
-public interface FirebaseCallback {
+public interface FAuthCallback {
 
     void onSuccessLogin(Task<AuthResult> task);
 

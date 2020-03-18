@@ -95,13 +95,15 @@
                 app:backgroundTint="#fff"
                 app:borderWidth="0dp" />
 
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fbProfile_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_alignTop="@id/fbBolsa_main"
+                android:layout_centerHorizontal="true"
 
+                android:layout_marginTop="-2dp"
                 android:layout_marginEnd="25dp"
                 android:backgroundTint="#fff"
                 android:elevation="0dp"
@@ -109,7 +111,6 @@
                 android:src="@drawable/ic_favorite_red_24dp"
                 app:backgroundTint="#fff"
                 app:borderWidth="0dp" />
-
 
             <TextView
                 android:layout_width="wrap_content"
