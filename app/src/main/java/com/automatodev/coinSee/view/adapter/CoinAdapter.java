@@ -1,6 +1,7 @@
 package com.automatodev.coinSee.view.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,12 +71,14 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
         else
             holder.txtDate_layout.setText(convertDataService.convertDate(coinChildr.getTimestamp()));
         holder.txtPercent_layout.setText(coinChildr.getPctChange() + "%");
+        if (Double.parseDouble(coinChildr.getPctChange()) <0)
+            holder.txtPercent_layout.setTextColor(Color.RED);
         Glide.with(context).load(coinChildr.getUlrPhoto()).transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.imgCode_layout);
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount() { 
         return coinChildrs.size();
     }
 

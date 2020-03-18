@@ -126,6 +126,8 @@ public class FavActivity extends AppCompatActivity {
                 final ProgressBar progressDetails_btFav = view.findViewById(R.id.progressDetails_btFav);
                 final TextView txtNameTitle_btFav = view.findViewById(R.id.txtNameTitle_btFav);
                 final ProgressBar progressChart_btFav = view.findViewById(R.id.progressChart_btFav);
+                ThreeBounce three = new ThreeBounce();
+                progressChart_btFav.setIndeterminateDrawable(three );
 
                 coinService.requestSingle(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
                     @Override

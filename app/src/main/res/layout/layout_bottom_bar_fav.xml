@@ -40,7 +40,6 @@
                         android:shadowDx="3"
                         android:shadowDy="3"
                         android:shadowRadius="15"
-                        android:text="Dolar Comercial"
                         android:textAlignment="textStart"
                         android:textColor="#444141"
                         android:textSize="25sp"
@@ -246,21 +245,6 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:id="@+id/btnClose_btFav"
-                    style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/bg_btn_splash"
-                    android:shadowRadius="30"
-                    android:text="Fechar"
-                    android:textColor="#fff"
-                    android:textSize="19sp" />
-
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -271,7 +255,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
                         android:orientation="vertical">
 
                         <androidx.cardview.widget.CardView
@@ -307,14 +291,30 @@
 
                             </LinearLayout>
 
-                            <ProgressBar
+                            <com.github.ybq.android.spinkit.SpinKitView
                                 android:id="@+id/progressChart_btFav"
                                 android:layout_width="match_parent"
+                                style="@style/SpinKitView.Small.ThreeBounce"
+                                app:SpinKit_Color="@color/colorPrimaryDark"
                                 android:layout_height="match_parent"
                                 android:background="#fff" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
                 </ScrollView>
+
+                <Button
+                    android:id="@+id/btnClose_btFav"
+                    style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@drawable/bg_btn_splash"
+                    android:shadowRadius="30"
+                    android:text="Fechar"
+                    android:textColor="#fff"
+                    android:textSize="19sp" />
 
 
             </LinearLayout>
