@@ -1,5 +1,6 @@
 package com.automatodev.coinSee.controller.service.firebase;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.FAuthCallback;
 import com.automatodev.coinSee.models.firebase.AuthFirebase;
@@ -30,10 +32,13 @@ public class AuthService {
     }
 
     public void serviceLogin(String email, String pass) {
-        View v = context.getLayoutInflater().inflate(R.layout.progress_login, null);
-        TextView txtLabel_progress = v.findViewById(R.id.txtLabel_progress);
-        txtLabel_progress.setText("Só um momento...");
         final AlertDialog alerta = new AlertDialog.Builder(context).create();
+        final View v = context.getLayoutInflater().inflate(R.layout.progress_login, null);
+        final ProgressBar spin_kit = v.findViewById(R.id.spin_kit);
+        final LottieAnimationView okAnimation_progress = v.findViewById(R.id.okAnimation_progress);
+        final TextView txtLabel_progress = v.findViewById(R.id.txtLabel_progress);
+
+        txtLabel_progress.setText("Só um momento...");
         alerta.setCancelable(false);
         alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         alerta.setView(v);
@@ -42,8 +47,35 @@ public class AuthService {
             @Override
             public void onSuccessLogin(Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    verifyUserAndLogin();
+                    txtLabel_progress.setText("Successo!!");
+                    spin_kit.setVisibility(View.GONE);
+                    okAnimation_progress.setVisibility(View.VISIBLE);
+                    okAnimation_progress.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            try {
+                                Thread.sleep(200);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            alerta.dismiss();
+                            verifyUserAndLogin();
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
                 }
+
             }
 
             @Override

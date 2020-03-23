@@ -35,17 +35,40 @@
             android:text="Todos os campos devem estar preenchidos!"
 
             />
-        <Button
-            android:id="@+id/btnDismiss_message"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:textAllCaps="false"
-            android:layout_marginTop="10dp"
-            android:textSize="12dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:textColor="#fff"
-            android:background="@drawable/bg_btn_splash"
-            android:text="Ok"/>
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnNegative_message"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textAllCaps="false"
+                android:textSize="12dp"
+                android:visibility="gone"
+                android:layout_marginEnd="25dp"
+                android:layout_gravity="end"
+                android:textColor="#fff"
+                android:background="@drawable/bg_btn_splash"
+                android:text="Cancelar"/>
+
+            <Button
+                android:id="@+id/btnDismiss_message"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:textAllCaps="false"
+                android:textSize="12dp"
+                android:layout_gravity="end"
+                android:textColor="#fff"
+                android:background="@drawable/bg_btn_splash"
+                android:text="Ok"/>
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
 

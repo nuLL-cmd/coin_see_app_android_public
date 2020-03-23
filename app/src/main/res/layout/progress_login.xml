@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:gravity="center"
@@ -9,7 +9,7 @@
     android:layout_height="wrap_content">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:padding="20dp"
         android:layout_height="wrap_content"
@@ -22,17 +22,31 @@
             android:text="Criando usuario..."
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="20dp" />
 
         <com.github.ybq.android.spinkit.SpinKitView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/spin_kit"
             style="@style/SpinKitView.Large.ThreeBounce"
             android:layout_width="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/txtLabel_progress"
             android:layout_height="100dp"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             app:SpinKit_Color="@color/colorPrimaryDark" />
-    </LinearLayout>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/okAnimation_progress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/txtLabel_progress"
+            android:layout_centerInParent="true"
+            app:lottie_loop="false"
+            android:visibility="gone"
+            app:lottie_fileName="animation.json"
+            app:lottie_autoPlay="true"
+            android:layout_marginTop="10dp"/>
+    </RelativeLayout>
 
 
 </LinearLayout>

@@ -62,7 +62,7 @@
                     android:textSize="50dp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgUser_fav"
+                    android:id="@+id/imgUser_details"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignTop="@id/txtNome_details"
@@ -251,7 +251,7 @@
                         android:text="0.55%"
                         android:textSize="10sp"
                         android:textStyle="bold"
-                        android:textColor="#43A047"
+                            android:textColor="#43A047"
                         android:layout_alignStart="@id/viewVar_layout"
                         android:layout_below="@id/viewVar_layout"
                         android:layout_marginTop="5dp"
@@ -263,7 +263,7 @@
                         android:layout_width="48dp"
                         android:clickable="true"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_favorite_red_24dp"
+                        android:src="@drawable/ic_favorite_border_32dp"
                         android:layout_alignParentEnd="true"/>
 
 
@@ -274,16 +274,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:background="#fff"
-                android:gravity="center"
+                android:gravity="bottom"
                 android:orientation="vertical">
 
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="350dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
@@ -311,19 +311,29 @@
                             android:id="@+id/chart"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="3dp"
+                            android:layout_marginStart="5dp"
                             android:layout_below="@id/lbl_titleGraph_details"
-                            android:layout_marginEnd="3dp"
+                            android:layout_marginEnd="5dp"
                             android:layout_marginBottom="10dp" />
 
                     </RelativeLayout>
 
-                    <ProgressBar
-                        android:id="@+id/progressChart_details"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#fff" />
+                   <RelativeLayout
+                       android:id="@+id/relativeChart_details"
+                       android:layout_width="match_parent"
+                       android:background="#fff"
+                       android:layout_height="match_parent">
 
+                       <com.github.ybq.android.spinkit.SpinKitView
+                           android:id="@+id/progressChart_details"
+                           android:layout_width="80dp"
+                           style="@style/SpinKitView.Small.ThreeBounce"
+                           android:layout_height="60dp"
+                           android:layout_centerInParent="true"
+                           app:SpinKit_Color="@color/colorPrimaryDark"
+                           android:background="#fff" />
+
+                   </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 

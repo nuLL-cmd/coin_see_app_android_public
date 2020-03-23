@@ -56,6 +56,7 @@ public class CreateUserService {
                         @Override
                         public void onSuccessSave(Task<Void> task) {
                             if (task.isSuccessful()){
+                                alerta.dismiss();
                                 verifyUserAndLogin(firebaseUser.getUid());
                             }
                         }

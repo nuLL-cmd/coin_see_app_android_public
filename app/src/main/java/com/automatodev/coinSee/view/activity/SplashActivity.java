@@ -1,8 +1,10 @@
 package com.automatodev.coinSee.view.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -17,6 +19,9 @@ public class SplashActivity extends AppCompatActivity {
     private ImageView imgTitle_splash;
     private Animation animation;
     private AuthService authService;
+
+    public static String FACEBOOK_URL = "https://www.facebook.com/Nazomiiamazo";
+    public static String LINKEDIN_URL = "https://www.linkedin.com/in/marcoaj/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +33,11 @@ public class SplashActivity extends AppCompatActivity {
         imgLogo_splash.setAnimation(animation);
         animation = AnimationUtils.loadAnimation(this, R.anim.push_right);
         imgTitle_splash.setAnimation(animation);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
     }
 
     public void actSplashLogin(View view) {
@@ -56,6 +66,18 @@ public class SplashActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
+    }
+
+    public void openFacebook(View view){
+        Intent facebook = new Intent(Intent.ACTION_VIEW);
+        facebook.setData(Uri.parse(FACEBOOK_URL));
+        startActivity(facebook);
+    }
+
+    public void openLinkedin(View view){
+        Intent facebook = new Intent(Intent.ACTION_VIEW);
+        facebook.setData(Uri.parse(LINKEDIN_URL));
+        startActivity(facebook);
     }
 }
 

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/</item>
+        <item>@font/aclonica</item>
         <item>@font/alfa_slab_one</item>
         <item>@font/anton</item>
+        <item>@font/architects_daughter</item>
         <item>@font/bowlby_one</item>
         <item>@font/candal</item>
+        <item>@font/ceviche_one</item>
+        <item>@font/kavoon</item>
     </array>
 </resources>

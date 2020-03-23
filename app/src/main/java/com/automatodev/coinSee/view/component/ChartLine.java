@@ -44,27 +44,29 @@ public class ChartLine {
 
         //Lista do tipo Entry que recebe um entry passando como pramatro os valores do eixo X e eixo y
         List<Entry> entradaTestes = new ArrayList<>();
-        entradaTestes.add(new Entry(0f, 4.36f));
-        entradaTestes.add(new Entry(1f, 4.46f));
-        entradaTestes.add(new Entry(2f, 4.29f));
-        entradaTestes.add(new Entry(3f, 4.37f));
-        entradaTestes.add(new Entry(4f, 4.37f));
-        entradaTestes.add(new Entry(5f, 4.42f));
-        entradaTestes.add(new Entry(6f, 4.34f));
+
+
+        entradaTestes.add(new Entry(0f, Float.parseFloat(valueList.get(6).getBid())));
+        entradaTestes.add(new Entry(1f, Float.parseFloat(valueList.get(5).getBid())));
+        entradaTestes.add(new Entry(2f, Float.parseFloat(valueList.get(4).getBid())));
+        entradaTestes.add(new Entry(3f, Float.parseFloat(valueList.get(3).getBid())));
+        entradaTestes.add(new Entry(4f, Float.parseFloat(valueList.get(2).getBid())));
+        entradaTestes.add(new Entry(5f, Float.parseFloat(valueList.get(1).getBid())));
+        entradaTestes.add(new Entry(6f, Float.parseFloat(valueList.get(0).getBid())));
         //Lista contendo as datas que substituira os valores de X no objeto Entry dentro do grafico
         final List<String> mxData = new ArrayList<>();
-        mxData.add(convertDataService.convertDayMonth(valueList.get(6).getTimestamp()));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(5).getTimestamp()));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(4).getTimestamp()));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(3).getTimestamp()));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(2).getTimestamp()));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(1).getTimestamp()));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(0).getTimestamp()));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(6).getTimestamp().substring(0,10)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(5).getTimestamp().substring(0,10)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(4).getTimestamp().substring(0,10)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(3).getTimestamp().substring(0,10)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(2).getTimestamp().substring(0,10)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(1).getTimestamp().substring(0,10)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(0).getTimestamp().substring(0,10)));
 
         //Configuração de dados do eixo X
         XAxis xAxis = chartGlobal.getXAxis(); //Inicia o eixo X
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //Dados(labels) do eixo X no Bottom do grafico
-        xAxis.setTextColor(Color.parseColor("#1E88E5")); //Seta a cor dos dados(labels) do eixo X
+        xAxis.setTextColor(Color.parseColor("#328635")); //Seta a cor dos dados(labels) do eixo X
         xAxis.setTextSize(10); //Tanho dos dados(labels) do eixo X
         xAxis.setYOffset(10f);
         xAxis.setXOffset(-10f);
@@ -78,20 +80,20 @@ public class ChartLine {
         YAxis yl = chartGlobal.getAxisLeft(); //Inicia o eixo Y do lado esquerdo do grafico
         yl.setEnabled(false); //Desabilita a visualização dos dados no eixo Y do lado direito do grafico
         //Incicia um novo LineDataSet passando a lista de Entrys e uma label para o grafico
-        LineDataSet lineDataSet = new LineDataSet(entradaTestes, "Periodo de 7 dias");
+        LineDataSet lineDataSet = new LineDataSet(entradaTestes, "últimos 7 fechamentos");
         lineDataSet.setDrawFilled(true); //Preenchimento de cor a baixo da linha tenua do grafico
         lineDataSet.setDrawValues(true); //Valores do eixo Y em cada nó da linha tenua do grafico
         lineDataSet.setValueTextColor(Color.BLACK); //Cor do texto do valor em cada nó da linha tenua do grafico
-        lineDataSet.setValueTextSize(10); //Tamanho do texto do valor em cada nó da linha tenua do grafico
+        lineDataSet.setValueTextSize(8); //Tamanho do texto do valor em cada nó da linha tenua do grafico
         lineDataSet.setValueFormatter(formatValue()); //Formata o valor em cada nó da linha tenua do grafico
         lineDataSet.setCircleHoleColor(Color.parseColor("#d32f2f")); // cor da bolinha
         lineDataSet.setCircleRadius(4f); //Diametro de cada nó da linha tenua do grafico
         lineDataSet.setCircleColor(Color.parseColor("#d32f2f")); //Cor de cada nó da linha tenua do grafico
-        lineDataSet.setColor(Color.parseColor("#1E88E5")); //Cor da linha tenua e da label do grafico
+        lineDataSet.setColor(Color.parseColor("#43A047")); //Cor da linha tenua e da label do grafico
         // Gradiente (preenchimento) da linha tenua do grafico
         lineDataSet.setFillDrawable(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{Color.parseColor("#1E88E5"), Color.parseColor("#00FA5544")}));
-        lineDataSet.setLineWidth(5f); //Espessura da linha tenua do grafico
+                new int[]{Color.parseColor("#199419"),Color.parseColor("#7CB342"), Color.parseColor("#00FA5544")}));
+        lineDataSet.setLineWidth(3f); //Espessura da linha tenua do grafico
         //Incicia um novo LineData passando o lineDataSet
         LineData lineData = new LineData(lineDataSet);
         chartGlobal.setData(lineData);//Seta o lineData no chartGlobal(grafico)
@@ -99,9 +101,9 @@ public class ChartLine {
         chartGlobal.setDoubleTapToZoomEnabled(false); //Desabilita o double toque para zoom do grafico
         chartGlobal.invalidate(); //Inicia e atualiza o grafico
         chartGlobal.setScaleEnabled(true); //Desabilita o zoom total do grafico
-        chartGlobal.setDescription(sDescription("Dolar Comercial")); // Seta uma descrição dentro do grafico atraves do metodo sDescription
+        chartGlobal.setDescription(sDescription(valueList.get(0).getName())); // Seta uma descrição dentro do grafico atraves do metodo sDescription
         chartGlobal.getDescription().setXOffset(10f); //Seta margin X da descrição
-        chartGlobal.getDescription().setYOffset(10F); //Seta a margin Y da descrição
+        chartGlobal.getDescription().setYOffset(5f); //Seta a margin Y da descrição
         chartGlobal.setDrawBorders(false); //Remove as bordas do grafico
         chartGlobal.setTouchEnabled(true); //Habilita o toque no grafico (pode usar o setOnClickListener() para colocar ações no toque)
         chartGlobal.zoom(1.5f, 1f, -1.2f, 1f); //Seta um zoon neste caso apenas no eixo X
@@ -112,12 +114,12 @@ public class ChartLine {
 
     //Metodo que formata os numeros nos valores de cada nó da linha tenua do grafico ou do eixo Y
     private ValueFormatter formatValue() {
-        final Locale locale = new Locale("pt", "BR");
-        final NumberFormat df = NumberFormat.getCurrencyInstance(locale);
+        final Locale locale = new Locale("pt","BR");
+        final NumberFormat format = NumberFormat.getCurrencyInstance(locale);
         return new ValueFormatter() {
             @Override
             public String getAxisLabel(float value, AxisBase axis) {
-                return df.format(value);
+                return format.format(value);
             }
         };
     }
@@ -139,6 +141,5 @@ public class ChartLine {
             }
         };
     }
-
 
 }

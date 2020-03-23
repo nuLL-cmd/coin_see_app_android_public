@@ -59,26 +59,23 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.DataHandler> {
         holder.txtCode_layout.setText(coinChildr.getCode());
         holder.txtName_layout.setText(coinChildr.getName());
         if (coinChildr.isFav())
-        holder.imgFav_layout.setImageResource(R.drawable.ic_favorite_red_24dp);
+            holder.imgFav_layout.setImageResource(R.drawable.ic_favorite_red_24dp);
         else
             holder.imgFav_layout.setImageResource(R.drawable.ic_favorite_border_32dp);
-
         holder.txtHigh_layout.setText(coinChildr.getHigh());
         holder.txtLow_layout.setText(coinChildr.getLow());
         holder.txtCoinValue_layout.setText(convertDataService.convertDecimal(coinChildr.getBid()));
-        if (coinChildr.getTimestamp().length() > 10)
-            holder.txtDate_layout.setText(convertDataService.convertDate(coinChildr.getTimestamp().substring(0, 10)));
-        else
-            holder.txtDate_layout.setText(convertDataService.convertDate(coinChildr.getTimestamp()));
+        holder.txtDate_layout.setText(convertDataService.convertDate(coinChildr.getTimestamp().substring(0, 10)));
         holder.txtPercent_layout.setText(coinChildr.getPctChange() + "%");
-        if (Double.parseDouble(coinChildr.getPctChange()) <0)
+        if (Double.parseDouble(coinChildr.getPctChange()) < 0)
             holder.txtPercent_layout.setTextColor(Color.RED);
+        else holder.txtPercent_layout.setTextColor(Color.parseColor("#43A047"));
         Glide.with(context).load(coinChildr.getUlrPhoto()).transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.imgCode_layout);
     }
 
     @Override
-    public int getItemCount() { 
+    public int getItemCount() {
         return coinChildrs.size();
     }
 

@@ -3,7 +3,6 @@ package com.automatodev.coinSee.controller.service.API;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
@@ -37,14 +36,11 @@ public class CoinService {
                 .addConverterFactory(GsonConverterFactory.create()).build();
         request = retrofit.create(RequestAPI.class);
         Call<CoinDaddy> call = request.requestAll();
-        Toast.makeText(context, "teste: "+request.toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(context, "teste: "+call.toString(), Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<CoinDaddy>() {
             @Override
             public void onResponse(@NotNull Call<CoinDaddy> call, @NotNull Response<CoinDaddy> response) {
                 CoinDaddy daddyTests = response.body();
                 List<CoinChildr> coinChildrList = new ArrayList<>();
-                Toast.makeText(context, "teste: "+response.code(), Toast.LENGTH_SHORT).show();
                 if (daddyTests != null) {
                     coinChildrList.add(daddyTests.getuSD());
                     coinChildrList.add(daddyTests.getaRS());

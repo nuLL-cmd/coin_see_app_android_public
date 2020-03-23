@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +31,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerCoin_main;
     private TextView lblUser_main;
     private CircleImageView imgUser_main;
+    private RelativeLayout relativeLayoutProgressUser_main;
 
     public static boolean status;
     private String uid;
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private UserEntity userMain;
     private GetUserService getUserService;
     private FavCoinService favCoinService;
+    private List<CoinChildr> coinLocal;
     SwipeRefreshLayout sw;
 
     @Override
@@ -73,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerCoin_main = findViewById(R.id.recyclerCoin_main);
         progressChart_main = findViewById(R.id.progressChart_main);
+        relativeLayoutProgressUser_main = findViewById(R.id.relativeProgressUser_main);
         lblUser_main = findViewById(R.id.lblUser_main);
         imgUser_main = findViewById(R.id.imgUser_main);
         anim2 = AnimationUtils.loadAnimation(this, R.anim.push_left);
@@ -86,46 +92,13 @@ public class MainActivity extends AppCompatActivity {
         favCoinService = new FavCoinService(this);
         recyclerCoin_main.hasFixedSize();
         recyclerCoin_main.setLayoutManager(new LinearLayoutManager(this));
+        coinLocal = new ArrayList<>();
         getDataUser();
-        getData();
+        //getData();
         sw.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                task.requestAll(new RetrofitCallback() {
-                    @Override
-                    public void onSucces(final List<CoinChildr> coinChildrList) {
-                        favCoinService.getFavCoinService(uid, new FCoinCallback() {
-                            @Override
-                            public void onComplete(Task<QuerySnapshot> task) {
-                            }
-
-                            @Override
-                            public void onCompleteReturn(List<CoinChildr> list) {
-                                for (int i = 0; i < coinChildrList.size(); i++)
-                                    coinChildrList.get(i).setUlrPhoto(urls[i]);
-                                for (int i = 0; i < coinChildrList.size(); i++) {
-                                    for (int j = 0; j < list.size(); j++) {
-                                        if (coinChildrList.get(i).getName().equals(list.get(j).getName()))
-                                            coinChildrList.get(i).setFav(list.get(j).isFav());
-                                    }
-                                }
-                                coinAdapter.setCoinChildrs(coinChildrList);
-                                progressChart_main.setVisibility(View.GONE);
-                                recyclerCoin_main.setAdapter(coinAdapter);
-                                sClick(coinChildrList);
-                                sw.setRefreshing(false);
-                            }
-
-                            @Override
-                            public void onFailure(Exception e) {
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onSucces(CoinChildr coinChildr0) throws InterruptedException {
-                    }
-                });
+                refreshData();
             }
         });
     }
@@ -146,49 +119,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getDataUser();
-    }
-
-    private void getData() {
-        task.requestAll(new RetrofitCallback() {
-            @Override
-            public void onSucces(final List<CoinChildr> coinChildrList) {
-                favCoinService.getFavCoinService(uid, new FCoinCallback() {
-                    @Override
-                    public void onComplete(Task<QuerySnapshot> task) {
-                    }
-
-                    @Override
-                    public void onCompleteReturn(List<CoinChildr> list) {
-                        for (int i = 0; i < coinChildrList.size(); i++)
-                            coinChildrList.get(i).setUlrPhoto(urls[i]);
-                        for (int i = 0; i < coinChildrList.size(); i++) {
-                            for (int j = 0; j < list.size(); j++) {
-                                if (coinChildrList.get(i).getName().equals(list.get(j).getName()))
-                                    coinChildrList.get(i).setFav(list.get(j).isFav());
-                            }
-                        }
-                        coinAdapter.setCoinChildrs(coinChildrList);
-                        recyclerCoin_main.setAdapter(coinAdapter);
-                        progressChart_main.setVisibility(View.GONE);
-                        recyclerCoin_main.setAnimation(anim2);
-                        sClick(coinChildrList);
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-                    }
-                });
-            }
-
-            @Override
-            public void onSucces(CoinChildr coinChildr0) throws InterruptedException {
-            }
-        });
+        refreshData();
     }
 
     public void actMainProfile(View view) {
         if (!ProfileActivity.status) {
             Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("user", userMain);
             startActivity(intent);
         }
     }
@@ -198,13 +135,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 coinAdapter.notifyItemChanged(position);
-                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                intent.putExtra("value", coinChildrList.get(position));
-                startActivity(intent);
+                if (!DetailsActivity.status) {
+                    Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                    intent.putExtra("value", coinChildrList.get(position));
+                    intent.putExtra("user", userMain);
+                    startActivity(intent);
+                }
             }
 
             @Override
             public void onFavItemClick(int position) {
+                if (!coinChildrList.get(position).isFav()) {
+                    coinChildrList.get(position).setFav(true);
+                    coinChildrList.get(position).setCoinUid(UUID.randomUUID().toString());
+                    favCoinService.addFavCoinService(uid, new CoinChildr(
+                            coinChildrList.get(position).getCode(),
+                            coinChildrList.get(position).getCodein(),
+                            coinChildrList.get(position).getName(),
+                            coinChildrList.get(position).getUlrPhoto(),
+                            coinChildrList.get(position).isFav(),
+                            UUID.randomUUID().toString()
+                    ));
+                    coinAdapter.notifyItemChanged(position);
+                }
             }
         });
     }
@@ -230,8 +183,9 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         userMain = userEntity;
                         lblUser_main.setText(userEntity.getUserName());
-                        Glide.with(MainActivity.this).load(userEntity.getUserPhoto()).into(imgUser_main);
-                    }catch (Exception e){
+                        Glide.with(MainActivity.this).load(userEntity.getUserPhoto()).placeholder(R.drawable.ic_user_round).into(imgUser_main);
+                        relativeLayoutProgressUser_main.setVisibility(View.GONE);
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -243,5 +197,107 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FavActivity.class);
         intent.putExtra("user", userMain);
         startActivity(intent);
+    }
+    //Metodo que pegara os primeiros dados e/ou atualizara os dados da API vs favoritos do banco de dados
+    public void refreshData() {
+        /*Se a lista auxiliar for diferente de zero, inicia o refresh lyaout, ou seja isto nao se aplica a inicializaçao
+        do programa, somente durante sua execução
+        se a lista for igual a zero, uma progressbar estara visivel indicando assim a 1º inicialização do app*/
+        if (coinLocal.size() != 0)
+            sw.setRefreshing(true);
+        //invoca o metodo que fara a requisição de todos os dados da Api
+        task.requestAll(new RetrofitCallback() {
+            @Override
+            public void onSucces(final List<CoinChildr> coinChildrList) {
+                /*Ao terminar seu trabalho teremos uma lista de dados pronta para uso assim invocando agora
+                o metodo que captura a lista de favoritos do banco de dados da google
+                passando como parametro o uid do usuario e um callback para transações assincronas*/
+                favCoinService.getFavCoinService(uid, new FCoinCallback() {
+                    @Override
+                    public void onComplete(Task<QuerySnapshot> task) {
+                    }
+
+                    @Override
+                    public void onCompleteReturn(List<CoinChildr> list) {
+                        //ao completar sua tarefa agora temos  uma lista de moedas e uma lista de favoritos de moedas
+
+                        /*O primeiro forLoop associa a cada item da lista, um link para download das bandeiras dos paises
+                        ja que a api nao traz as imagens da interent*/
+                        for (int i = 0; i < coinChildrList.size(); i++)
+                            coinChildrList.get(i).setUlrPhoto(urls[i]);
+
+                        /*O segundo forLoop faz uma comparação entre um dado da lista vinda da api e da lista de favoritos
+                        vindo do servidor usando como base o nome da moeda, ja que a API nao tras duas moedas repetidas
+                        Para cada item da lista vinda da api eu faço  um outro forLooP na lista de favoritos, onde se o dado da API na posição i
+                        for igual ao dado vindo do banco de dados onde estao os favoritos na posição J, entao o campo favorito
+                        da lista vinda da api é atualizado com o campo favorito vindo do banco de dados
+                         tendo agora uma lista vinda da API com url de imagens e booleanos indicando se é favorito ou nao*/
+                        for (int i = 0; i < coinChildrList.size(); i++) {
+                            for (int j = 0; j < list.size(); j++) {
+                                if (coinChildrList.get(i).getName().equals(list.get(j).getName()))
+                                    coinChildrList.get(i).setFav(list.get(j).isFav());
+                            }
+                        }
+
+                        /*Atualizações sao feitas na API de 30 em 30 segundos e alterações de favorito = true ou false tambem sao realizadas
+                        pelo usuario, tendo a necessidade de atualizar apenas a celula afetada ou seja apenas o dado afetado
+                        sem precisar carregar toda a lista e atualizar a view consumindo mais processamento e recursos do dispositivo
+                        ja que nem todos os dados serao atualizados*/
+
+                        /*Se a lista local for vazia ou seja Se aplica em tempo de execução do programa nao sendo valido
+                        para a primeira inicialização*/
+                        if (coinLocal.size() != 0) {
+                            /*Faz um forLoop onde para cada item da lista local eu comparo os dados que tenho na lista local
+                             com os dados vindos da api ja com os dados da url e favoritos
+                             por isso nao se aplica a primeira inicialização pois a lista na primeira inicialização ainda estara vazia*/
+                            for (int i = 0; i < coinLocal.size(); i++) {
+                                /*Se os dados na lista local na posição i forem diferentes dos dados da API na posição i
+                                deleta o dado antigo na lisita local na posição i
+                                e adiciona na mesma posição (i) o dado atualizaçdo da lista vinda do sevidor na posição i*/
+                                if (coinLocal.get(i) != coinChildrList.get(i)) {
+                                    coinLocal.remove(i);
+                                    coinLocal.add(i, coinChildrList.get(i));
+                                }
+                            }
+                            /*Notifica a view dizendo que houve alterações no repositorio de dados (Lista local)
+                            e atualiza esses dados em cada celula
+                            chamando o metodo que ativa os clicques nas celulas passando como parametro a lista local pronta e atualizada*/
+                            coinAdapter.notifyDataSetChanged();
+                            sClick(coinLocal);
+                            sw.setRefreshing(false);
+                            return; // para a execução do bloco pois o progrmaa ja esta em execuçap e uma lista local ja esta preenchida
+                        }
+
+                        /*Se for a primeira inicialização do programa
+                         atribuo os dados vindo da api para minha lista local
+                         atribuo meu objeto de verificação de estado ao meu componente de listagem
+                         coloco uma animação tosca no meu compoente de listagem
+                         desabilito minha progressbar
+                         chamo o metodo sclick passando minha lista local como parametro*/
+                        coinLocal = coinChildrList;
+                        coinAdapter.setCoinChildrs(coinLocal);
+                        recyclerCoin_main.setAdapter(coinAdapter);
+                        recyclerCoin_main.setAnimation(anim2);
+                        progressChart_main.setVisibility(View.GONE);
+                        sClick(coinLocal);
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                    }
+                });
+            }
+
+            @Override
+            public void onSucces(CoinChildr coinChildr0) throws InterruptedException {
+            }
+        });
+    }
+
+    public void refreshList(View view) {
+        if (coinLocal.size() != 0) {
+            refreshData();
+
+        }
     }
 }

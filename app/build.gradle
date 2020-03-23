@@ -45,5 +45,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.google.firebase:firebase-firestore:21.2.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
+    implementation 'com.airbnb.android:lottie:3.4.0'
+
 
 }

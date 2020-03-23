@@ -4,7 +4,9 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
+import com.automatodev.coinSee.controller.callback.FAuthCallback;
 import com.automatodev.coinSee.controller.callback.FCoinCallback;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -34,4 +36,40 @@ public class FavCoinFirebase {
             }
         });
     }
+
+    public void delFavCoinFirebase(String userUid, String coinUid, final FAuthCallback callback){
+        firestore.collection("users").document(userUid).collection("favorites")
+                .document(coinUid)
+                .delete()
+                .addOnCompleteListener(context, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        callback.onSuccessSave(task);
+                    }
+                }).addOnFailureListener(context, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                callback.onFailure(e);
+            }
+        });
+    }
+
+    public void addFavCoinFirebase(String userUid, CoinChildr coinChildr, final FAuthCallback callback){
+        firestore.collection("users").document(userUid)
+                .collection("favorites")
+                .document(coinChildr.getCoinUid())
+               .set(coinChildr)
+                .addOnCompleteListener(context, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        callback.onSuccessSave(task);;
+                    }
+                }).addOnFailureListener(context, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                callback.onFailure(e);
+            }
+        });
+    }
+
 }

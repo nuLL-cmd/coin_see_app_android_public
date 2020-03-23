@@ -4,6 +4,8 @@
     package="com.automatodev.coinSee">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -14,27 +16,38 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.automatodev.coinSee.view.activity.DetailsActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName="com.automatodev.coinSee.view.activity.DetailsActivity"
         >
 
         </activity>
         <activity
             android:name="com.automatodev.coinSee.view.activity.FavActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName="com.automatodev.coinSee.view.activity.FavActivity">
 
         </activity>
         <activity
             android:name="com.automatodev.coinSee.view.activity.ProfileActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName="com.automatodev.coinSee.view.activity.ProfileActivity">
 
         </activity>
-        <activity android:name="com.automatodev.coinSee.view.activity.ForgotActivity" />
-        <activity android:name="com.automatodev.coinSee.view.activity.MainActivity">
+        <activity android:name="com.automatodev.coinSee.view.activity.ForgotActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".view.activity.ForgotActivity"/>
 
+        <activity android:name="com.automatodev.coinSee.view.activity.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.automatodev.coinSee.view.activity.RegisterActivity" />
-        <activity android:name="com.automatodev.coinSee.view.activity.LoginActivity" />
-        <activity android:name="com.automatodev.coinSee.view.activity.SplashActivity">
+        <activity android:name="com.automatodev.coinSee.view.activity.RegisterActivity"
+            android:parentActivityName=".view.activity.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.automatodev.coinSee.view.activity.LoginActivity"
+            android:parentActivityName=".view.activity.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.automatodev.coinSee.view.activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

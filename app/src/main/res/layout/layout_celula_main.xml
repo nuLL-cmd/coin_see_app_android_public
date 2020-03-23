@@ -26,7 +26,7 @@
         <ImageView
             android:id="@+id/imgCode_layout"
             android:layout_width="28dp"
-            android:src="@drawable/usd"
+
             android:layout_below="@+id/txtName_layout"
             android:layout_marginTop="8dp"
             android:layout_height="28dp"/>
@@ -59,11 +59,10 @@
         <ImageView
             android:id="@+id/imgCodeIn_layout"
             android:layout_width="28dp"
-            android:src="@drawable/brl"
             android:layout_toEndOf="@id/txtIn_layout"
             android:layout_alignTop="@id/txtCode_layout"
             android:layout_alignBottom="@id/txtCode_layout"
-
+            android:src="@drawable/brl"
             android:layout_height="28dp"/>
 
 
@@ -184,7 +183,7 @@
             android:layout_width="28dp"
             android:clickable="true"
             android:layout_height="28dp"
-            android:src="@drawable/ic_favorite_red_24dp"
+
             android:layout_alignBottom="@id/txtDate_layout"
             android:layout_alignParentEnd="true"/>
 

@@ -1,8 +1,10 @@
 package com.automatodev.coinSee.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
 
@@ -25,5 +27,8 @@ public class ForgotActivity extends AppCompatActivity {
     protected  void onStop(){
         super.onStop();
         status = false;
+    }
+    public void acForgotSplash(View view){
+        NavUtils.navigateUpFromSameTask(ForgotActivity.this);
     }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.service.firebase.AuthService;
@@ -53,6 +54,9 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ForgotActivity.class);
             startActivity(intent);
         }
+    }
+    public void acLoginSplash(View view){
+        NavUtils.navigateUpFromSameTask(LoginActivity.this);
     }
 
     public void actLoginMain(View view) {

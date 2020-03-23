@@ -31,10 +31,8 @@ public class ConvertDataService {
        return numberFormat.format(decimal);
     }
 
-    public String convertPercent(String value){
-        double percent = Double.parseDouble(value);
-        locale = new Locale("pt","BR");
-        numberFormat = NumberFormat.getPercentInstance(locale);
-        return numberFormat.format(percent);
+    public String convertPhone(String value){
+        return value = "("+ value.substring(0,2)+") "+value.substring(2,7)+"-"+value.substring(7,11);
+
     }
 }

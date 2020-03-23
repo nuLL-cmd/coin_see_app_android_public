@@ -1,11 +1,13 @@
 
 package com.automatodev.coinSee.controller.entity;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class CoinChildr implements Parcelable {
@@ -35,13 +37,15 @@ public class CoinChildr implements Parcelable {
 
     private String ulrPhoto;
     private boolean fav;
+    private String coinUid;
 
-    public CoinChildr(String code, String codein, String name, String ulrPhoto, boolean fav) {
+    public CoinChildr(String code, String codein, String name, String ulrPhoto, boolean fav,String coinUid) {
         this.code = code;
         this.codein = codein;
         this.name = name;
         this.ulrPhoto = ulrPhoto;
         this.fav = fav;
+        this.coinUid = coinUid;
     }
 
     public CoinChildr(String code, String codein, String name, boolean fav) {
@@ -67,6 +71,7 @@ public class CoinChildr implements Parcelable {
         timestamp = in.readString();
         varBid = in.readString();
         ulrPhoto = in.readString();
+        coinUid  = in.readString();
         fav = in.readByte() != 0;
     }
 
@@ -191,6 +196,14 @@ public class CoinChildr implements Parcelable {
         return 0;
     }
 
+    public String getCoinUid() {
+        return coinUid;
+    }
+
+    public void setCoinUid(String coinUid) {
+        this.coinUid = coinUid;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(ask);
@@ -205,6 +218,19 @@ public class CoinChildr implements Parcelable {
         dest.writeString(timestamp);
         dest.writeString(varBid);
         dest.writeString(ulrPhoto);
+        dest.writeString(coinUid);
         dest.writeByte((byte) (fav ? 1 : 0));
+    }
+
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", name);
+        result.put("code",code);
+        result.put("fav",fav);
+        result.put("coinUid",coinUid);
+        result.put("codein",codein);
+        result.put("ulrPhoto",ulrPhoto);
+
+        return result;
     }
 }

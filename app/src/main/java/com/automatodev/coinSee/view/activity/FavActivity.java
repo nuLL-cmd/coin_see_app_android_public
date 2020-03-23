@@ -8,9 +8,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,11 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.FCoinCallback;
+import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.CoinService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
-import com.automatodev.coinSee.controller.callback.RetrofitCallback;
 import com.automatodev.coinSee.controller.service.firebase.FavCoinService;
 import com.automatodev.coinSee.view.adapter.FavAdapter;
 import com.automatodev.coinSee.view.component.ChartLine;
@@ -50,6 +52,8 @@ public class FavActivity extends AppCompatActivity {
     private CircleImageView imgUser_fav;
     private FavCoinService favCoinService;
     private ProgressBar progressFav_fav;
+    private UserEntity userEntity;
+    private RelativeLayout relativeNothing_fav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,49 +61,44 @@ public class FavActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fav);
         recyclerFav_fav = findViewById(R.id.recyclerFav_fav);
         imgUser_fav = findViewById(R.id.imgUser_fav);
-
+        relativeNothing_fav = findViewById(R.id.relativeNothing_fav);
+        progressFav_fav = findViewById(R.id.progressFav_fav);
         coinService = new CoinService(this);
         convertDataService = new ConvertDataService();
         favCoinService = new FavCoinService(this);
-        progressFav_fav = findViewById(R.id.progressFav_fav);
-
         favAdapter = new FavAdapter(this, null);
         animation = AnimationUtils.loadAnimation(this, R.anim.push_left);
         ThreeBounce three = new ThreeBounce();
         progressFav_fav.setIndeterminateDrawable(three);
         recyclerFav_fav.hasFixedSize();
         recyclerFav_fav.setLayoutManager(new LinearLayoutManager(this));
-
-
-
-            UserEntity userEntity = getIntent().getParcelableExtra("user");
-            Glide.with(this).load(userEntity.getUserPhoto()).placeholder(R.drawable.ic_user_round).into(imgUser_fav);
-            getDataFav(userEntity.getUserUid());
-
-       
+        userEntity = getIntent().getParcelableExtra("user");
+        Glide.with(this).load(userEntity.getUserPhoto()).placeholder(R.drawable.ic_user_round).into(imgUser_fav);
+        getDataFav(userEntity.getUserUid());
     }
 
     private void getDataFav(String uid) {
-            favCoinService.getFavCoinService(uid, new FCoinCallback() {
-                @Override
-                public void onComplete(Task<QuerySnapshot> task) {
-                }
+        favCoinService.getFavCoinService(uid, new FCoinCallback() {
+            @Override
+            public void onComplete(Task<QuerySnapshot> task) {
+            }
 
-                @Override
-                public void onCompleteReturn(List<CoinChildr> list) {
-                    favAdapter.setCoinEntityList(list);
-                    recyclerFav_fav.setAdapter(favAdapter);
-                    progressFav_fav.setVisibility(View.GONE);
-                    recyclerFav_fav.setAnimation(animation);
-                    sClick(list);
-                }
+            @Override
+            public void onCompleteReturn(List<CoinChildr> list) {
+                favAdapter.setCoinEntityList(list);
+                recyclerFav_fav.setAdapter(favAdapter);
+                progressFav_fav.setVisibility(View.GONE);
+                recyclerFav_fav.setAnimation(animation);
+                sClick(list);
+                if (list.size() == 0)
+                    relativeNothing_fav.setVisibility(View.VISIBLE);
+                relativeNothing_fav.setAnimation(animation);
+            }
 
-                @Override
-                public void onFailure(Exception e) {
-                }
-            });
-
-
+            @Override
+            public void onFailure(Exception e) {
+            }
+        });
     }
 
     private void sClick(final List<CoinChildr> coinChildrList) {
@@ -123,12 +122,12 @@ public class FavActivity extends AppCompatActivity {
                 final TextView txtCode_btFav = view.findViewById(R.id.txtCode_btFav);
                 final TextView txtDate_btFav = view.findViewById(R.id.txtDate_btFav);
                 final TextView txtCodeIn_btFav = view.findViewById(R.id.txtCodeIn_btFav);
-                final ProgressBar progressDetails_btFav = view.findViewById(R.id.progressDetails_btFav);
                 final TextView txtNameTitle_btFav = view.findViewById(R.id.txtNameTitle_btFav);
                 final ProgressBar progressChart_btFav = view.findViewById(R.id.progressChart_btFav);
+                final RelativeLayout relative_prgoress_chart = view.findViewById(R.id.relative_prgoress_chart);
+                final RelativeLayout relative_detais_btFav = view.findViewById(R.id.relative_detais_btFav);
                 ThreeBounce three = new ThreeBounce();
-                progressChart_btFav.setIndeterminateDrawable(three );
-
+                progressChart_btFav.setIndeterminateDrawable(three);
                 coinService.requestSingle(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
                     @Override
                     public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
@@ -144,12 +143,11 @@ public class FavActivity extends AppCompatActivity {
                         txtCode_btFav.setText(coinChildr0.getCode());
                         txtDate_btFav.setText(convertDataService.convertDate(coinChildr0.getTimestamp()));
                         txtCodeIn_btFav.setText(coinChildr0.getCodein());
-                        progressDetails_btFav.setVisibility(View.GONE);;
+                        relative_detais_btFav.setVisibility(View.GONE);
+                        ;
                         txtNameTitle_btFav.setText(coinChildr0.getName());
-
                         Glide.with(FavActivity.this).load(coinChildrList.get(position).getUlrPhoto())
                                 .transition(DrawableTransitionOptions.withCrossFade()).into(imgCodeTitle_btFav);
-
                         Glide.with(FavActivity.this).load(coinChildrList.get(position).getUlrPhoto())
                                 .transition(DrawableTransitionOptions.withCrossFade()).into(imgCode_btFav);
                     }
@@ -159,7 +157,7 @@ public class FavActivity extends AppCompatActivity {
                     public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
                         chartLine = new ChartLine(FavActivity.this, chart, coinChildrList);
                         chartLine.makeGraph();
-                        progressChart_btFav.setVisibility(View.GONE);;
+                        relative_prgoress_chart.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -178,9 +176,39 @@ public class FavActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onDeleteClick(int position) {
-                coinChildrList.remove(position);
-                favAdapter.notifyItemRemoved(position);
+            public void onDeleteClick(final int position) {
+                final AlertDialog delFav = new AlertDialog.Builder(FavActivity.this).create();
+                delFav.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                View v = getLayoutInflater().inflate(R.layout.layout_message, null);
+                TextView txtTitle_mesage = v.findViewById(R.id.txtTitle_message);
+                TextView txtLabel_message = v.findViewById(R.id.txtLabel_message);
+                Button btnDismiss_message = v.findViewById(R.id.btnDismiss_message);
+                Button btnNegative_message = v.findViewById(R.id.btnNegative_message);
+                txtTitle_mesage.setText("Aviso!");
+                txtLabel_message.setText("Deseja emover este item da lista de favoritos?");
+                btnDismiss_message.setText("Sim");
+                btnNegative_message.setText("Não");
+                btnNegative_message.setVisibility(View.VISIBLE);
+                btnDismiss_message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        favCoinService.delFavCoinService(userEntity.getUserUid(), coinChildrList.get(position).getCoinUid());
+                        coinChildrList.remove(position);
+                        favAdapter.notifyItemRemoved(position);
+                        if (favAdapter.getItemCount() == 0) {
+                            relativeNothing_fav.setVisibility(View.VISIBLE);
+                        }
+                        delFav.dismiss();
+                    }
+                });
+                btnNegative_message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        delFav.dismiss();
+                    }
+                });
+                delFav.setView(v);
+                delFav.show();
             }
         });
     }
@@ -199,6 +227,4 @@ public class FavActivity extends AppCompatActivity {
     public void actFavMain(View view) {
         NavUtils.navigateUpFromSameTask(this);
     }
-
-
 }
