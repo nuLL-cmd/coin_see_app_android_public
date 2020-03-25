@@ -68,7 +68,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edtEmail_login"
+                android:id="@+id/edtEmail_forgot"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_edt"
@@ -83,6 +83,7 @@
                 style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:onClick="sendEmail"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_btn_splash"
                 android:text="Enviar"

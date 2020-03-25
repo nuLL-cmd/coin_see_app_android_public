@@ -3,13 +3,11 @@ package com.automatodev.coinSee.controller.service.firebase;
 import android.app.Activity;
 import android.widget.Toast;
 
-import com.automatodev.coinSee.controller.callback.FAuthCallback;
-import com.automatodev.coinSee.controller.callback.FCoinCallback;
+import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
+import com.automatodev.coinSee.controller.callback.firebase.FSaveCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.models.firebase.FavCoinFirebase;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -51,42 +49,26 @@ public class FavCoinService {
     }
 
     public void delFavCoinService(String userUid, String coinUid){
-        favCoinFirebase.delFavCoinFirebase(userUid, coinUid, new FAuthCallback() {
+        favCoinFirebase.delFavCoinFirebase(userUid, coinUid, new FSaveCallback() {
             @Override
-            public void onSuccessLogin(Task<AuthResult> task) {
-            }
-
-            @Override
-            public void onSuccessCreateUser(Task<AuthResult> task, FirebaseUser firebaseUser) {
+            public void onSuccess(Task<Void> task) {
             }
 
             @Override
             public void onFailure(Exception e) {
-            }
-
-            @Override
-            public void onSuccessSave(Task<Void> task) {
             }
         });
 
 
     }
     public void addFavCoinService(String userUid, CoinChildr coinChildr){
-        favCoinFirebase.addFavCoinFirebase(userUid, coinChildr, new FAuthCallback() {
-            @Override
-            public void onSuccessLogin(Task<AuthResult> task) {
-            }
-
-            @Override
-            public void onSuccessCreateUser(Task<AuthResult> task, FirebaseUser firebaseUser) {
-            }
-
+        favCoinFirebase.addFavCoinFirebase(userUid, coinChildr, new FSaveCallback() {
             @Override
             public void onFailure(Exception e) {
             }
 
             @Override
-            public void onSuccessSave(Task<Void> task) {
+            public void onSuccess(Task<Void> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(context, "Item favoritado!", Toast.LENGTH_SHORT).show();
                 }

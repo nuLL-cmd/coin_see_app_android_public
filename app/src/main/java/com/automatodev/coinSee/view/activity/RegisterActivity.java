@@ -14,7 +14,7 @@ import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.controller.service.firebase.CreateUserService;
+import com.automatodev.coinSee.controller.service.firebase.UserService;
 import com.google.android.material.snackbar.Snackbar;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edtPhone_register;
     private EditText edtPass_register;
 
-    private CreateUserService createUserService;
+    private UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         edtPhone_register = findViewById(R.id.edtPhone_register);
         edtPass_register = findViewById(R.id.edtPass_register);
 
-        createUserService = new CreateUserService(this);
+        userService = new UserService(this);
 
 
     }
@@ -129,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
             UserEntity userEntity = new UserEntity(fields[0],fields[1]
                     ,fields[2],fields[3],Long.parseLong(fields[4]));
-            createUserService.serviceCreateNewUser(fields[3],fields[5],userEntity);
+            userService.createUserService(fields[3],fields[5],userEntity);
         }
 
     }

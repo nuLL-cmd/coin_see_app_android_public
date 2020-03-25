@@ -200,27 +200,6 @@
                         android:layout_alignTop="@id/txtHigh_details"
                         android:drawableStart="@drawable/ic_arrowdown_24dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fechamento:"
-                        android:textColor="#1E88E5"
-                        android:textStyle="bold"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignTop="@id/txtLastCot_layout"
-                        android:id="@+id/txtLastAtt_layout"/>
-
-                    <TextView
-                        android:id="@+id/txtDateAtt_details"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#1E88E5"
-                        android:text="2020-03-03"
-                        android:layout_below="@id/txtLastAtt_layout"
-                        android:layout_alignParentEnd="true"
-                        android:textSize="13sp"
-                        android:textAlignment="center"
-                        android:textStyle="italic"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -274,7 +253,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="3dp"
                 android:background="#fff"
                 android:gravity="bottom"
@@ -282,8 +261,9 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card"
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="7dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
@@ -304,7 +284,7 @@
                             android:layout_marginTop="10dp"
                             android:id="@+id/lbl_titleGraph_details"
                             android:layout_marginBottom="10dp"
-                            android:text="Ultimas alterações"
+                            android:text="Arraste -> para visualizar mais dados"
                             android:textSize="14sp" />
 
                         <com.github.mikephil.charting.charts.LineChart

@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.FCoinCallback;
-import com.automatodev.coinSee.controller.callback.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
+import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.CoinService;
@@ -152,10 +152,10 @@ public class FavActivity extends AppCompatActivity {
                                 .transition(DrawableTransitionOptions.withCrossFade()).into(imgCode_btFav);
                     }
                 });
-                coinService.requestRangeDays(coinChildrList.get(position).getCode() + "-" + "BRL", new RetrofitCallback() {
+                coinService.requestRangeDays(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
                     @Override
                     public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
-                        chartLine = new ChartLine(FavActivity.this, chart, coinChildrList);
+                        chartLine = new ChartLine(FavActivity.this,chart, coinChildrList);
                         chartLine.makeGraph();
                         relative_prgoress_chart.setVisibility(View.GONE);
                     }

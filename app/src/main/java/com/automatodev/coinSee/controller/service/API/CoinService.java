@@ -3,8 +3,14 @@ package com.automatodev.coinSee.controller.service.API;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import com.automatodev.coinSee.controller.callback.RetrofitCallback;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.automatodev.coinSee.R;
+import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.CoinDaddy;
 import com.automatodev.coinSee.models.API.RequestAPI;
@@ -26,9 +32,11 @@ public class CoinService {
     private Retrofit retrofit;
     private RequestAPI request;
     private String baseUrl = "https://economia.awesomeapi.com.br/";
+    private SwipeRefreshLayout sw;
 
     public CoinService(Activity context) {
         this.context = context;
+        sw = context.findViewById(R.id.swipte_main);
     }
 
     public void requestAll(final RetrofitCallback callback) {
@@ -67,10 +75,24 @@ public class CoinService {
 
             @Override
             public void onFailure(@NotNull Call<CoinDaddy> call, @NotNull Throwable t) {
-                Log.e("logx", "Error: " + t.getMessage(), t);
-                AlertDialog.Builder alerta  = new AlertDialog.Builder(context);
-                alerta.setMessage(t.getMessage()+"\n\n"+t.toString());
+                final AlertDialog alerta  = new AlertDialog.Builder(context).create();
+                alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                View v = context.getLayoutInflater().inflate(R.layout.layout_message,null);
+                TextView txtTitle_message = v.findViewById(R.id.txtTitle_message);
+                TextView txtLabel_message = v.findViewById(R.id.txtLabel_message);
+
+                Button btnDismiss_message = v.findViewById(R.id.btnDismiss_message);
+                txtTitle_message.setText("Ops!");
+                txtLabel_message.setText("Não foi possivel conectar a ao serviço de informações\nPor favor verifique sua conexão e tente novamente.");
+                btnDismiss_message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alerta.dismiss();
+                    }
+                });
+                alerta.setView(v);
                 alerta.show();
+                sw.setRefreshing(false);
             }
         });
 
@@ -79,7 +101,7 @@ public class CoinService {
     public void requestRangeDays(String value, final RetrofitCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         request = retrofit.create(RequestAPI.class);
-        Call<List<CoinChildr>> call = request.requestRangeDay(value, 7);
+        Call<List<CoinChildr>> call = request.requestRangeDay(value, 14);
         call.enqueue(new Callback<List<CoinChildr>>() {
             @Override
             public void onResponse(Call<List<CoinChildr>> call, Response<List<CoinChildr>> response) {

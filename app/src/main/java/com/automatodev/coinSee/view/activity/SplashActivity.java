@@ -12,13 +12,13 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.service.firebase.AuthService;
+import com.automatodev.coinSee.controller.service.firebase.UserService;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView imgLogo_splash;
     private ImageView imgTitle_splash;
     private Animation animation;
-    private AuthService authService;
+    private UserService userService;
 
     public static String FACEBOOK_URL = "https://www.facebook.com/Nazomiiamazo";
     public static String LINKEDIN_URL = "https://www.linkedin.com/in/marcoaj/";
@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        authService = new AuthService(this);
+        userService = new UserService(this);
         imgLogo_splash = findViewById(R.id.imgLogo_splash);
         imgTitle_splash = findViewById(R.id.imgTitle_splash);
         animation = AnimationUtils.loadAnimation(this, R.anim.push_down);
@@ -57,7 +57,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        authService.verifyUserAndLogin();
+        userService.verifyUserAndLogin();
 
 
     }

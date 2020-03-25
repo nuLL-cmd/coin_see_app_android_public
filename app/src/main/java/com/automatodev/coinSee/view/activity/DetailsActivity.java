@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -11,10 +13,11 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.CoinService;
@@ -40,13 +43,14 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView imgFav_details;
     private ImageView imgUser_details;
     private TextView txtDate_details;
-    private TextView txtDateAtt_details;
     private ConvertDataService convertDataService;
     private CoinService task;
     private ProgressBar progressChart_details;
     private RelativeLayout relativeChart_details;
+    private Animation anim;
     private ChartLine chartLine;
     private LineChart lineChart;
+    private CardView card;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -66,13 +70,15 @@ public class DetailsActivity extends AppCompatActivity {
         txtCode_details = findViewById(R.id.txtCode_details);
         txtDate_details = findViewById(R.id.txtDate_details);
         txtCodeIn_details = findViewById(R.id.txtCodeIn_details);
-        txtDateAtt_details = findViewById(R.id.txtDateAtt_details);
         progressChart_details = findViewById(R.id.progressChart_details);
         relativeChart_details = findViewById(R.id.relativeChart_details);
         ThreeBounce three = new ThreeBounce();
         progressChart_details.setIndeterminateDrawable(three);
-        lineChart = findViewById(R.id.chart);
         convertDataService = new ConvertDataService();
+        card = findViewById(R.id.card);
+        anim = AnimationUtils.loadAnimation(this,R.anim.push_right);
+
+        lineChart = findViewById(R.id.chart);
         getData();
     }
 
@@ -97,7 +103,6 @@ public class DetailsActivity extends AppCompatActivity {
             if (coinChildr.isFav())
                 imgFav_details.setImageResource(R.drawable.ic_favorite_red_24dp);
             txtDate_details.setText(convertDataService.convertDate(coinChildr.getTimestamp().substring(0, 10)));
-            txtDateAtt_details.setText(coinChildr.getCreate_date());
             getDataChart(coinChildr.getCode() + "-" + coinChildr.getCodein());
         }
     }
@@ -107,8 +112,9 @@ public class DetailsActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
-                chartLine = new ChartLine(DetailsActivity.this, lineChart, coinChildrList);
+                chartLine = new ChartLine(DetailsActivity.this,lineChart,coinChildrList);
                 chartLine.makeGraph();
+                card.setAnimation(anim);
                 relativeChart_details.setVisibility(View.GONE);
                 progressChart_details.setVisibility(View.GONE);
             }

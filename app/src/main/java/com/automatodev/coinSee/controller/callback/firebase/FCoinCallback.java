@@ -1,4 +1,4 @@
-package com.automatodev.coinSee.controller.callback;
+package com.automatodev.coinSee.controller.callback.firebase;
 
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.google.android.gms.tasks.Task;

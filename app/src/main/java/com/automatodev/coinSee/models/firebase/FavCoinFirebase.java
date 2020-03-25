@@ -4,8 +4,8 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-import com.automatodev.coinSee.controller.callback.FAuthCallback;
-import com.automatodev.coinSee.controller.callback.FCoinCallback;
+import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
+import com.automatodev.coinSee.controller.callback.firebase.FSaveCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -16,12 +16,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class FavCoinFirebase {
     private Activity context;
     private FirebaseFirestore firestore;
+
+    //####################################
     public FavCoinFirebase(Activity context) {
         this.context = context;
         firestore = FirebaseFirestore.getInstance();
     }
 
-    public void getFavCoinFirebase(String uid, final FCoinCallback callback){
+    //####################################
+    public void getFavCoinFirebase(String uid, final FCoinCallback callback) {
         firestore.collection("users").document(uid)
                 .collection("favorites")
                 .get().addOnCompleteListener(context, new OnCompleteListener<QuerySnapshot>() {
@@ -37,14 +40,15 @@ public class FavCoinFirebase {
         });
     }
 
-    public void delFavCoinFirebase(String userUid, String coinUid, final FAuthCallback callback){
+    //####################################
+    public void delFavCoinFirebase(String userUid, String coinUid, final FSaveCallback callback) {
         firestore.collection("users").document(userUid).collection("favorites")
                 .document(coinUid)
                 .delete()
                 .addOnCompleteListener(context, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        callback.onSuccessSave(task);
+                        callback.onSuccess(task);
                     }
                 }).addOnFailureListener(context, new OnFailureListener() {
             @Override
@@ -54,15 +58,17 @@ public class FavCoinFirebase {
         });
     }
 
-    public void addFavCoinFirebase(String userUid, CoinChildr coinChildr, final FAuthCallback callback){
+    //####################################
+    public void addFavCoinFirebase(String userUid, CoinChildr coinChildr, final FSaveCallback callback) {
         firestore.collection("users").document(userUid)
                 .collection("favorites")
                 .document(coinChildr.getCoinUid())
-               .set(coinChildr)
+                .set(coinChildr)
                 .addOnCompleteListener(context, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        callback.onSuccessSave(task);;
+                        callback.onSuccess(task);
+                        ;
                     }
                 }).addOnFailureListener(context, new OnFailureListener() {
             @Override
@@ -71,5 +77,4 @@ public class FavCoinFirebase {
             }
         });
     }
-
 }

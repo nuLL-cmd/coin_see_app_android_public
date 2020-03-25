@@ -23,7 +23,6 @@ import androidx.core.app.NavUtils;
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
-import com.automatodev.coinSee.models.firebase.AuthFirebase;
 import com.automatodev.coinSee.models.firebase.UserFirebase;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
@@ -31,7 +30,6 @@ import com.github.ybq.android.spinkit.style.ThreeBounce;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
-    private AuthFirebase auth;
     public static boolean status;
     private UserEntity userEntity;
     private ConvertDataService convertDataService;
@@ -55,8 +53,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        auth = new AuthFirebase(this);
 
         txtName_profile = findViewById(R.id.txtName_profile);
         txtEmail_prifile = findViewById(R.id.txtEmail_profile);
@@ -118,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
         btnDismiss_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.authSignOut();
+                userFirebase.authSignOut();
                 Intent intent = new Intent(ProfileActivity.this, SplashActivity.class);
                 startActivity(intent);
                 alerta.dismiss();
@@ -183,7 +179,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
     public void updatePick(View view){
         if (uri != null){
-            userFirebase.updatePickUser(userEntity.getUserUid(),uri);
+            userFirebase.updatePickUserFirebase(userEntity.getUserUid(),uri);
             uri = null;
         }
 

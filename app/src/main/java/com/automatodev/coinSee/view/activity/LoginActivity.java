@@ -11,12 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.service.firebase.AuthService;
+import com.automatodev.coinSee.controller.service.firebase.UserService;
 
 public class LoginActivity extends AppCompatActivity {
 
     public static boolean status;
-    private AuthService authService;
+    private UserService userService;
     private EditText edtEmail_login;
     private EditText edtPass_login;
 
@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        authService = new AuthService(this);
+        userService = new UserService(this);
         edtEmail_login = findViewById(R.id.edtEmail_login);
         edtPass_login = findViewById(R.id.edtPass_login);
     }
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
             else
                 edtPass_login.setBackgroundResource(R.drawable.bg_edt_wrong);
         } else
-            authService.serviceLogin(email, pass);
+            userService.serviceLogin(email, pass);
         ;
     }
 }

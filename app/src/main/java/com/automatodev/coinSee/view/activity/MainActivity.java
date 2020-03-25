@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.FCoinCallback;
-import com.automatodev.coinSee.controller.callback.FUserCallback;
-import com.automatodev.coinSee.controller.callback.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
+import com.automatodev.coinSee.controller.callback.firebase.FUserCallback;
+import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.CoinService;
 import com.automatodev.coinSee.controller.service.firebase.FavCoinService;
-import com.automatodev.coinSee.controller.service.firebase.GetUserService;
+import com.automatodev.coinSee.controller.service.firebase.UserService;
 import com.automatodev.coinSee.view.adapter.CoinAdapter;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
@@ -67,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
     private CoinAdapter coinAdapter;
     private CoinService task;
     private UserEntity userMain;
-    private GetUserService getUserService;
     private FavCoinService favCoinService;
     private List<CoinChildr> coinLocal;
-    SwipeRefreshLayout sw;
+    private SwipeRefreshLayout sw;
+    private UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +87,12 @@ public class MainActivity extends AppCompatActivity {
         ThreeBounce three = new ThreeBounce();
         progressChart_main.setIndeterminateDrawable(three);
         task = new CoinService(this);
-        getUserService = new GetUserService(this);
+        userService = new UserService(this);
         coinAdapter = new CoinAdapter(null, MainActivity.this);
         favCoinService = new FavCoinService(this);
         recyclerCoin_main.hasFixedSize();
         recyclerCoin_main.setLayoutManager(new LinearLayoutManager(this));
+
         coinLocal = new ArrayList<>();
         getDataUser();
         //getData();
@@ -173,13 +174,13 @@ public class MainActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
         if (bundle != null) {
             uid = bundle.getString("uid");
-            getUserService.serviceGetUser(uid, new FUserCallback() {
+            userService.getUserService(uid, new FUserCallback() {
                 @Override
                 public void onEventListener(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                 }
 
                 @Override
-                public void onEventSucccess(UserEntity userEntity) {
+                public void onSuccess(UserEntity userEntity) {
                     try {
                         userMain = userEntity;
                         lblUser_main.setText(userEntity.getUserName());
@@ -279,6 +280,7 @@ public class MainActivity extends AppCompatActivity {
                         recyclerCoin_main.setAdapter(coinAdapter);
                         recyclerCoin_main.setAnimation(anim2);
                         progressChart_main.setVisibility(View.GONE);
+
                         sClick(coinLocal);
                     }
 
