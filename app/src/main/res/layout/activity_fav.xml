@@ -37,19 +37,17 @@
             android:src="@mipmap/ic_user_round" />
 
 
-
         <TextView
             android:id="@+id/txtTitle_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aqui estão listados as suas cotações favoritas"
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_marginTop="25dp"
             android:layout_below="@id/imgUser_fav"
-            />
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:text="Aqui estão listadas as suas cotações favoritas"
+            android:textSize="25dp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 
