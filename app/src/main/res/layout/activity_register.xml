@@ -137,6 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:singleLine="true"
+                android:inputType="textEmailAddress"
                 android:background="@drawable/bg_edt"
                 android:textColor="#A2A2A2"
                 android:layout_marginTop="10dp"

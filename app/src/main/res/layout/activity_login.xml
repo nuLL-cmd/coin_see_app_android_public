@@ -60,7 +60,7 @@
             <EditText
                 android:id="@+id/edtEmail_login"
                 android:layout_width="match_parent"
-                android:text="teste@gmail.com"
+                android:inputType="textEmailAddress"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_edt"
                 android:singleLine="true"
@@ -82,7 +82,6 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textColor="#A2A2A2"
-                android:text="402866"
                 android:hint="******"
                 android:maxLength="6"
                 android:inputType="numberPassword"
