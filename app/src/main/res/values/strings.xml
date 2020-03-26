@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">CoinSee</string>
-    <string name="str_resumo">Digite a baixo seu email para que possamos enviar o link de redefiniçao de senha para você. Lembre-se: Deve ser utilizado um email valido!</string>
+    <string name="str_resumo">Digite a baixo seu email para que possamos enviar o link de redefinição de senha para você. Lembre-se: Deve ser utilizado um email válido!</string>
     <string name="automatodev">\automatoDev - 2020</string>
 </resources>
