@@ -5,7 +5,7 @@
 
     <item android:id="@+id/mask">
         <shape android:name="shape_unselected">
-            <solid android:color="#17A80000"/>
+            <solid android:color="#0F6E6B6B"/>
             <corners android:radius="70dp"/>
 
 
