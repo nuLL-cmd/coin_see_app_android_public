@@ -5,7 +5,7 @@ Presentation of values of 15 currency quotes between foreign currencies and cryp
 A database is also available for the user to register, where he can register favorites for quick consultation through a BottomBar at the bottom of the screen.
 
 Technologies used:
-*Java
+* Java
 * XML
 * Retrofit (Parse JSON)
 * Firebase (Storage, Database and Authentication)
