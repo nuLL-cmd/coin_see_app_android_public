@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.service.firebase.ChartActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/toolbar_chart">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/btnBack_chart"
+                    android:layout_width="32dp"
+                    android:src="@drawable/ic_arrow_gray_32p"
+                    android:onClick="backDetailsActivity"
+                    android:background="@drawable/bg_btn_back"
+                    android:layout_height="32dp"/>
+
+                <TextView
+                    android:id="@+id/txtTitleCoin_chart"
+                    android:layout_width="match_parent"
+                    android:text="Dolar Comercial"
+                    android:layout_toEndOf="@id/btnBack_chart"
+                    android:layout_alignTop="@id/btnBack_chart"
+                    android:layout_alignBottom="@id/btnBack_chart"
+                    android:gravity="start|center"
+                    android:layout_marginStart="20dp"
+                    android:textColor="#fff"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart_chart"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_below="@id/appbar_chart"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeChart_chart"
+        android:layout_width="match_parent"
+        android:layout_below="@id/appbar_chart"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressChart_chart"
+            style="@style/SpinKitView.Small.ThreeBounce"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="#fff"
+            app:SpinKit_Color="@color/colorPrimaryDark" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

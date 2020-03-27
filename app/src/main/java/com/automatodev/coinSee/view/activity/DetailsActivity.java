@@ -1,11 +1,13 @@
 package com.automatodev.coinSee.view.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -22,6 +24,7 @@ import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.CoinService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
+import com.automatodev.coinSee.controller.service.firebase.ChartActivity;
 import com.automatodev.coinSee.view.component.ChartLine;
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
@@ -51,6 +54,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ChartLine chartLine;
     private LineChart lineChart;
     private CardView card;
+   private Button btnFullChart_details;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -71,6 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
         txtDate_details = findViewById(R.id.txtDate_details);
         txtCodeIn_details = findViewById(R.id.txtCodeIn_details);
         progressChart_details = findViewById(R.id.progressChart_details);
+        btnFullChart_details = findViewById(R.id.btnFullChart_details);
         relativeChart_details = findViewById(R.id.relativeChart_details);
         ThreeBounce three = new ThreeBounce();
         progressChart_details.setIndeterminateDrawable(three);
@@ -83,7 +88,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void getData() {
-        CoinChildr coinChildr = getIntent().getParcelableExtra("value");
+        final CoinChildr coinChildr = getIntent().getParcelableExtra("value");
         UserEntity userEntity = getIntent().getParcelableExtra("user");
         if (coinChildr != null && userEntity != null) {
             Glide.with(this).load(userEntity.getUserPhoto()).into(imgUser_details);
@@ -104,19 +109,31 @@ public class DetailsActivity extends AppCompatActivity {
                 imgFav_details.setImageResource(R.drawable.ic_favorite_red_24dp);
             txtDate_details.setText(convertDataService.convertDate(coinChildr.getTimestamp().substring(0, 10)));
             getDataChart(coinChildr.getCode() + "-" + coinChildr.getCodein());
+            btnFullChart_details.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Intent intent = new Intent(DetailsActivity.this, ChartActivity.class);
+                    intent.putExtra("dataCoin",coinChildr.getName());
+                    intent.putExtra("dataChart",coinChildr.getCode()+'-'+coinChildr.getCodein());
+                    startActivity(intent);
+                }
+            });
         }
     }
 
     public void getDataChart(final String value) {
         task.requestRangeDays(value, new RetrofitCallback() {
+
+
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
-            public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
+            public void onSucces(final List<CoinChildr> coinChildrList) throws InterruptedException {
                 chartLine = new ChartLine(DetailsActivity.this,lineChart,coinChildrList);
                 chartLine.makeGraph();
                 card.setAnimation(anim);
                 relativeChart_details.setVisibility(View.GONE);
                 progressChart_details.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -145,4 +162,5 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }
