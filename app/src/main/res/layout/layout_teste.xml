@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="#8D302F2D" >
+    android:background="@drawable/bg_btn_show_chart" >
 
     <TextView
         android:id="@+id/tvContent"
