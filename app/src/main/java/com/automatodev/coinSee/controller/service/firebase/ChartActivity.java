@@ -22,6 +22,7 @@ import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.P)
 public class ChartActivity extends AppCompatActivity {
+    public static boolean status;
     private ChartLine chartLine;
     private LineChart lineChart;
     private RelativeLayout relativeChart_chart;
@@ -62,5 +63,16 @@ public class ChartActivity extends AppCompatActivity {
     }
     public void backDetailsActivity(View view){
         NavUtils.navigateUpFromSameTask(ChartActivity.this);
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        status = true;
+
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        status = false;
     }
 }

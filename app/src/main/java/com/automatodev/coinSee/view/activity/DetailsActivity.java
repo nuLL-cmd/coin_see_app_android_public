@@ -54,7 +54,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ChartLine chartLine;
     private LineChart lineChart;
     private CardView card;
-   private ImageButton btnFullChart_details;
+    private ImageButton btnFullChart_details;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -81,8 +81,7 @@ public class DetailsActivity extends AppCompatActivity {
         progressChart_details.setIndeterminateDrawable(three);
         convertDataService = new ConvertDataService();
         card = findViewById(R.id.card);
-        anim = AnimationUtils.loadAnimation(this,R.anim.push_right);
-
+        anim = AnimationUtils.loadAnimation(this, R.anim.push_right);
         lineChart = findViewById(R.id.chart);
         getData();
     }
@@ -109,13 +108,15 @@ public class DetailsActivity extends AppCompatActivity {
                 imgFav_details.setImageResource(R.drawable.ic_favorite_red_24dp);
             txtDate_details.setText(convertDataService.convertDate(coinChildr.getTimestamp().substring(0, 10)));
             getDataChart(coinChildr.getCode() + "-" + coinChildr.getCodein());
-            btnFullChart_details.setOnClickListener(new View.OnClickListener(){
+            btnFullChart_details.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view){
-                    Intent intent = new Intent(DetailsActivity.this, ChartActivity.class);
-                    intent.putExtra("dataCoin",coinChildr.getName());
-                    intent.putExtra("dataChart",coinChildr.getCode()+'-'+coinChildr.getCodein());
-                    startActivity(intent);
+                public void onClick(View view) {
+                    if (!ChartActivity.status) {
+                        Intent intent = new Intent(DetailsActivity.this, ChartActivity.class);
+                        intent.putExtra("dataCoin", coinChildr.getName());
+                        intent.putExtra("dataChart", coinChildr.getCode() + '-' + coinChildr.getCodein());
+                        startActivity(intent);
+                    }
                 }
             });
         }
@@ -124,16 +125,14 @@ public class DetailsActivity extends AppCompatActivity {
     public void getDataChart(final String value) {
         task.requestRangeDays(value, new RetrofitCallback() {
 
-
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onSucces(final List<CoinChildr> coinChildrList) throws InterruptedException {
-                chartLine = new ChartLine(DetailsActivity.this,lineChart,coinChildrList);
+                chartLine = new ChartLine(DetailsActivity.this, lineChart, coinChildrList);
                 chartLine.makeGraph();
                 card.setAnimation(anim);
                 relativeChart_details.setVisibility(View.GONE);
                 progressChart_details.setVisibility(View.GONE);
-
             }
 
             @Override
@@ -162,5 +161,4 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
 }
