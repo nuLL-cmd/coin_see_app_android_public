@@ -187,7 +187,7 @@
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:background="#3949AB"
+            android:background="#fff"
             app:SpinKit_Color="@color/colorPrimaryDark" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

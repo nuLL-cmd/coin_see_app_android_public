@@ -106,22 +106,26 @@ public class ChartLine {
         //Incicia um novo LineDataSet passando a lista de Entrys e uma label para o grafico
         LineDataSet lineDataSet = new LineDataSet(entradaTestes, "últimos fechamentos");
         lineDataSet.setDrawFilled(true); //Preenchimento de cor a baixo da linha tenua do grafico
+        lineDataSet.enableDashedLine(5,18,0); //linha tenua serrilhada
         lineDataSet.setDrawValues(true); //Valores do eixo Y em cada nó da linha tenua do grafico
         lineDataSet.setValueTextColor(Color.BLACK); //Cor do texto do valor em cada nó da linha tenua do grafico
         lineDataSet.setValueTextSize(8); //Tamanho do texto do valor em cada nó da linha tenua do grafico
         lineDataSet.setValueFormatter(formatValue()); //Formata o valor em cada nó da linha tenua do grafico
-        lineDataSet.setHighlightLineWidth(1f);// espessura da linha em fomra de cruz que que linka os dados do eixo y ao eixo x
-        lineDataSet.setHighLightColor(Color.RED);
+        lineDataSet.setHighlightLineWidth(0.5f);// espessura da linha em fomra de cruz que que linka os dados do eixo y ao eixo x
+        lineDataSet.setHighLightColor(Color.RED); // cor da linha em fomra de cruz
         lineDataSet.setCircleHoleColor(Color.parseColor("#d32f2f")); // cor da bolinha
         lineDataSet.setCircleRadius(4f); //Diametro de cada nó da linha tenua do grafico
         lineDataSet.setCircleColor(Color.parseColor("#d32f2f")); //Cor de cada nó da linha tenua do grafico
+        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER); //Seta o tipo de curva que o grafico fara em cada no
+        lineDataSet.setCubicIntensity(0.2f); // para o CUBIC seta o arredondamento da curva do grafico - quanto maior mais redondinho
         lineDataSet.setColor(Color.parseColor("#8F99A1")); //Cor da linha tenua e da label do grafico
         // Gradiente (preenchimento) da linha tenua do grafico
         lineDataSet.setFillDrawable(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[]{Color.parseColor("#075FAC"), Color.parseColor("#3176B3"), Color.parseColor("#00FA5544")}));
-        lineDataSet.setLineWidth(3f); //Espessura da linha tenua do grafico
+        lineDataSet.setLineWidth(0); //Espessura da linha tenua do grafico
         //Incicia um novo LineData passando o lineDataSet
         LineData lineData = new LineData(lineDataSet);
+        lineData.setValueFormatter(formatValue());
         chartGlobal.setData(lineData);//Seta o lineData no chartGlobal(grafico)
         chartGlobal.animateX(1000); //Animação sentido X da linha tenua do grafico passando o tempo em milesegundos
         chartGlobal.setDoubleTapToZoomEnabled(false); //Desabilita o double toque para zoom do grafico
@@ -136,6 +140,9 @@ public class ChartLine {
         chartGlobal.setExtraBottomOffset(10f); //MarginBottom da label do grafico
         chartGlobal.setNoDataText("Sem dadoss"); //Texto padrão caso nao haja dados para mostrar no grafico
         chartGlobal.setNoDataTextColor(Color.GRAY); //Cor do texto padrao caso nao haja dados para mostrar no grafico
+        CustomMarkerView mk = new CustomMarkerView(context, R.layout.layout_teste);
+        mk.setChartView(chartGlobal);
+        chartGlobal.setMarker(mk);
     }
 
     //Metodo que formata os numeros nos valores de cada nó da linha tenua do grafico ou do eixo Y
