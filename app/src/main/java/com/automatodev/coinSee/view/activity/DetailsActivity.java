@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -54,7 +54,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ChartLine chartLine;
     private LineChart lineChart;
     private CardView card;
-   private Button btnFullChart_details;
+   private ImageButton btnFullChart_details;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -75,7 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
         txtDate_details = findViewById(R.id.txtDate_details);
         txtCodeIn_details = findViewById(R.id.txtCodeIn_details);
         progressChart_details = findViewById(R.id.progressChart_details);
-        btnFullChart_details = findViewById(R.id.btnFullChart_details);
+        btnFullChart_details = findViewById(R.id.imgChart_details);
         relativeChart_details = findViewById(R.id.relativeChart_details);
         ThreeBounce three = new ThreeBounce();
         progressChart_details.setIndeterminateDrawable(three);

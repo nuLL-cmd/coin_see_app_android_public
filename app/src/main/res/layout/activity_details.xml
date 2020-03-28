@@ -87,7 +87,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp">
+                    android:padding="15dp">
 
                     <TextView
                         android:id="@+id/txtName_details"
@@ -128,18 +128,16 @@
                         android:gravity="center"
                         android:text="--->" />
 
-                    <Button
-                        android:id="@+id/btnFullChart_details"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_alignTop="@id/txtLastCot_layout"
+                    <ImageButton
+                        android:id="@+id/imgChart_details"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:scaleType="centerCrop"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/bg_btn_show_chart"
-                        android:padding="10dp"
-                        android:text="Gráfico em tela cheia"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
+
+                        android:background="@drawable/bg_btn_back"
+                        android:layout_alignTop="@id/txtLastCot_layout"
+                        android:src="@drawable/chart"/>
 
                     <ImageView
                         android:id="@+id/imgCodeIn_details"
@@ -148,8 +146,14 @@
                         android:layout_alignTop="@id/txtCode_details"
                         android:layout_alignBottom="@id/txtCode_details"
                         android:layout_toEndOf="@id/txtIn_layout"
-
                         android:src="@drawable/brl" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Clique no botão para visualizar em tela cheia"
+                        android:layout_below="@id/txtDate_details"
+                        android:layout_marginTop="15dp"
+                        android:textAlignment="center"/>
 
 
                     <TextView
