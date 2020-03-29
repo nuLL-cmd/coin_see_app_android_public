@@ -23,6 +23,9 @@ public class CoinEntityAlpha {
     @SerializedName("9. Ask Price")
     private String ask;
 
+    public CoinEntityAlpha() {
+    }
+
     public CoinEntityAlpha(String fromCode, String fromName, String toCode, String toName, String rate, String lastRefresh, String timeZone, String bid, String ask) {
         this.fromCode = fromCode;
         this.fromName = fromName;
@@ -32,6 +35,42 @@ public class CoinEntityAlpha {
         this.lastRefresh = lastRefresh;
         this.timeZone = timeZone;
         this.bid = bid;
+        this.ask = ask;
+    }
+
+    public void setFromCode(String fromCode) {
+        this.fromCode = fromCode;
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
+    }
+
+    public void setToCode(String toCode) {
+        this.toCode = toCode;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
+    public void setLastRefresh(String lastRefresh) {
+        this.lastRefresh = lastRefresh;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
+
+    public void setBid(String bid) {
+        this.bid = bid;
+    }
+
+    public void setAsk(String ask) {
         this.ask = ask;
     }
 

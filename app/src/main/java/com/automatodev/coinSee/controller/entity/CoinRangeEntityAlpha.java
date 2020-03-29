@@ -2,7 +2,9 @@ package com.automatodev.coinSee.controller.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CoinRangeEntityAlpha {
+import java.io.Serializable;
+
+public class CoinRangeEntityAlpha implements Serializable {
     @SerializedName("1. open")
     private String open;
     @SerializedName("2. high")
