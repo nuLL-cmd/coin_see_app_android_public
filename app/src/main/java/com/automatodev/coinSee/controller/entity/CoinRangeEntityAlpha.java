@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class CoinRangeEntityAlpha implements Serializable {
+    private String dateRange;
     @SerializedName("1. open")
     private String open;
     @SerializedName("2. high")
@@ -17,8 +18,9 @@ public class CoinRangeEntityAlpha implements Serializable {
     public CoinRangeEntityAlpha() {
     }
 
-    public CoinRangeEntityAlpha(String open, String high, String low, String close) {
+    public CoinRangeEntityAlpha(String dateRange,String open, String high, String low, String close) {
         this.open = open;
+        this.dateRange = dateRange;
         this.high = high;
         this.low = low;
         this.close = close;
