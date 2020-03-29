@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
-import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.AwesomeService;
@@ -128,7 +128,7 @@ public class FavActivity extends AppCompatActivity {
                 final RelativeLayout relative_detais_btFav = view.findViewById(R.id.relative_detais_btFav);
                 ThreeBounce three = new ThreeBounce();
                 progressChart_btFav.setIndeterminateDrawable(three);
-                awesomeService.requestSingle(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
+                awesomeService.requestSingle(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new AwesomeCallback() {
                     @Override
                     public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
                     }
@@ -152,7 +152,7 @@ public class FavActivity extends AppCompatActivity {
                                 .transition(DrawableTransitionOptions.withCrossFade()).into(imgCode_btFav);
                     }
                 });
-                awesomeService.requestRangeDays(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
+                awesomeService.requestRangeDays(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new AwesomeCallback() {
                     @Override
                     public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
                         chartLine = new ChartLine(FavActivity.this,chart, coinChildrList);

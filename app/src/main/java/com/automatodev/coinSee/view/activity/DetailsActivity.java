@@ -19,7 +19,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.AwesomeService;
@@ -123,7 +123,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void getDataChart(final String value) {
-        task.requestRangeDays(value, new RetrofitCallback() {
+        task.requestRangeDays(value, new AwesomeCallback() {
 
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override

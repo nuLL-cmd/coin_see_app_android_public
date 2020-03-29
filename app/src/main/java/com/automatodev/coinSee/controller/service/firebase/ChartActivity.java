@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.service.API.AwesomeService;
 import com.automatodev.coinSee.view.component.ChartLine;
@@ -46,7 +46,7 @@ public class ChartActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             txtTitleCoin_chart.setText(bundle.getString("dataCoin"));
-            awesomeService.requestRangeDays(bundle.getString("dataChart"), new RetrofitCallback() {
+            awesomeService.requestRangeDays(bundle.getString("dataChart"), new AwesomeCallback() {
                 @Override
                 public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
                     chartLine = new ChartLine(ChartActivity.this, lineChart, coinChildrList, 1);

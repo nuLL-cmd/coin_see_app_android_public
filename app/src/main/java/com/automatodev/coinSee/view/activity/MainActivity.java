@@ -17,7 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
 import com.automatodev.coinSee.controller.callback.firebase.FUserCallback;
-import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.AwesomeService;
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         if (coinLocal.size() != 0)
             sw.setRefreshing(true);
         //invoca o metodo que fara a requisição de todos os dados da Api
-        task.requestAll(new RetrofitCallback() {
+        task.requestAll(new AwesomeCallback() {
             @Override
             public void onSucces(final List<CoinChildr> coinChildrList) {
                 /*Ao terminar seu trabalho teremos uma lista de dados pronta para uso assim invocando agora

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
+import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.CoinDaddy;
 import com.automatodev.coinSee.models.API.AwesomeRequest;
@@ -39,7 +39,7 @@ public class AwesomeService {
         sw = context.findViewById(R.id.swipte_main);
     }
 
-    public void requestAll(final RetrofitCallback callback) {
+    public void requestAll(final AwesomeCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         request = retrofit.create(AwesomeRequest.class);
@@ -98,7 +98,7 @@ public class AwesomeService {
 
     }
 
-    public void requestRangeDays(String value, final RetrofitCallback callback) {
+    public void requestRangeDays(String value, final AwesomeCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         request = retrofit.create(AwesomeRequest.class);
         Call<List<CoinChildr>> call = request.requestRangeDay(value, 14);
@@ -124,7 +124,7 @@ public class AwesomeService {
         });
     }
 
-    public void requestSingle(final String value, final RetrofitCallback callback) {
+    public void requestSingle(final String value, final AwesomeCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create())
                 .build();
         request = retrofit.create(AwesomeRequest.class);
