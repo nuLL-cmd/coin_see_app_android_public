@@ -15,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".controller.service.firebase.ChartActivity"
-            android:parentActivityName=".controller.service.firebase.ChartActivity">
+        <activity android:name=".view.activity.ChartActivity"
+            android:parentActivityName=".view.activity.ChartActivity">
 
         </activity>
         <activity

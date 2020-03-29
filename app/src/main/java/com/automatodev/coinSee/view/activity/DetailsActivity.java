@@ -24,7 +24,6 @@ import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.AwesomeService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
-import com.automatodev.coinSee.controller.service.firebase.ChartActivity;
 import com.automatodev.coinSee.view.component.ChartLine;
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;

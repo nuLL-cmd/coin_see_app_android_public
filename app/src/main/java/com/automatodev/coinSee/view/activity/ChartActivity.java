@@ -1,4 +1,4 @@
-package com.automatodev.coinSee.controller.service.firebase;
+package com.automatodev.coinSee.view.activity;
 
 import android.os.Build;
 import android.os.Bundle;
