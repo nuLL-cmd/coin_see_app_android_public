@@ -20,7 +20,7 @@ import com.automatodev.coinSee.controller.callback.firebase.FUserCallback;
 import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.controller.service.API.CoinService;
+import com.automatodev.coinSee.controller.service.API.AwesomeService;
 import com.automatodev.coinSee.controller.service.firebase.FavCoinService;
 import com.automatodev.coinSee.controller.service.firebase.UserService;
 import com.automatodev.coinSee.view.adapter.CoinAdapter;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Animation anim2;
     private CoinAdapter coinAdapter;
-    private CoinService task;
+    private AwesomeService task;
     private UserEntity userMain;
     private FavCoinService favCoinService;
     private List<CoinChildr> coinLocal;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         sw.setColorSchemeResources(R.color.colorPrimary);
         ThreeBounce three = new ThreeBounce();
         progressChart_main.setIndeterminateDrawable(three);
-        task = new CoinService(this);
+        task = new AwesomeService(this);
         userService = new UserService(this);
         coinAdapter = new CoinAdapter(null, MainActivity.this);
         favCoinService = new FavCoinService(this);

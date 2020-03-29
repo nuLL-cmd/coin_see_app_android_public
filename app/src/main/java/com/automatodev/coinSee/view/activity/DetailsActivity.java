@@ -22,7 +22,7 @@ import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.controller.service.API.CoinService;
+import com.automatodev.coinSee.controller.service.API.AwesomeService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.automatodev.coinSee.controller.service.firebase.ChartActivity;
 import com.automatodev.coinSee.view.component.ChartLine;
@@ -47,7 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView imgUser_details;
     private TextView txtDate_details;
     private ConvertDataService convertDataService;
-    private CoinService task;
+    private AwesomeService task;
     private ProgressBar progressChart_details;
     private RelativeLayout relativeChart_details;
     private Animation anim;
@@ -61,7 +61,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        task = new CoinService(this);
+        task = new AwesomeService(this);
         txtCoinValue_details = findViewById(R.id.txtCoinValue_details);
         txtName_details = findViewById(R.id.txtName_details);
         txtHigh_details = findViewById(R.id.txtHigh_details);

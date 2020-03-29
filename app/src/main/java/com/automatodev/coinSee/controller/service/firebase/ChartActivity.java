@@ -14,7 +14,7 @@ import androidx.core.app.NavUtils;
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
-import com.automatodev.coinSee.controller.service.API.CoinService;
+import com.automatodev.coinSee.controller.service.API.AwesomeService;
 import com.automatodev.coinSee.view.component.ChartLine;
 import com.github.mikephil.charting.charts.LineChart;
 
@@ -27,7 +27,7 @@ public class ChartActivity extends AppCompatActivity {
     private LineChart lineChart;
     private RelativeLayout relativeChart_chart;
     private ProgressBar progressChart_chart;
-    private CoinService coinService;
+    private AwesomeService awesomeService;
     private TextView txtTitleCoin_chart;
 
     @Override
@@ -38,7 +38,7 @@ public class ChartActivity extends AppCompatActivity {
         relativeChart_chart = findViewById(R.id.relativeChart_chart);
         progressChart_chart = findViewById(R.id.progressChart_chart);
         txtTitleCoin_chart = findViewById(R.id.txtTitleCoin_chart);
-        coinService = new CoinService(this);
+        awesomeService = new AwesomeService(this);
         getData();
     }
 
@@ -46,7 +46,7 @@ public class ChartActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             txtTitleCoin_chart.setText(bundle.getString("dataCoin"));
-            coinService.requestRangeDays(bundle.getString("dataChart"), new RetrofitCallback() {
+            awesomeService.requestRangeDays(bundle.getString("dataChart"), new RetrofitCallback() {
                 @Override
                 public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
                     chartLine = new ChartLine(ChartActivity.this, lineChart, coinChildrList, 1);

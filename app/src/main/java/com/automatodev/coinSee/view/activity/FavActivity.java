@@ -23,7 +23,7 @@ import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
 import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.controller.service.API.CoinService;
+import com.automatodev.coinSee.controller.service.API.AwesomeService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.automatodev.coinSee.controller.service.firebase.FavCoinService;
 import com.automatodev.coinSee.view.adapter.FavAdapter;
@@ -46,7 +46,7 @@ public class FavActivity extends AppCompatActivity {
     private RecyclerView recyclerFav_fav;
     private FavAdapter favAdapter;
     private ChartLine chartLine;
-    private CoinService coinService;
+    private AwesomeService awesomeService;
     private Animation animation;
     private ConvertDataService convertDataService;
     private CircleImageView imgUser_fav;
@@ -63,7 +63,7 @@ public class FavActivity extends AppCompatActivity {
         imgUser_fav = findViewById(R.id.imgUser_fav);
         relativeNothing_fav = findViewById(R.id.relativeNothing_fav);
         progressFav_fav = findViewById(R.id.progressFav_fav);
-        coinService = new CoinService(this);
+        awesomeService = new AwesomeService(this);
         convertDataService = new ConvertDataService();
         favCoinService = new FavCoinService(this);
         favAdapter = new FavAdapter(this, null);
@@ -128,7 +128,7 @@ public class FavActivity extends AppCompatActivity {
                 final RelativeLayout relative_detais_btFav = view.findViewById(R.id.relative_detais_btFav);
                 ThreeBounce three = new ThreeBounce();
                 progressChart_btFav.setIndeterminateDrawable(three);
-                coinService.requestSingle(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
+                awesomeService.requestSingle(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
                     @Override
                     public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
                     }
@@ -152,7 +152,7 @@ public class FavActivity extends AppCompatActivity {
                                 .transition(DrawableTransitionOptions.withCrossFade()).into(imgCode_btFav);
                     }
                 });
-                coinService.requestRangeDays(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
+                awesomeService.requestRangeDays(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new RetrofitCallback() {
                     @Override
                     public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
                         chartLine = new ChartLine(FavActivity.this,chart, coinChildrList);

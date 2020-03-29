@@ -13,7 +13,7 @@ import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.API.RetrofitCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.CoinDaddy;
-import com.automatodev.coinSee.models.API.RequestAPI;
+import com.automatodev.coinSee.models.API.AwesomeRequest;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,15 +26,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CoinService {
+public class AwesomeService {
 
     private Activity context;
     private Retrofit retrofit;
-    private RequestAPI request;
+    private AwesomeRequest request;
     private String baseUrl = "https://economia.awesomeapi.com.br/";
     private SwipeRefreshLayout sw;
 
-    public CoinService(Activity context) {
+    public AwesomeService(Activity context) {
         this.context = context;
         sw = context.findViewById(R.id.swipte_main);
     }
@@ -42,7 +42,7 @@ public class CoinService {
     public void requestAll(final RetrofitCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create()).build();
-        request = retrofit.create(RequestAPI.class);
+        request = retrofit.create(AwesomeRequest.class);
         Call<CoinDaddy> call = request.requestAll();
         call.enqueue(new Callback<CoinDaddy>() {
             @Override
@@ -100,7 +100,7 @@ public class CoinService {
 
     public void requestRangeDays(String value, final RetrofitCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
-        request = retrofit.create(RequestAPI.class);
+        request = retrofit.create(AwesomeRequest.class);
         Call<List<CoinChildr>> call = request.requestRangeDay(value, 14);
         call.enqueue(new Callback<List<CoinChildr>>() {
             @Override
@@ -127,7 +127,7 @@ public class CoinService {
     public void requestSingle(final String value, final RetrofitCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create())
                 .build();
-        request = retrofit.create(RequestAPI.class);
+        request = retrofit.create(AwesomeRequest.class);
         Call<CoinDaddy> call = request.requestSingle(value);
         call.enqueue(new Callback<CoinDaddy>() {
             @Override
