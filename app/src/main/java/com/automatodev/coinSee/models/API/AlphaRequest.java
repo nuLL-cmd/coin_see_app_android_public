@@ -14,8 +14,8 @@ public interface AlphaRequest {
                            @Query("to_currency")String to, @Query("apikey")String apikey);
     //Range de minutos limitado a 60 minutos
     @GET("query?")
-    Call<String> getSingleRangeMin(@Query("function")String function,@Query("from_symbol")String from,
-                                   @Query("to_symbol")String to,@Query("apikey")String apikey);
+    Call<String> getSingleIntervalMin(@Query("function")String function,@Query("from_symbol")String from,
+                                   @Query("to_symbol")String to,@Query("interval")String interval,@Query("apikey")String apikey);
     //Range de dias limitado a 100 resultados por padrao no output=size
     @GET("query?")
     Call<String> getSingleRangeDay(@Query("function")String function,@Query("from_symbol")String from,
