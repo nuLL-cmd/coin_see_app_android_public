@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.2.1'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
     implementation 'com.airbnb.android:lottie:3.4.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
 
 
 }
