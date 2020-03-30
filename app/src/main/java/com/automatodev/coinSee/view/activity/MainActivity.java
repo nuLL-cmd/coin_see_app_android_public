@@ -47,21 +47,23 @@ public class MainActivity extends AppCompatActivity {
 
     public static boolean status;
     private String uid;
-    String urls[] = {"https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fusd.png?alt=media&token=6ee6ec10-ee9c-4483-96d6-e401111f3761",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fars.png?alt=media&token=7a40539c-4d57-41de-ab11-3160c08d654a",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Faud.png?alt=media&token=0cdf86c1-81f3-4206-8fca-584306774567",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fbtc.png?alt=media&token=9c5a136a-df75-4ceb-bc4c-8273365e1774",
+    String urls[] = {
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fusd.png?alt=media&token=6ee6ec10-ee9c-4483-96d6-e401111f3761",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fusdt.png?alt=media&token=d904bab4-40b0-4372-9fb8-2800fd03bee2",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fcad.png?alt=media&token=c2b2e9e0-958c-4e41-916b-23ab027672c8",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fchf.png?alt=media&token=c1f3d93c-0819-4dbf-a4eb-984024c25bdb",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fcny.png?alt=media&token=d1d72eaf-cab3-43d2-a161-f970c831ed42",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Feth.png?alt=media&token=03e1d490-c897-4a9a-8a96-3245e5297e7d",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Feur.png?alt=media&token=15973782-f226-47a5-bc17-209c6e348fd0",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fgbp.png?alt=media&token=85cbab11-9085-4824-941b-ab4752ed4386",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fils.png?alt=media&token=902ea792-01b0-44d9-b5d7-d0f974513ab9",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fjpy.png?alt=media&token=aaaaa627-af09-492d-a783-5420ce126918",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fars.png?alt=media&token=7a40539c-4d57-41de-ab11-3160c08d654a",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fbtc.png?alt=media&token=9c5a136a-df75-4ceb-bc4c-8273365e1774",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fltc.png?alt=media&token=9497de55-7f5b-4525-89b4-3f9dd445075d",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fjpy.png?alt=media&token=aaaaa627-af09-492d-a783-5420ce126918",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fchf.png?alt=media&token=c1f3d93c-0819-4dbf-a4eb-984024c25bdb",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Faud.png?alt=media&token=0cdf86c1-81f3-4206-8fca-584306774567",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fcny.png?alt=media&token=d1d72eaf-cab3-43d2-a161-f970c831ed42",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fils.png?alt=media&token=902ea792-01b0-44d9-b5d7-d0f974513ab9",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Feth.png?alt=media&token=03e1d490-c897-4a9a-8a96-3245e5297e7d",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fxrp.png?alt=media&token=3a238ebf-9e21-43a5-a193-82790d074d27",
-            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fusdt.png?alt=media&token=d904bab4-40b0-4372-9fb8-2800fd03bee2"};
+    };
 
     private Animation anim2;
     private CoinAdapter coinAdapter;
@@ -92,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         favCoinService = new FavCoinService(this);
         recyclerCoin_main.hasFixedSize();
         recyclerCoin_main.setLayoutManager(new LinearLayoutManager(this));
-
         coinLocal = new ArrayList<>();
         getDataUser();
         //getData();
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("user", userMain);
         startActivity(intent);
     }
+
     //Metodo que pegara os primeiros dados e/ou atualizara os dados da API vs favoritos do banco de dados
     public void refreshData() {
         /*Se a lista auxiliar for diferente de zero, inicia o refresh lyaout, ou seja isto nao se aplica a inicializaçao
@@ -280,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
                         recyclerCoin_main.setAdapter(coinAdapter);
                         recyclerCoin_main.setAnimation(anim2);
                         progressChart_main.setVisibility(View.GONE);
-
                         sClick(coinLocal);
                     }
 
@@ -299,7 +300,6 @@ public class MainActivity extends AppCompatActivity {
     public void refreshList(View view) {
         if (coinLocal.size() != 0) {
             refreshData();
-
         }
     }
 }
