@@ -55,10 +55,24 @@ public class CoinChildr implements Parcelable {
         this.fav = fav;
     }
 
+    public CoinChildr(String ask, String bid, String code, String codein, String create_date, String high, String low, String name, String pctChange, String timestamp, String varBid) {
+        this.ask = ask;
+        this.bid = bid;
+        this.code = code;
+        this.codein = codein;
+        this.create_date = create_date;
+        this.high = high;
+        this.low = low;
+        this.name = name;
+        this.pctChange = pctChange;
+        this.timestamp = timestamp;
+        this.varBid = varBid;
+    }
+
     public CoinChildr() {
     }
 
-    protected CoinChildr(Parcel in) {
+    public CoinChildr(Parcel in) {
         ask = in.readString();
         bid = in.readString();
         code = in.readString();
