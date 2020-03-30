@@ -12,12 +12,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
-import com.automatodev.coinSee.controller.entity.CoinDaddy;
 import com.automatodev.coinSee.models.API.AwesomeRequest;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,6 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class AwesomeService {
 
@@ -38,43 +41,29 @@ public class AwesomeService {
         this.context = context;
         sw = context.findViewById(R.id.swipte_main);
     }
-
     public void requestAll(final AwesomeCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create()).build();
+                .addConverterFactory(ScalarsConverterFactory.create()).build();
         request = retrofit.create(AwesomeRequest.class);
-        Call<CoinDaddy> call = request.requestAll();
-        call.enqueue(new Callback<CoinDaddy>() {
+        Call<String> call = request.requestAll();
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(@NotNull Call<CoinDaddy> call, @NotNull Response<CoinDaddy> response) {
-                CoinDaddy daddyTests = response.body();
-                List<CoinChildr> coinChildrList = new ArrayList<>();
-                if (daddyTests != null) {
-                    coinChildrList.add(daddyTests.getuSD());
-                    coinChildrList.add(daddyTests.getaRS());
-                    coinChildrList.add(daddyTests.getaUD());
-                    coinChildrList.add(daddyTests.getbTC());
-                    coinChildrList.add(daddyTests.getcAD());
-                    coinChildrList.add(daddyTests.getcHF());
-                    coinChildrList.add(daddyTests.getcNY());
-                    coinChildrList.add(daddyTests.geteTH());
-                    coinChildrList.add(daddyTests.geteUR());
-                    coinChildrList.add(daddyTests.getgBP());
-                    coinChildrList.add(daddyTests.getiLS());
-                    coinChildrList.add(daddyTests.getjPY());
-                    coinChildrList.add(daddyTests.getlTC());
-                    coinChildrList.add(daddyTests.getxRP());
-                    coinChildrList.add(daddyTests.getuSDT());
-                    try {
-                        callback.onSucces(coinChildrList);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
+                if (response.isSuccessful()){
+                    if (response.body()!= null){
+                        List<CoinChildr> coinChildrList = extractAll(response.body());
+                        try {
+                            callback.onSucces(coinChildrList);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
+
             }
 
             @Override
-            public void onFailure(@NotNull Call<CoinDaddy> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
                 final AlertDialog alerta  = new AlertDialog.Builder(context).create();
                 alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 View v = context.getLayoutInflater().inflate(R.layout.layout_message,null);
@@ -123,50 +112,88 @@ public class AwesomeService {
             }
         });
     }
-
     public void requestSingle(final String value, final AwesomeCallback callback) {
-        retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create())
+        retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(ScalarsConverterFactory.create())
                 .build();
         request = retrofit.create(AwesomeRequest.class);
-        Call<CoinDaddy> call = request.requestSingle(value);
-        call.enqueue(new Callback<CoinDaddy>() {
+        Call<String> call = request.requestSingle(value);
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(@NotNull Call<CoinDaddy> call, @NotNull Response<CoinDaddy> response) {
-                CoinDaddy daddyTests = response.body();
-                List<CoinChildr> coinChildrList = new ArrayList<>();
-                CoinChildr cSingle = null;
-                if (daddyTests != null) {
-                    coinChildrList.add(daddyTests.getuSD());
-                    coinChildrList.add(daddyTests.getaRS());
-                    coinChildrList.add(daddyTests.getaUD());
-                    coinChildrList.add(daddyTests.getbTC());
-                    coinChildrList.add(daddyTests.getcAD());
-                    coinChildrList.add(daddyTests.getcHF());
-                    coinChildrList.add(daddyTests.getcNY());
-                    coinChildrList.add(daddyTests.geteTH());
-                    coinChildrList.add(daddyTests.geteUR());
-                    coinChildrList.add(daddyTests.getgBP());
-                    coinChildrList.add(daddyTests.getiLS());
-                    coinChildrList.add(daddyTests.getjPY());
-                    coinChildrList.add(daddyTests.getlTC());
-                    coinChildrList.add(daddyTests.getxRP());
-                    coinChildrList.add(daddyTests.getuSDT());
-                    for (CoinChildr c : coinChildrList) {
-                        if (c != null)
-                            cSingle = c;
-                    }
-                    try {
-                        callback.onSucces(cSingle);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
+                if (response.isSuccessful()){
+                    if (response.body() != null){
+                        CoinChildr coinChildr = extractSingle(response.body());
+                        try {
+                            callback.onSucces(coinChildr);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
 
             @Override
-            public void onFailure(@NotNull Call<CoinDaddy> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
                 Log.e("logx", "ErrorSingle: " + t.getMessage(), t);
             }
         });
+    }
+
+    private List<CoinChildr> extractAll(String response){
+        List<CoinChildr> listCoinChildr = new ArrayList<>();
+        try{
+            JSONObject obj = new JSONObject(response.trim());
+            Iterator<String> keys = obj.keys();
+            while(keys.hasNext()){
+                String key = keys.next();
+                listCoinChildr.add(new CoinChildr(
+                        ((JSONObject)obj.get(key)).get("ask").toString(),
+                        ((JSONObject)obj.get(key)).get("bid").toString(),
+                        ((JSONObject)obj.get(key)).get("code").toString(),
+                        ((JSONObject)obj.get(key)).get("codein").toString(),
+                        ((JSONObject)obj.get(key)).get("create_date").toString(),
+                        ((JSONObject)obj.get(key)).get("high").toString(),
+                        ((JSONObject)obj.get(key)).get("low").toString(),
+                        ((JSONObject)obj.get(key)).get("name").toString(),
+                        ((JSONObject)obj.get(key)).get("pctChange").toString(),
+                        ((JSONObject)obj.get(key)).get("timestamp").toString(),
+                        ((JSONObject)obj.get(key)).get("varBid").toString()
+                        ));
+
+                Log.i("logx","Test: "+listCoinChildr.size());
+            }
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+
+        return listCoinChildr;
+    }
+
+    private CoinChildr extractSingle(String response){
+        CoinChildr coinChildr = null;
+        try{
+            JSONObject obj = new JSONObject(response.trim());
+            Iterator<String> keys = obj.keys();
+            while(keys.hasNext()){
+                String key = keys.next();
+                coinChildr = new CoinChildr(
+                        ((JSONObject)obj.get(key)).get("ask").toString(),
+                        ((JSONObject)obj.get(key)).get("bid").toString(),
+                        ((JSONObject)obj.get(key)).get("code").toString(),
+                        ((JSONObject)obj.get(key)).get("codein").toString(),
+                        ((JSONObject)obj.get(key)).get("create_date").toString(),
+                        ((JSONObject)obj.get(key)).get("high").toString(),
+                        ((JSONObject)obj.get(key)).get("low").toString(),
+                        ((JSONObject)obj.get(key)).get("name").toString(),
+                        ((JSONObject)obj.get(key)).get("pctChange").toString(),
+                        ((JSONObject)obj.get(key)).get("timestamp").toString(),
+                        ((JSONObject)obj.get(key)).get("varBid").toString()
+                );
+            }
+
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return coinChildr;
     }
 }
