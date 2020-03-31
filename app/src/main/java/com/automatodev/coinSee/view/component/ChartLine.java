@@ -3,27 +3,19 @@ package com.automatodev.coinSee.view.component;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.entity.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinRangeEntityAlpha;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -32,60 +24,30 @@ import java.util.Locale;
 
 public class ChartLine {
     private Activity context;
-    private List<CoinChildr> valueList;
+   private List<CoinRangeEntityAlpha> valueList;
     private LineChart chartGlobal;
     private ConvertDataService convertDataService;
-    private int var = 0;
+    private String coinName;
 
-    public ChartLine(Activity context, LineChart chartGlobal, List<CoinChildr> valueList) {
+    public ChartLine(Activity context, LineChart chartGlobal, List<CoinRangeEntityAlpha> valueList, String coinName) {
         this.context = context;
+        this.coinName = coinName;
         this.valueList = valueList;
         this.chartGlobal = chartGlobal;
         convertDataService = new ConvertDataService();
     }
 
-    public ChartLine(Activity context,LineChart chartGlobal, List<CoinChildr> valueList, int var) {
-        this.context = context;
-        this.valueList = valueList;
-        this.chartGlobal = chartGlobal;
-        this.var = var;
-        convertDataService = new ConvertDataService();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.P)
     public void makeGraph() {
         //Lista do tipo Entry que recebe um entry passando como pramatro os valores do eixo X e eixo y
         List<Entry> entradaTestes = new ArrayList<>();
-        entradaTestes.add(new Entry(0, Float.parseFloat(valueList.get(13).getBid())));
-        entradaTestes.add(new Entry(1, Float.parseFloat(valueList.get(12).getBid())));
-        entradaTestes.add(new Entry(2, Float.parseFloat(valueList.get(11).getBid())));
-        entradaTestes.add(new Entry(3, Float.parseFloat(valueList.get(10).getBid())));
-        entradaTestes.add(new Entry(4, Float.parseFloat(valueList.get(9).getBid())));
-        entradaTestes.add(new Entry(5, Float.parseFloat(valueList.get(8).getBid())));
-        entradaTestes.add(new Entry(6, Float.parseFloat(valueList.get(7).getBid())));
-        entradaTestes.add(new Entry(7, Float.parseFloat(valueList.get(6).getBid())));
-        entradaTestes.add(new Entry(8, Float.parseFloat(valueList.get(5).getBid())));
-        entradaTestes.add(new Entry(9, Float.parseFloat(valueList.get(4).getBid())));
-        entradaTestes.add(new Entry(10, Float.parseFloat(valueList.get(3).getBid())));
-        entradaTestes.add(new Entry(11, Float.parseFloat(valueList.get(2).getBid())));
-        entradaTestes.add(new Entry(12, Float.parseFloat(valueList.get(1).getBid())));
-        entradaTestes.add(new Entry(13, Float.parseFloat(valueList.get(0).getBid())));
+        for (int i = 1; i<=valueList.size();i++){
+            entradaTestes.add(new Entry(i-1, Float.parseFloat(valueList.get(valueList.size()-i).getClose())));
+        }
         //Lista contendo as datas que substituira os valores de X no objeto Entry dentro do grafico
         final List<String> mxData = new ArrayList<>();
-        mxData.add(convertDataService.convertDayMonth(valueList.get(13).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(12).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(11).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(10).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(9).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(8).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(7).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(6).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(5).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(4).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(3).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(2).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(1).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(0).getTimestamp().substring(0, 10)));
+        for (int i = 1; i<=valueList.size();i++){
+            mxData.add(convertDataService.convertDayString(valueList.get(valueList.size()-i).getDateRange()));
+        }
         //Configuração de dados do eixo X
         XAxis xAxis = chartGlobal.getXAxis(); //Inicia o eixo X
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //Dados(labels) do eixo X no Bottom do grafico
@@ -131,7 +93,7 @@ public class ChartLine {
         chartGlobal.setDoubleTapToZoomEnabled(false); //Desabilita o double toque para zoom do grafico
         chartGlobal.invalidate(); //Inicia e atualiza o grafico
         chartGlobal.setScaleEnabled(true); //Desabilita o zoom total do grafico
-        chartGlobal.setDescription(sDescription(valueList.get(0).getName())); // Seta uma descrição dentro do grafico atraves do metodo sDescription
+        chartGlobal.setDescription(sDescription(coinName)); // Seta uma descrição dentro do grafico atraves do metodo sDescription
         chartGlobal.getDescription().setXOffset(10f); //Seta margin X da descrição
         chartGlobal.getDescription().setYOffset(5f); //Seta a margin Y da descrição
         chartGlobal.setDrawBorders(false); //Remove as bordas do grafico
@@ -175,39 +137,39 @@ public class ChartLine {
             }
         };
     }
-
+/*
     public void makeGhraphBar() {
         final List<String> mxData = new ArrayList<>();
-        mxData.add(convertDataService.convertDayMonth(valueList.get(13).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(12).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(11).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(10).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(9).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(8).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(7).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(6).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(5).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(4).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(3).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(2).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(1).getTimestamp().substring(0, 10)));
-        mxData.add(convertDataService.convertDayMonth(valueList.get(0).getTimestamp().substring(0, 10)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(13).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(12).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(11).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(10).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(9).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(8).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(7).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(6).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(5).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(4).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(3).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(2).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(1).getDateRange().substring(0, 5)));
+        mxData.add(convertDataService.convertDayMonth(valueList.get(0).getDateRange().substring(0, 5)));
         BarChart barchart = context.findViewById(R.id.chart);
         ArrayList<BarEntry> values = new ArrayList<>();
-        values.add(new BarEntry(0, Float.parseFloat(valueList.get(13).getBid())));
-        values.add(new BarEntry(1, Float.parseFloat(valueList.get(12).getBid())));
-        values.add(new BarEntry(2, Float.parseFloat(valueList.get(11).getBid())));
-        values.add(new BarEntry(3, Float.parseFloat(valueList.get(10).getBid())));
-        values.add(new BarEntry(4, Float.parseFloat(valueList.get(9).getBid())));
-        values.add(new BarEntry(5, Float.parseFloat(valueList.get(8).getBid())));
-        values.add(new BarEntry(6, Float.parseFloat(valueList.get(7).getBid())));
-        values.add(new BarEntry(7, Float.parseFloat(valueList.get(6).getBid())));
-        values.add(new BarEntry(8, Float.parseFloat(valueList.get(5).getBid())));
-        values.add(new BarEntry(9, Float.parseFloat(valueList.get(4).getBid())));
-        values.add(new BarEntry(10, Float.parseFloat(valueList.get(3).getBid())));
-        values.add(new BarEntry(11, Float.parseFloat(valueList.get(2).getBid())));
-        values.add(new BarEntry(12, Float.parseFloat(valueList.get(1).getBid())));
-        values.add(new BarEntry(13, Float.parseFloat(valueList.get(0).getBid())));
+        values.add(new BarEntry(0, Float.parseFloat(valueList.get(13).getClose())));
+        values.add(new BarEntry(1, Float.parseFloat(valueList.get(12).getClose())));
+        values.add(new BarEntry(2, Float.parseFloat(valueList.get(11).getClose())));
+        values.add(new BarEntry(3, Float.parseFloat(valueList.get(10).getClose())));
+        values.add(new BarEntry(4, Float.parseFloat(valueList.get(9).getClose())));
+        values.add(new BarEntry(5, Float.parseFloat(valueList.get(8).getClose())));
+        values.add(new BarEntry(6, Float.parseFloat(valueList.get(7).getClose())));
+        values.add(new BarEntry(7, Float.parseFloat(valueList.get(6).getClose())));
+        values.add(new BarEntry(8, Float.parseFloat(valueList.get(5).getClose())));
+        values.add(new BarEntry(9, Float.parseFloat(valueList.get(4).getClose())));
+        values.add(new BarEntry(10, Float.parseFloat(valueList.get(3).getClose())));
+        values.add(new BarEntry(11, Float.parseFloat(valueList.get(2).getClose())));
+        values.add(new BarEntry(12, Float.parseFloat(valueList.get(1).getClose())));
+        values.add(new BarEntry(13, Float.parseFloat(valueList.get(0).getClose())));
         XAxis xAxis = barchart.getXAxis(); //Inicia o eixo X
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //Dados(labels) do eixo X no Bottom do grafico
         xAxis.setTextColor(Color.parseColor("#328635")); //Seta a cor dos dados(labels) do eixo X
@@ -237,5 +199,5 @@ public class ChartLine {
         barchart.setPinchZoom(false);
         barchart.setExtraBottomOffset(10f); //MarginBottom da label do grafico
         barchart.zoom(3f, 1f, 1f, 1f); //Seta um zoon neste caso apenas no eixo X
-    }
+    }*/
 }
