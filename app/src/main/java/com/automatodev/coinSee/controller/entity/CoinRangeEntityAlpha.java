@@ -26,6 +26,10 @@ public class CoinRangeEntityAlpha implements Serializable {
         this.close = close;
     }
 
+    public String getDateRange() {
+        return dateRange;
+    }
+
     public String getOpen() {
         return open;
     }
