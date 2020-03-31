@@ -24,6 +24,10 @@ public class ConvertDataService {
         dateFormat = new SimpleDateFormat("dd-MM", locale);
         return dateFormat.format(timestamp);
     }
+
+    public String convertDayString(String value){
+        return value.substring(8,10)+"-"+value.substring(5,7);
+    }
     public String convertDecimal(String value){
         double decimal = Double.parseDouble(value);
         locale = new Locale("pt", "BR");
