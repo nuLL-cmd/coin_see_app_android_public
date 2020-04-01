@@ -26,7 +26,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class AwesomeService {
@@ -86,7 +85,7 @@ public class AwesomeService {
         });
 
     }
-
+/*
     public void requestRangeDays(String value, final AwesomeCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         request = retrofit.create(AwesomeRequest.class);
@@ -111,7 +110,7 @@ public class AwesomeService {
                 Log.e("logx", "Error: " + t.getMessage(), t);
             }
         });
-    }
+    }*/
     public void requestSingle(final String value, final AwesomeCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(ScalarsConverterFactory.create())
                 .build();
@@ -159,8 +158,6 @@ public class AwesomeService {
                         ((JSONObject)obj.get(key)).get("timestamp").toString(),
                         ((JSONObject)obj.get(key)).get("varBid").toString()
                         ));
-
-                Log.i("logx","Test: "+listCoinChildr.size());
             }
         }catch(JSONException e){
             e.printStackTrace();

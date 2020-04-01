@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.automatodev.coinSee.R;
+import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
 import com.automatodev.coinSee.controller.callback.firebase.FUserCallback;
-import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
 import com.automatodev.coinSee.controller.service.API.AwesomeService;
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         relativeLayoutProgressUser_main = findViewById(R.id.relativeProgressUser_main);
         lblUser_main = findViewById(R.id.lblUser_main);
         imgUser_main = findViewById(R.id.imgUser_main);
-        anim2 = AnimationUtils.loadAnimation(this, R.anim.push_left);
+        anim2 = AnimationUtils.loadAnimation(this, R.anim.push_right);
         sw = findViewById(R.id.swipte_main);
         sw.setColorSchemeResources(R.color.colorPrimary);
         ThreeBounce three = new ThreeBounce();
@@ -242,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
+
                         /*Atualizações sao feitas na API de 30 em 30 segundos e alterações de favorito = true ou false tambem sao realizadas
                         pelo usuario, tendo a necessidade de atualizar apenas a celula afetada ou seja apenas o dado afetado
                         sem precisar carregar toda a lista e atualizar a view consumindo mais processamento e recursos do dispositivo
@@ -250,6 +251,14 @@ public class MainActivity extends AppCompatActivity {
                         /*Se a lista local for vazia ou seja Se aplica em tempo de execução do programa nao sendo valido
                         para a primeira inicialização*/
                         if (coinLocal.size() != 0) {
+                            List<CoinChildr> coinLocal2 = new ArrayList<>();
+
+                            for (CoinChildr c : coinChildrList) {
+                                if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC"))
+                                    coinLocal2.add(c);
+                            }
+                            coinChildrList.removeAll(coinLocal2);
+
                             /*Faz um forLoop onde para cada item da lista local eu comparo os dados que tenho na lista local
                              com os dados vindos da api ja com os dados da url e favoritos
                              por isso nao se aplica a primeira inicialização pois a lista na primeira inicialização ainda estara vazia*/
@@ -262,6 +271,8 @@ public class MainActivity extends AppCompatActivity {
                                     coinLocal.add(i, coinChildrList.get(i));
                                 }
                             }
+
+
                             /*Notifica a view dizendo que houve alterações no repositorio de dados (Lista local)
                             e atualiza esses dados em cada celula
                             chamando o metodo que ativa os clicques nas celulas passando como parametro a lista local pronta e atualizada*/
@@ -270,14 +281,19 @@ public class MainActivity extends AppCompatActivity {
                             sw.setRefreshing(false);
                             return; // para a execução do bloco pois o progrmaa ja esta em execuçap e uma lista local ja esta preenchida
                         }
-
+                        for (CoinChildr c : coinChildrList) {
+                            if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC"))
+                                coinLocal.add(c);
+                        }
+                        coinChildrList.removeAll(coinLocal);
+                        coinLocal = coinChildrList;
                         /*Se for a primeira inicialização do programa
                          atribuo os dados vindo da api para minha lista local
                          atribuo meu objeto de verificação de estado ao meu componente de listagem
                          coloco uma animação tosca no meu compoente de listagem
                          desabilito minha progressbar
                          chamo o metodo sclick passando minha lista local como parametro*/
-                        coinLocal = coinChildrList;
+
                         coinAdapter.setCoinChildrs(coinLocal);
                         recyclerCoin_main.setAdapter(coinAdapter);
                         recyclerCoin_main.setAnimation(anim2);

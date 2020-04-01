@@ -45,6 +45,7 @@ public class AlphaService {
                 .build();
         alphaRequest = retrofit.create(AlphaRequest.class);
     }
+
     //###########################################
     //Ssrviço que manipulara os resultados da consulta singular e devolverar em forma de tipo para a view.
     public void getSingleService(String from, String to, final AlphaCallback callback) {
@@ -52,22 +53,41 @@ public class AlphaService {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
+                CoinEntityAlpha coinEntity = new CoinEntityAlpha();
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        CoinEntityAlpha coinEntityAlpha = extractItem(response.body());
-                        callback.onSuccessSingle(coinEntityAlpha);
+
+                        try {
+                            JSONObject obj = new JSONObject(response.body().trim());
+                            Iterator<String> keys = obj.keys();
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                coinEntity.setFromCode(((JSONObject) obj.get(key)).getString("1. From_Currency Code"));
+                                coinEntity.setFromName(((JSONObject) obj.get(key)).getString("2. From_Currency Name"));
+                                coinEntity.setToCode(((JSONObject) obj.get(key)).getString("3. To_Currency Code"));
+                                coinEntity.setToName(((JSONObject) obj.get(key)).getString("4. To_Currency Name"));
+                                coinEntity.setRate(((JSONObject) obj.get(key)).getString("5. Exchange Rate"));
+                                coinEntity.setLastRefresh(((JSONObject) obj.get(key)).getString("6. Last Refreshed"));
+                                coinEntity.setTimeZone(((JSONObject) obj.get(key)).getString("7. Time Zone"));
+                                coinEntity.setBid(((JSONObject) obj.get(key)).getString("8. Bid Price"));
+                                coinEntity.setAsk(((JSONObject) obj.get(key)).getString("9. Ask Price"));
+                            }
+                            callback.onSuccessSingle(coinEntity);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
-                final AlertDialog alerta  = new AlertDialog.Builder(context).create();
+                final AlertDialog alerta = new AlertDialog.Builder(context).create();
                 Objects.requireNonNull(alerta.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-                View v = context.getLayoutInflater().inflate(R.layout.layout_message,null);
+                View v = context.getLayoutInflater().inflate(R.layout.layout_message, null);
                 TextView txtTitle_message = v.findViewById(R.id.txtTitle_message);
                 TextView txtLabel_message = v.findViewById(R.id.txtLabel_message);
-
                 Button btnDismiss_message = v.findViewById(R.id.btnDismiss_message);
                 txtTitle_message.setText("Ops!");
                 txtLabel_message.setText("Não foi possivel conectar a ao serviço de informações\nPor favor verifique sua conexão e tente novamente.");
@@ -82,57 +102,93 @@ public class AlphaService {
             }
         });
     }
+
     //###########################################
-    //Ssrviço que manipulara os resultados do intervalo de minutos e devolverar em forma de tipo para a view.
-    public void getSingleMinService(final String interval, String from, String to, final AlphaCallback callback){
-        Call<String> call =  alphaRequest.getSingleIntervalMin(INTRADAY,from,to,interval,APIKEY);
+/*    Srviço que manipulara os resultados do intervalo de minutos e devolverar em forma de tipo para a view /
+    limite de 60 minutos de intervalo*/
+    public void getSingleMinService(final String interval, String from, String to, final AlphaCallback callback) {
+        Call<String> call = alphaRequest.getSingleIntervalMin(INTRADAY, from, to, interval, APIKEY);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
-                if (response.isSuccessful()){
-                    if(response.body() != null){
-
-                        List<CoinRangeEntityAlpha> alphaList = extractRange(response.body(),interval);
-                        callback.onSuccessRange(alphaList);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
-                final AlertDialog alerta  = new AlertDialog.Builder(context).create();
-                alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                View v = context.getLayoutInflater().inflate(R.layout.layout_message,null);
-                TextView txtTitle_message = v.findViewById(R.id.txtTitle_message);
-                TextView txtLabel_message = v.findViewById(R.id.txtLabel_message);
-
-                Button btnDismiss_message = v.findViewById(R.id.btnDismiss_message);
-                txtTitle_message.setText("Ops!");
-                txtLabel_message.setText("Não foi possivel conectar a ao serviço de informações\nPor favor verifique sua conexão e tente novamente.");
-                btnDismiss_message.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alerta.dismiss();
-                    }
-                });
-                alerta.setView(v);
-                alerta.show();
-            }
-        });
-
-    }
-    //###########################################
-    //Ssrviço que manipulara os resultados do intervalo de minutos e devolverar em forma de tipo para a view.
-    public void getSingleDayService(String from, String to, final AlphaCallback callback){
-        Call<String> call = alphaRequest.getSingleRangeDay(DAILY,from,to,APIKEY);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
-                if (response.isSuccessful()){
+                List<CoinRangeEntityAlpha> alphaList = new ArrayList<>();
+                if (response.isSuccessful()) {
                     if (response.body() != null) {
+                        try {
+                            JSONObject obj = new JSONObject(response.body().trim());
+                            String resFilter = obj.getString("Time Series FX (" + "Daily" + ")");
+                            obj = new JSONObject(resFilter);
+                            Iterator<String> keys = obj.keys();
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                alphaList.add(new CoinRangeEntityAlpha(
+                                        key,
+                                        ((JSONObject) obj.get(key)).getString("1. open"),
+                                        ((JSONObject) obj.get(key)).getString("2. high"),
+                                        ((JSONObject) obj.get(key)).getString("3. low"),
+                                        ((JSONObject) obj.get(key)).getString("4. close")
+                                ));
+                            }
+                            callback.onSuccessRange(alphaList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
 
-                       List<CoinRangeEntityAlpha> alphaList =  extractRange(response.body(),"Daily");
-                       callback.onSuccessRange(alphaList);
+            @Override
+            public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
+                final AlertDialog alerta = new AlertDialog.Builder(context).create();
+                alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                View v = context.getLayoutInflater().inflate(R.layout.layout_message, null);
+                TextView txtTitle_message = v.findViewById(R.id.txtTitle_message);
+                TextView txtLabel_message = v.findViewById(R.id.txtLabel_message);
+                Button btnDismiss_message = v.findViewById(R.id.btnDismiss_message);
+                txtTitle_message.setText("Ops!");
+                txtLabel_message.setText("Não foi possivel conectar a ao serviço de informações\nPor favor verifique sua conexão e tente novamente.");
+                btnDismiss_message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alerta.dismiss();
+                    }
+                });
+                alerta.setView(v);
+                alerta.show();
+            }
+        });
+    }
+
+    //###########################################
+/*    Ssrviço que manipulara os resultados do intervalo de dias e devolverar em forma de tipo para a view
+    Por padrao limita em 100 resultados.*/
+    public void getSingleDayService(String from, String to, final AlphaCallback callback) {
+        Call<String> call = alphaRequest.getSingleRangeDay(DAILY, from, to, APIKEY);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NotNull Call<String> call, @NotNull Response<String> response) {
+                List<CoinRangeEntityAlpha> alphaList = new ArrayList<>();
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        try {
+                            JSONObject obj = new JSONObject(response.body().trim());
+                            String resFilter = obj.getString("Time Series FX (" + "Daily" + ")");
+                            obj = new JSONObject(resFilter);
+                            Iterator<String> keys = obj.keys();
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                alphaList.add(new CoinRangeEntityAlpha(
+                                        key,
+                                        ((JSONObject) obj.get(key)).getString("1. open"),
+                                        ((JSONObject) obj.get(key)).getString("2. high"),
+                                        ((JSONObject) obj.get(key)).getString("3. low"),
+                                        ((JSONObject) obj.get(key)).getString("4. close")
+                                ));
+                            }
+                            callback.onSuccessRange(alphaList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -141,11 +197,11 @@ public class AlphaService {
             public void onFailure(@NotNull Call<String> call, @NotNull Throwable t) {
             }
         });
-
     }
+
     //###########################################
     //Metodo que fara a extração de um unico objeto do JSONbjeto, sera chamado de um serviço de chamada singular
-    private CoinEntityAlpha extractItem(String response) {
+    /*private CoinEntityAlpha extractItem(String response) {
         CoinEntityAlpha coinEntity = new CoinEntityAlpha();
         try {
             JSONObject obj = new JSONObject(response.trim());
@@ -166,14 +222,15 @@ public class AlphaService {
             e.printStackTrace();
         }
         return coinEntity;
-    }
+    }*/
+
     //###########################################
     //Metodo que trara a lista de dados do range de dias ou horas
-    private List<CoinRangeEntityAlpha> extractRange(String response, String range) {
+   /* private List<CoinRangeEntityAlpha> extractRange(String response, String range) {
         List<CoinRangeEntityAlpha> rangeList = new ArrayList<>();
         try {
             JSONObject obj = new JSONObject(response.trim());
-            String resFilter = obj.getString("Time Series FX(" + range + ")");
+            String resFilter = obj.getString("Time Series FX (" + range + ")");
             obj = new JSONObject(resFilter);
             Iterator<String> keys = obj.keys();
             while (keys.hasNext()) {
@@ -190,5 +247,5 @@ public class AlphaService {
             e.printStackTrace();
         }
         return rangeList;
-    }
+    }*/
 }

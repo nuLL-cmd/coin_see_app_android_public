@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +20,12 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
-import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
+import com.automatodev.coinSee.controller.callback.API.AlphaCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
+import com.automatodev.coinSee.controller.entity.CoinEntityAlpha;
+import com.automatodev.coinSee.controller.entity.CoinRangeEntityAlpha;
 import com.automatodev.coinSee.controller.entity.UserEntity;
+import com.automatodev.coinSee.controller.service.API.AlphaService;
 import com.automatodev.coinSee.controller.service.API.AwesomeService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.automatodev.coinSee.view.component.ChartLine;
@@ -29,6 +33,8 @@ import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -47,6 +53,7 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView txtDate_details;
     private ConvertDataService convertDataService;
     private AwesomeService task;
+    private AlphaService alphaService;
     private ProgressBar progressChart_details;
     private RelativeLayout relativeChart_details;
     private Animation anim;
@@ -54,6 +61,8 @@ public class DetailsActivity extends AppCompatActivity {
     private LineChart lineChart;
     private CardView card;
     private ImageButton btnFullChart_details;
+    private CoinChildr coinChildr;
+    private List<CoinRangeEntityAlpha> listAux;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -61,6 +70,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         task = new AwesomeService(this);
+        alphaService = new AlphaService(this);
         txtCoinValue_details = findViewById(R.id.txtCoinValue_details);
         txtName_details = findViewById(R.id.txtName_details);
         txtHigh_details = findViewById(R.id.txtHigh_details);
@@ -82,11 +92,12 @@ public class DetailsActivity extends AppCompatActivity {
         card = findViewById(R.id.card);
         anim = AnimationUtils.loadAnimation(this, R.anim.push_right);
         lineChart = findViewById(R.id.chart);
+        listAux = new ArrayList<>();
         getData();
     }
 
     public void getData() {
-        final CoinChildr coinChildr = getIntent().getParcelableExtra("value");
+        coinChildr = getIntent().getParcelableExtra("value");
         UserEntity userEntity = getIntent().getParcelableExtra("user");
         if (coinChildr != null && userEntity != null) {
             Glide.with(this).load(userEntity.getUserPhoto()).into(imgUser_details);
@@ -110,32 +121,37 @@ public class DetailsActivity extends AppCompatActivity {
             btnFullChart_details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!ChartActivity.status) {
+                    if (!ChartActivity.status && listAux.size() != 0) {
                         Intent intent = new Intent(DetailsActivity.this, ChartActivity.class);
                         intent.putExtra("dataCoin", coinChildr.getName());
-                        intent.putExtra("dataChart", coinChildr.getCode() + '-' + coinChildr.getCodein());
+                        intent.putExtra("code", coinChildr.getCode());
+                        intent.putExtra("codein", coinChildr.getCodein());
+                        intent.putExtra("list", (Serializable) listAux);
                         startActivity(intent);
-                    }
+                    } else
+                        Toast.makeText(DetailsActivity.this, "Por favor guarde o carregamento dos dados :D", Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
 
     public void getDataChart(final String value) {
-        task.requestRangeDays(value, new AwesomeCallback() {
-
-            @RequiresApi(api = Build.VERSION_CODES.P)
+        alphaService.getSingleDayService(coinChildr.getCode(), coinChildr.getCodein(), new AlphaCallback() {
             @Override
-            public void onSucces(final List<CoinChildr> coinChildrList) throws InterruptedException {
-                chartLine = new ChartLine(DetailsActivity.this, lineChart, coinChildrList);
+            public void onSuccessSingle(CoinEntityAlpha coinEntityAlpha) {
+            }
+
+            @Override
+            public void onSuccessRange(final List<CoinRangeEntityAlpha> rangeList) {
+                listAux = new ArrayList<>();
+                for (int i = 0; i < 14; i++) {
+                    listAux.add(rangeList.get(i));
+                }
+                chartLine = new ChartLine(DetailsActivity.this, lineChart, listAux, coinChildr.getName());
                 chartLine.makeGraph();
                 card.setAnimation(anim);
                 relativeChart_details.setVisibility(View.GONE);
                 progressChart_details.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onSucces(CoinChildr coinChildr0) throws InterruptedException {
             }
         });
     }

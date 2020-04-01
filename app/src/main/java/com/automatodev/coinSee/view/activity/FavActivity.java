@@ -1,14 +1,11 @@
 package com.automatodev.coinSee.view.activity;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -17,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +34,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
@@ -46,6 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FavActivity extends AppCompatActivity {
 
     public static boolean status;
+    private int statusAnimation = 0;
     private RecyclerView recyclerFav_fav;
     private FavAdapter favAdapter;
     private ChartLine chartLine;
@@ -58,6 +56,20 @@ public class FavActivity extends AppCompatActivity {
     private UserEntity userEntity;
     private RelativeLayout relativeNothing_fav;
     private AlphaService alphaService;
+    private CardView cardDetails_fav;
+    private Animation anim;
+    private Animation anim2;
+
+    private TextView txtCoinValue_btFav;
+    private TextView txtName_btFav;
+    private TextView txtHigh_btFav;
+    private TextView txtLow_btFav;
+    private TextView txtPercent_btFav;
+    private ImageView imgCode_btFav;
+    private TextView txtCode_btFav;
+    private TextView txtDate_btFav;
+    private TextView txtCodeIn_btFav;
+    private RelativeLayout relative_detais_btFav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +79,25 @@ public class FavActivity extends AppCompatActivity {
         imgUser_fav = findViewById(R.id.imgUser_fav);
         relativeNothing_fav = findViewById(R.id.relativeNothing_fav);
         progressFav_fav = findViewById(R.id.progressFav_fav);
+        cardDetails_fav = findViewById(R.id.cardDetails_fav);
+        txtCoinValue_btFav = findViewById(R.id.txtCoinValue_btFav);
+        txtName_btFav = findViewById(R.id.txtName_btFav);
+        txtHigh_btFav = findViewById(R.id.txtHigh_btFav);
+        txtLow_btFav = findViewById(R.id.txtLow_btFav);
+        txtPercent_btFav = findViewById(R.id.txtPercent_btFav);
+        imgCode_btFav = findViewById(R.id.imgCode_btFav);
+        txtCode_btFav = findViewById(R.id.txtCode_btFav);
+        txtDate_btFav = findViewById(R.id.txtDate_btFav);
+        txtCodeIn_btFav = findViewById(R.id.txtCodeIn_btFav);
+        relative_detais_btFav = findViewById(R.id.relative_detais_btFav);
         awesomeService = new AwesomeService(this);
         alphaService = new AlphaService(this);
         convertDataService = new ConvertDataService();
         favCoinService = new FavCoinService(this);
         favAdapter = new FavAdapter(this, null);
-        animation = AnimationUtils.loadAnimation(this, R.anim.push_left);
+        animation = AnimationUtils.loadAnimation(this, R.anim.push_right);
+        anim = AnimationUtils.loadAnimation(this, R.anim.push_right);
+        anim2 = AnimationUtils.loadAnimation(this, R.anim.push_left);
         ThreeBounce three = new ThreeBounce();
         progressFav_fav.setIndeterminateDrawable(three);
         recyclerFav_fav.hasFixedSize();
@@ -113,29 +138,17 @@ public class FavActivity extends AppCompatActivity {
             @Override
             public void onIntemClick(final int position) {
                 favAdapter.notifyItemChanged(position);
-                final BottomSheetDialog bt = new BottomSheetDialog(FavActivity.this, R.style.BottomSheetDialogTheme);
-                bt.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                bt.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                    }
-                });
-                final View view = getLayoutInflater().inflate(R.layout.layout_bottom_bar_fav, null);
-                final TextView txtCoinValue_btFav = view.findViewById(R.id.txtCoinValue_btFav);
-                final TextView txtName_btFav = view.findViewById(R.id.txtName_btFav);
-                final TextView txtHigh_btFav = view.findViewById(R.id.txtHigh_btFav);
-                final TextView txtLow_btFav = view.findViewById(R.id.txtLow_btFav);
-                final TextView txtPercent_btFav = view.findViewById(R.id.txtPercent_btFav);
-                final ImageView imgCode_btFav = view.findViewById(R.id.imgCode_btFav);
-                final ImageView imgCodeTitle_btFav = view.findViewById(R.id.imgCodeTitle_btFav);
-                final TextView txtCode_btFav = view.findViewById(R.id.txtCode_btFav);
-                final TextView txtDate_btFav = view.findViewById(R.id.txtDate_btFav);
-                final TextView txtCodeIn_btFav = view.findViewById(R.id.txtCodeIn_btFav);
-                final TextView txtNameTitle_btFav = view.findViewById(R.id.txtNameTitle_btFav);
-                final RelativeLayout relative_detais_btFav = view.findViewById(R.id.relative_detais_btFav);
-                final ImageButton btnBack_btFav = view.findViewById(R.id.btnBack_btFav);
-                final ImageButton btnMore_btFav = view.findViewById(R.id.btnMore_btFav);
-                ThreeBounce three = new ThreeBounce();
+
+                if (cardDetails_fav.getVisibility() == View.GONE){
+                    cardDetails_fav.setVisibility(View.VISIBLE);
+                    cardDetails_fav.setAnimation(anim);
+                }
+/*                if (statusAnimation == 0) {
+                    statusAnimation = 1;
+                } else{
+                    cardDetails_fav.setAnimation(anim2);
+                    statusAnimation = 0;
+                }*/
                 awesomeService.requestSingle(coinChildrList.get(position).getCode() + "-" + coinChildrList.get(position).getCodein(), new AwesomeCallback() {
                     @Override
                     public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
@@ -152,51 +165,10 @@ public class FavActivity extends AppCompatActivity {
                         txtDate_btFav.setText(convertDataService.convertDate(coinChildr0.getTimestamp()));
                         txtCodeIn_btFav.setText(coinChildr0.getCodein());
                         relative_detais_btFav.setVisibility(View.GONE);
-                        txtNameTitle_btFav.setText(coinChildr0.getName());
-                        Glide.with(FavActivity.this).load(coinChildrList.get(position).getUlrPhoto())
-                                .transition(DrawableTransitionOptions.withCrossFade()).into(imgCodeTitle_btFav);
                         Glide.with(FavActivity.this).load(coinChildrList.get(position).getUlrPhoto())
                                 .transition(DrawableTransitionOptions.withCrossFade()).into(imgCode_btFav);
-                        btnMore_btFav.setOnClickListener(new View.OnClickListener(){
-                            @Override
-                            public void onClick(View view){
-                                    coinChildr0.setUlrPhoto(coinChildrList.get(position).getUlrPhoto());
-                                    Intent intent = new Intent(FavActivity.this, DetailsActivity.class);
-                                    intent.putExtra("value",coinChildr0);
-                                    intent.putExtra("user",userEntity);
-                                    startActivity(intent);
-                                    finish();
-                            }
-                        });
                     }
                 });
-
-                btnBack_btFav.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view){
-                        bt.dismiss();
-                    }
-                });
-                /*alphaService.getSingleDayService(coinChildrList.get(position).getCode(),coinChildrList.get(position).getCodein(), new AlphaCallback() {
-                    @Override
-                    public void onSuccessSingle(CoinEntityAlpha coinEntityAlpha) {
-
-                    }
-
-                    @Override
-                    public void onSuccessRange(final List<CoinRangeEntityAlpha> rangeList) {
-                        List<CoinRangeEntityAlpha> listAux = new ArrayList<>();
-                        for (int i = 0; i<14; i++){
-                            listAux.add(rangeList.get(i));
-                        }
-                        chartLine = new ChartLine(FavActivity.this,chart, listAux,coinChildrList.get(position).getName());
-                        chartLine.makeGraph();
-                        relative_prgoress_chart.setVisibility(View.GONE);
-                    }
-                });*/
-                bt.setContentView(view);
-                bt.setCancelable(true);
-                bt.show();
             }
 
             @Override

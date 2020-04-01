@@ -130,14 +130,14 @@
 
                     <ImageButton
                         android:id="@+id/imgChart_details"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:scaleType="centerCrop"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignTop="@id/txtLastCot_layout"
                         android:layout_alignParentEnd="true"
 
                         android:background="@drawable/bg_btn_back"
-                        android:layout_alignTop="@id/txtLastCot_layout"
-                        android:src="@drawable/chart"/>
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/chart" />
 
                     <ImageView
                         android:id="@+id/imgCodeIn_details"
@@ -147,13 +147,17 @@
                         android:layout_alignBottom="@id/txtCode_details"
                         android:layout_toEndOf="@id/txtIn_layout"
                         android:src="@drawable/brl" />
+
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Clique no botão para visualizar em tela cheia"
-                        android:layout_below="@id/txtDate_details"
-                        android:layout_marginTop="15dp"
-                        android:textAlignment="center"/>
+                        android:layout_alignTop="@id/imgChart_details"
+                        android:layout_alignBottom="@id/imgChart_details"
+                        android:layout_toStartOf="@id/imgChart_details"
+                        android:layout_marginEnd="15dp"
+                        android:gravity="center"
+                        android:text="Tela cheia"
+                        android:textAlignment="center" />
 
 
                     <TextView
