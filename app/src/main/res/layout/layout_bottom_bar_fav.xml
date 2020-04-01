@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height ="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="#00F3F3F3"
             android:orientation="vertical">
@@ -32,13 +32,11 @@
                 <ImageButton
                     android:id="@+id/btnBack_btFav"
                     android:layout_width="28dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ic_arrow_gray_32p"
-                    android:onClick="backDetailsActivity"
+                    android:layout_height="28dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/bg_btn_back"
-                    android:layout_height="28dp"/>
-
+                    android:src="@drawable/ic_arrow_gray_32p" />
 
 
                 <TextView
@@ -46,16 +44,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:singleLine="true"
                     android:layout_marginTop="15dp"
-                    android:ellipsize="marquee"
                     android:layout_marginEnd="10dp"
-                     android:layout_toStartOf="@id/imgCodeTitle_btFav"
+                    android:layout_toStartOf="@id/imgCodeTitle_btFav"
+                    android:layout_toEndOf="@id/btnBack_btFav"
+                    android:ellipsize="marquee"
                     android:shadowColor="#A1868585"
                     android:shadowDx="3"
-                    android:layout_toEndOf="@id/btnBack_btFav"
                     android:shadowDy="3"
                     android:shadowRadius="15"
+                    android:singleLine="true"
                     android:textAlignment="textStart"
                     android:textColor="#444141"
                     android:textSize="25sp"
@@ -64,31 +62,30 @@
                 <ImageButton
                     android:id="@+id/btnMore_btFav"
                     android:layout_width="28dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_more_24dp"
-                    android:onClick="backDetailsActivity"
-                    android:layout_alignEnd="@id/imgCodeTitle_btFav"
-                    android:layout_alignStart="@id/imgCodeTitle_btFav"
-
+                    android:layout_height="28dp"
                     android:layout_below="@id/imgCodeTitle_btFav"
+                    android:layout_alignStart="@id/imgCodeTitle_btFav"
+                    android:layout_alignEnd="@id/imgCodeTitle_btFav"
+
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/bg_btn_back"
-                    android:layout_height="28dp"/>
+                    android:src="@drawable/ic_more_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Exibir detalhes e grafico"
                     android:layout_alignTop="@id/btnMore_btFav"
                     android:layout_alignBottom="@id/btnMore_btFav"
+                    android:layout_marginEnd="15dp"
                     android:layout_toStartOf="@id/btnMore_btFav"
-                    android:layout_marginEnd="15dp"/>
+                    android:text="Exibir detalhes e grafico" />
 
                 <ImageView
                     android:id="@+id/imgCodeTitle_btFav"
                     android:layout_width="48dp"
-                    android:layout_marginTop="15dp"
                     android:layout_height="48dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp" />
 
             </RelativeLayout>
@@ -154,8 +151,8 @@
                         android:layout_height="28dp"
                         android:layout_alignTop="@id/txtCode_btFav"
                         android:layout_alignBottom="@id/txtCode_btFav"
-                        android:src="@drawable/brl"
-                        android:layout_toEndOf="@id/txtIn_btFav" />
+                        android:layout_toEndOf="@id/txtIn_btFav"
+                        android:src="@drawable/brl" />
 
 
                     <TextView
@@ -293,7 +290,6 @@
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
-
 
 
         </LinearLayout>
