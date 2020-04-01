@@ -28,16 +28,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
+                <ImageButton
+                    android:id="@+id/btnBack_btFav"
+                    android:layout_width="28dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_arrow_gray_32p"
+                    android:onClick="backDetailsActivity"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/bg_btn_back"
+                    android:layout_height="28dp"/>
+
+
+
                 <TextView
                     android:id="@+id/txtNameTitle_btFav"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
+                    android:layout_marginStart="15dp"
+                    android:singleLine="true"
                     android:layout_marginTop="15dp"
+                    android:ellipsize="marquee"
                     android:layout_marginEnd="10dp"
-                    android:layout_toStartOf="@id/imgCodeTitle_btFav"
+                     android:layout_toStartOf="@id/imgCodeTitle_btFav"
                     android:shadowColor="#A1868585"
                     android:shadowDx="3"
+                    android:layout_toEndOf="@id/btnBack_btFav"
                     android:shadowDy="3"
                     android:shadowRadius="15"
                     android:textAlignment="textStart"
@@ -45,9 +61,32 @@
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
+                <ImageButton
+                    android:id="@+id/btnMore_btFav"
+                    android:layout_width="28dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_more_24dp"
+                    android:onClick="backDetailsActivity"
+                    android:layout_alignEnd="@id/imgCodeTitle_btFav"
+                    android:layout_alignStart="@id/imgCodeTitle_btFav"
+
+                    android:layout_below="@id/imgCodeTitle_btFav"
+                    android:background="@drawable/bg_btn_back"
+                    android:layout_height="28dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exibir detalhes e grafico"
+                    android:layout_alignTop="@id/btnMore_btFav"
+                    android:layout_alignBottom="@id/btnMore_btFav"
+                    android:layout_toStartOf="@id/btnMore_btFav"
+                    android:layout_marginEnd="15dp"/>
+
                 <ImageView
                     android:id="@+id/imgCodeTitle_btFav"
                     android:layout_width="48dp"
+                    android:layout_marginTop="15dp"
                     android:layout_height="48dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="20dp" />
@@ -58,9 +97,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="25sp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="6dp">
@@ -255,83 +294,6 @@
 
             </androidx.cardview.widget.CardView>
 
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true"
-                android:scrollbars="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="6dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:text="Últimas alterações"
-                                android:textAlignment="center"
-                                android:textSize="14sp" />
-
-
-                            <com.github.mikephil.charting.charts.LineChart
-                                android:id="@+id/chart_btFav"
-                                android:layout_width="match_parent"
-                                android:layout_height="200dp"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:layout_marginBottom="10dp" />
-
-                        </LinearLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/relative_prgoress_chart"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="#fff">
-
-                            <com.github.ybq.android.spinkit.SpinKitView
-                                android:id="@+id/progressChart_btFav"
-                                style="@style/SpinKitView.Small.ThreeBounce"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp"
-                                android:layout_centerInParent="true"
-                                android:background="#fff"
-                                app:SpinKit_Color="@color/colorPrimaryDark" />
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-            </ScrollView>
-
-            <Button
-                android:id="@+id/btnClose_btFav"
-                style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="40dp"
-                android:background="@drawable/bg_btn_splash"
-                android:shadowRadius="30"
-                android:text="Fechar"
-                android:textColor="#fff"
-                android:textSize="19sp" />
 
 
         </LinearLayout>
