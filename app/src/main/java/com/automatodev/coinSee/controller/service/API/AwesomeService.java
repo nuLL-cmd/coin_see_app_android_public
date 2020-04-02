@@ -26,6 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class AwesomeService {
@@ -34,13 +35,12 @@ public class AwesomeService {
     private Retrofit retrofit;
     private AwesomeRequest request;
     private String baseUrl = "https://economia.awesomeapi.com.br/";
-    private SwipeRefreshLayout sw;
 
     public AwesomeService(Activity context) {
         this.context = context;
-        sw = context.findViewById(R.id.swipte_main);
+
     }
-    public void requestAll(final AwesomeCallback callback) {
+    public void requestAll(final SwipeRefreshLayout sw, final AwesomeCallback callback) {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         request = retrofit.create(AwesomeRequest.class);
@@ -80,7 +80,7 @@ public class AwesomeService {
                 });
                 alerta.setView(v);
                 alerta.show();
-                sw.setRefreshing(false);
+                sw.setRefreshing(false);;
             }
         });
 
@@ -137,7 +137,32 @@ public class AwesomeService {
             }
         });
     }
+    public void requestRangeDays(String value, final AwesomeCallback callback){
+        retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        request = retrofit.create(AwesomeRequest.class);
+        Call<List<CoinChildr>> call = request.requestRangeDay(value,14);
+        call.enqueue(new Callback<List<CoinChildr>>() {
+            @Override
+            public void onResponse(Call<List<CoinChildr>> call, Response<List<CoinChildr>> response) {
+                if(response.isSuccessful()){
+                    if (response.body() != null){
+                        List<CoinChildr> coinChildrs = response.body();
+                        try {
+                            callback.onSucces(coinChildrs);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<List<CoinChildr>> call, Throwable t) {
+            }
+        });
+    }
     private List<CoinChildr> extractAll(String response){
         List<CoinChildr> listCoinChildr = new ArrayList<>();
         try{

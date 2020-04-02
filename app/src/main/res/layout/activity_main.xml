@@ -4,41 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="#00FFFFFF"
     android:orientation="vertical"
     tools:context=".view.activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:background="@drawable/bg_relative_main"
+        android:background="#00FFFFFF"
         android:orientation="vertical">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
 
             <TextView
                 android:id="@+id/lblTitle_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
                 android:layout_alignTop="@id/lblOla_main"
                 android:layout_alignBottom="@id/lblOla_main"
-                android:text="CoinSee"
+                android:layout_marginStart="25dp"
                 android:gravity="center"
+                android:text="CoinSee"
+                android:textColor="#fff"
                 android:textSize="19sp" />
 
             <TextView
                 android:id="@+id/lblOla_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_alignBottom="@id/lblUser_main"
                 android:layout_alignTop="@id/lblUser_main"
+                android:layout_alignBottom="@id/lblUser_main"
                 android:layout_toStartOf="@id/lblUser_main"
+                android:gravity="center"
                 android:text="Olá! "
+                android:textColor="#FFF"
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
@@ -46,12 +49,13 @@
                 android:id="@+id/lblUser_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:text=""
-                android:layout_alignBottom="@id/imgUser_main"
                 android:layout_alignTop="@id/imgUser_main"
+                android:layout_alignBottom="@id/imgUser_main"
+                android:layout_marginEnd="15dp"
                 android:layout_toStartOf="@id/imgUser_main"
                 android:gravity="center"
+                android:text=""
+                android:textColor="#fff"
 
                 android:textSize="19sp"
                 android:textStyle="bold" />
@@ -69,9 +73,9 @@
                 android:id="@+id/fbBolsa_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/lblUser_main"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="30dp"
-                android:layout_below="@id/lblUser_main"
                 android:backgroundTint="#fff"
                 android:elevation="0dp"
                 android:onClick="refreshList"
@@ -83,10 +87,10 @@
                 android:id="@+id/fbFav_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-
-                android:layout_marginEnd="35dp"
                 android:layout_alignTop="@id/fbBolsa_main"
+
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="35dp"
                 android:backgroundTint="#fff"
                 android:elevation="0dp"
                 android:onClick="actMainProfile"
@@ -116,14 +120,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fbProfile_main"
 
-
                 android:layout_alignStart="@id/fbProfile_main"
                 android:layout_marginTop="10sp"
                 android:text="Cotações"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="#fff" />
 
 
             <TextView
+                android:id="@+id/txtAtt_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fbBolsa_main"
@@ -131,28 +136,30 @@
                 android:layout_marginTop="10dp"
                 android:text="Atualizar"
                 android:textAlignment="center"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fbFav_main"
-
                 android:layout_alignStart="@id/fbFav_main"
+
                 android:layout_alignEnd="@id/fbFav_main"
                 android:layout_marginTop="10dp"
                 android:text="Perfil"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="#fff" />
 
             <RelativeLayout
                 android:id="@+id/relativeProgressUser_main"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_alignStart="@id/lblOla_main"
-                android:layout_alignEnd="@id/imgUser_main"
                 android:layout_alignTop="@id/imgUser_main"
+                android:layout_alignEnd="@id/imgUser_main"
                 android:layout_alignBottom="@id/imgUser_main"
-                android:background="#fff">
+                android:background="@color/colorPrimaryDark">
 
                 <com.github.ybq.android.spinkit.SpinKitView
                     android:id="@+id/progressUser_main"
@@ -161,13 +168,12 @@
                     android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="10dp"
-                    android:background="#FFF"
-                    app:SpinKit_Color="@color/colorPrimaryDark" />
-
-
+                    android:background="@color/colorPrimaryDark"
+                    app:SpinKit_Color="#FFF" />
 
 
             </RelativeLayout>
+
 
 
         </RelativeLayout>
@@ -177,50 +183,66 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="-130dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="-135dp"
+        android:background="#00FFFFFF">
 
         <com.github.ybq.android.spinkit.SpinKitView
-            android:id="@+id/progressChart_main"
+            android:id="@+id/progressData_main"
             style="@style/SpinKitView.Small.ThreeBounce"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="#fff"
+            android:layout_centerInParent="true"
+            android:background="#00FFFFFF"
             app:SpinKit_Color="@color/colorPrimaryDark" />
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:layout_width="match_parent"
-            android:id="@+id/swipte_main"
-            android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerCoin_main"
-                tools:listitem="@layout/layout_celula_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fbBolsa_main2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="30dp"
-            android:elevation="0dp"
-            android:onClick="refreshList"
-            android:layout_alignParentEnd="true"
-            android:visibility="gone"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="30dp"
+        <com.ogaclejapan.smarttablayout.SmartTabLayout
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_local_atm_white_24dp"
+            android:id="@+id/viewpagertab"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:stl_indicatorAlwaysInCenter="false"
+            app:stl_indicatorWithoutPadding="false"
+            app:stl_indicatorInFront="false"
+            app:stl_indicatorInterpolation="smart"
+            app:stl_indicatorGravity="bottom"
+            app:stl_indicatorColor="#fff"
+            app:stl_indicatorThickness="4dp"
+            android:background="@color/colorPrimaryDark"
+            app:stl_indicatorWidth="auto"
+            app:stl_indicatorCornerRadius="2dp"
+            app:stl_overlineColor="#8DFFFFFF"
+            app:stl_overlineThickness="0dp"
+            app:stl_underlineColor="#9AFFFFFF"
+            app:stl_underlineThickness="1dp"
+            app:stl_dividerColor="#A6FFFFFF"
+            app:stl_dividerThickness="0dp"
+            app:stl_defaultTabBackground="?attr/selectableItemBackground"
+            app:stl_defaultTabTextAllCaps="true"
+            app:stl_defaultTabTextColor="#fff"
+            app:stl_defaultTabTextSize="16sp"
+            app:stl_defaultTabTextHorizontalPadding="16dp"
+            app:stl_defaultTabTextMinWidth="0dp"
+            app:stl_distributeEvenly="true"
+            app:stl_clickable="true"
+            app:stl_titleOffset="24dp"
+            app:stl_drawDecorationAfterTab="false"
             />
 
 
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/viewpagertab"
+
+                />
+
+
+
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

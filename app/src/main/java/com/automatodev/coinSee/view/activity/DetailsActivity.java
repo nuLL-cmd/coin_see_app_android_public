@@ -21,6 +21,7 @@ import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
 import com.automatodev.coinSee.controller.callback.API.AlphaCallback;
+import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.CoinEntityAlpha;
 import com.automatodev.coinSee.controller.entity.CoinRangeEntityAlpha;
@@ -45,14 +46,16 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView txtCodeIn_details;
     private TextView txtHigh_details;
     private TextView txtLow_details;
+    private TextView txtProgress_details;
     private TextView txtPercent_details;
     private ImageView imgCode_details;
     private ImageView imgCodeIn_details;
     private ImageView imgFav_details;
     private ImageView imgUser_details;
     private TextView txtDate_details;
+    private ImageView imgSorry_details;
     private ConvertDataService convertDataService;
-    private AwesomeService task;
+    private AwesomeService awesomeService;
     private AlphaService alphaService;
     private ProgressBar progressChart_details;
     private RelativeLayout relativeChart_details;
@@ -69,7 +72,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        task = new AwesomeService(this);
+        awesomeService = new AwesomeService(this);
         alphaService = new AlphaService(this);
         txtCoinValue_details = findViewById(R.id.txtCoinValue_details);
         txtName_details = findViewById(R.id.txtName_details);
@@ -81,11 +84,13 @@ public class DetailsActivity extends AppCompatActivity {
         imgFav_details = findViewById(R.id.imgFav_details);
         imgUser_details = findViewById(R.id.imgUser_details);
         txtCode_details = findViewById(R.id.txtCode_details);
+        txtProgress_details = findViewById(R.id.txtProgress_details);
         txtDate_details = findViewById(R.id.txtDate_details);
         txtCodeIn_details = findViewById(R.id.txtCodeIn_details);
         progressChart_details = findViewById(R.id.progressChart_details);
         btnFullChart_details = findViewById(R.id.imgChart_details);
         relativeChart_details = findViewById(R.id.relativeChart_details);
+        imgSorry_details = findViewById(R.id.imgSorry_details);
         ThreeBounce three = new ThreeBounce();
         progressChart_details.setIndeterminateDrawable(three);
         convertDataService = new ConvertDataService();
@@ -117,7 +122,7 @@ public class DetailsActivity extends AppCompatActivity {
             if (coinChildr.isFav())
                 imgFav_details.setImageResource(R.drawable.ic_favorite_red_24dp);
             txtDate_details.setText(convertDataService.convertDate(coinChildr.getTimestamp().substring(0, 10)));
-            getDataChart(coinChildr.getCode() + "-" + coinChildr.getCodein());
+            getDataChart(coinChildr.getCode() + "-" + coinChildr.getCodein(),coinChildr.getCode(),coinChildr.getCodein() );
             btnFullChart_details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -135,8 +140,33 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
-    public void getDataChart(final String value) {
-        alphaService.getSingleDayService(coinChildr.getCode(), coinChildr.getCodein(), new AlphaCallback() {
+    public void getDataChart(String value, final String code, String codein) {
+        if (value.equals("USD-BRLT")){
+            txtProgress_details.setText("Desculpe, mas não há um gráfico \ndisponivel para esta cotação.");
+            progressChart_details.setVisibility(View.GONE);;
+            imgSorry_details.setVisibility(View.VISIBLE);
+            card.setAnimation(anim);
+            return;
+        }
+        if (code.equals("BTC") || code.equals("ETH") || code.equals("XRP") || code.equals("LTC")){
+            awesomeService.requestRangeDays(value, new AwesomeCallback() {
+                @Override
+                public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
+                    chartLine = new ChartLine(DetailsActivity.this, lineChart, coinChildrList, coinChildr.getName(),1);
+                    chartLine.makeGraph();
+                    card.setAnimation(anim);
+                    relativeChart_details.setVisibility(View.GONE);
+                    progressChart_details.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onSucces(CoinChildr coinChildr0) throws InterruptedException {
+
+                }
+            });
+            return;
+        }
+        alphaService.getSingleDayService(code, codein, new AlphaCallback() {
             @Override
             public void onSuccessSingle(CoinEntityAlpha coinEntityAlpha) {
             }

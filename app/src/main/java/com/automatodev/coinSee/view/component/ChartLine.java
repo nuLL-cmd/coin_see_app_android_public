@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 
 import com.automatodev.coinSee.R;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.CoinRangeEntityAlpha;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.github.mikephil.charting.charts.LineChart;
@@ -25,9 +26,11 @@ import java.util.Locale;
 public class ChartLine {
     private Activity context;
    private List<CoinRangeEntityAlpha> valueList;
+   private List<CoinChildr> coinChildrList;
     private LineChart chartGlobal;
     private ConvertDataService convertDataService;
     private String coinName;
+    private int serviceRequest;
 
     public ChartLine(Activity context, LineChart chartGlobal, List<CoinRangeEntityAlpha> valueList, String coinName) {
         this.context = context;
@@ -36,18 +39,43 @@ public class ChartLine {
         this.chartGlobal = chartGlobal;
         convertDataService = new ConvertDataService();
     }
+    public ChartLine(Activity context, LineChart chartGlobal, List<CoinChildr> coinChildrList, String coinName, int serviceRequest) {
+        this.context = context;
+        this.coinName = coinName;
+        this.coinChildrList = coinChildrList;
+        this.chartGlobal = chartGlobal;
+        this.serviceRequest = serviceRequest;
+        convertDataService = new ConvertDataService();
+    }
+
 
     public void makeGraph() {
         //Lista do tipo Entry que recebe um entry passando como pramatro os valores do eixo X e eixo y
         List<Entry> entradaTestes = new ArrayList<>();
-        for (int i = 1; i<=valueList.size();i++){
-            entradaTestes.add(new Entry(i-1, Float.parseFloat(valueList.get(valueList.size()-i).getClose())));
+
+        if(serviceRequest == 1){
+            for (int i = 1; i<=coinChildrList.size();i++){
+                entradaTestes.add(new Entry(i-1, Float.parseFloat(coinChildrList.get(coinChildrList.size()-i).getBid())));
+            }
+        }else{
+            for (int i = 1; i<=valueList.size();i++){
+                entradaTestes.add(new Entry(i-1, Float.parseFloat(valueList.get(valueList.size()-i).getClose())));
+            }
         }
+
         //Lista contendo as datas que substituira os valores de X no objeto Entry dentro do grafico
         final List<String> mxData = new ArrayList<>();
-        for (int i = 1; i<=valueList.size();i++){
-            mxData.add(convertDataService.convertDayString(valueList.get(valueList.size()-i).getDateRange()));
+
+        if (serviceRequest == 1){
+            for (int i = 1; i<=coinChildrList.size();i++){
+                mxData.add(convertDataService.convertDayMonth(coinChildrList.get(coinChildrList.size()-i).getTimestamp()));
+            }
+        }else{
+            for (int i = 1; i<=valueList.size();i++){
+                mxData.add(convertDataService.convertDayString(valueList.get(valueList.size()-i).getDateRange()));
+            }
         }
+
         //Configuração de dados do eixo X
         XAxis xAxis = chartGlobal.getXAxis(); //Inicia o eixo X
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //Dados(labels) do eixo X no Bottom do grafico
