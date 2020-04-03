@@ -66,6 +66,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageButton btnFullChart_details;
     private CoinChildr coinChildr;
     private List<CoinRangeEntityAlpha> listAux;
+    private List<CoinChildr> listChildr;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -98,11 +99,12 @@ public class DetailsActivity extends AppCompatActivity {
         anim = AnimationUtils.loadAnimation(this, R.anim.push_right);
         lineChart = findViewById(R.id.chart);
         listAux = new ArrayList<>();
+        listChildr = new ArrayList<>();
         getData();
     }
 
     public void getData() {
-        coinChildr = getIntent().getParcelableExtra("value");
+        coinChildr = (CoinChildr) getIntent().getSerializableExtra("value");
         UserEntity userEntity = getIntent().getParcelableExtra("user");
         if (coinChildr != null && userEntity != null) {
             Glide.with(this).load(userEntity.getUserPhoto()).into(imgUser_details);
@@ -126,12 +128,13 @@ public class DetailsActivity extends AppCompatActivity {
             btnFullChart_details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!ChartActivity.status && listAux.size() != 0) {
+                    if ((!ChartActivity.status) && (listAux.size() != 0 || listChildr.size() !=0)) {
                         Intent intent = new Intent(DetailsActivity.this, ChartActivity.class);
                         intent.putExtra("dataCoin", coinChildr.getName());
                         intent.putExtra("code", coinChildr.getCode());
                         intent.putExtra("codein", coinChildr.getCodein());
                         intent.putExtra("list", (Serializable) listAux);
+                        intent.putExtra("listAwaesome", (Serializable) listChildr);
                         startActivity(intent);
                     } else
                         Toast.makeText(DetailsActivity.this, "Por favor guarde o carregamento dos dados :D", Toast.LENGTH_SHORT).show();
@@ -152,6 +155,7 @@ public class DetailsActivity extends AppCompatActivity {
             awesomeService.requestRangeDays(value, new AwesomeCallback() {
                 @Override
                 public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {
+                    listChildr = coinChildrList;
                     chartLine = new ChartLine(DetailsActivity.this, lineChart, coinChildrList, coinChildr.getName(),1);
                     chartLine.makeGraph();
                     card.setAnimation(anim);
@@ -173,7 +177,6 @@ public class DetailsActivity extends AppCompatActivity {
 
             @Override
             public void onSuccessRange(final List<CoinRangeEntityAlpha> rangeList) {
-                listAux = new ArrayList<>();
                 for (int i = 0; i < 14; i++) {
                     listAux.add(rangeList.get(i));
                 }

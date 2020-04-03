@@ -1,16 +1,14 @@
 
 package com.automatodev.coinSee.controller.entity;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public class CoinChildr implements Parcelable {
+public class CoinChildr implements Serializable {
 
     @Expose
     private String ask;
@@ -72,7 +70,7 @@ public class CoinChildr implements Parcelable {
     public CoinChildr() {
     }
 
-    public CoinChildr(Parcel in) {
+/*    public CoinChildr(Parcel in) {
         ask = in.readString();
         bid = in.readString();
         code = in.readString();
@@ -87,9 +85,9 @@ public class CoinChildr implements Parcelable {
         ulrPhoto = in.readString();
         coinUid  = in.readString();
         fav = in.readByte() != 0;
-    }
+    }*/
 
-    public static final Creator<CoinChildr> CREATOR = new Creator<CoinChildr>() {
+/*    public static final Creator<CoinChildr> CREATOR = new Creator<CoinChildr>() {
         @Override
         public CoinChildr createFromParcel(Parcel in) {
             return new CoinChildr(in);
@@ -99,7 +97,7 @@ public class CoinChildr implements Parcelable {
         public CoinChildr[] newArray(int size) {
             return new CoinChildr[size];
         }
-    };
+    };*/
 
     public String getAsk() {
         return ask;
@@ -205,10 +203,10 @@ public class CoinChildr implements Parcelable {
         this.fav = fav;
     }
 
-    @Override
+/*    @Override
     public int describeContents() {
         return 0;
-    }
+    }*/
 
     public String getCoinUid() {
         return coinUid;
@@ -217,7 +215,7 @@ public class CoinChildr implements Parcelable {
     public void setCoinUid(String coinUid) {
         this.coinUid = coinUid;
     }
-
+/*
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(ask);
@@ -234,7 +232,7 @@ public class CoinChildr implements Parcelable {
         dest.writeString(ulrPhoto);
         dest.writeString(coinUid);
         dest.writeByte((byte) (fav ? 1 : 0));
-    }
+    }*/
 
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();

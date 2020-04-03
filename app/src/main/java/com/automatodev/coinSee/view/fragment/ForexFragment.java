@@ -85,7 +85,7 @@ public class ForexFragment extends Fragment {
         sw = view.findViewById(R.id.swipeForex_main);
         //progressChart_main = view.findViewById(R.id.progressChart_main);
         //------------------------------
-        anim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_right);
+        anim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_right_fast);
         //---------------------------------
         recyclerViewForex.hasFixedSize();
         recyclerViewForex.setLayoutManager(new LinearLayoutManager(getActivity()));

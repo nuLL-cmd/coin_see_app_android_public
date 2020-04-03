@@ -48,14 +48,226 @@
             android:textStyle="bold" />
 
 
+    <RelativeLayout
+        android:id="@+id/relativeDetails_fav"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark">
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_below="@id/txtTitle_profile"
         android:id="@+id/relative1"
         android:layout_width="match_parent"
-        android:layout_above="@id/cardDetails_fav"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="30dp">
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/cardDetails_fav"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="6dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/txtName_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dólar Comercial" />
+
+
+                <ImageView
+                    android:id="@+id/imgCode_btFav"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_below="@+id/txtName_btFav"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/txtCode_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgCode_btFav"
+                    android:layout_alignBottom="@id/imgCode_btFav"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/imgCode_btFav"
+                    android:gravity="center"
+                    android:text="USD"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/txtIn_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txtCode_btFav"
+                    android:layout_alignBottom="@id/txtCode_btFav"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/txtCode_btFav"
+                    android:gravity="center"
+                    android:text="--->" />
+
+                <ImageView
+                    android:id="@+id/imgCodeIn_btFav"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignTop="@id/txtCode_btFav"
+                    android:layout_alignBottom="@id/txtCode_btFav"
+                    android:layout_toEndOf="@id/txtIn_btFav"
+                    android:src="@drawable/brl" />
+
+
+                <TextView
+                    android:id="@+id/txtCodeIn_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgCodeIn_btFav"
+                    android:layout_alignBottom="@id/imgCodeIn_btFav"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/imgCodeIn_btFav"
+                    android:gravity="center"
+                    android:text="BRL"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/txtCoinValue_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txtName_btFav"
+                    android:layout_alignParentEnd="true"
+                    android:shadowColor="#AAA9A9"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="13"
+                    android:text="$4.39"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/txtHigh_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgCode_btFav"
+                    android:layout_marginTop="20sp"
+                    android:drawableStart="@drawable/ic_arrowup_4dp"
+                    android:text="$4.41"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/viewVar_btFav"
+                    android:layout_alignStart="@id/viewVar_btFav"
+                    android:layout_alignEnd="@id/viewVar_btFav"
+                    android:layout_marginBottom="5dp"
+                    android:text="Variação"
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
+
+                <View
+                    android:id="@+id/viewVar_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="3dp"
+                    android:layout_alignBottom="@id/txtHigh_btFav"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_toStartOf="@id/txtLow_btFav"
+                    android:layout_toEndOf="@id/txtHigh_btFav"
+                    android:background="#DBDBDB" />
+
+                <TextView
+                    android:id="@+id/txtLow_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txtHigh_btFav"
+                    android:layout_alignBottom="@id/txtHigh_btFav"
+                    android:layout_alignParentEnd="true"
+                    android:drawableStart="@drawable/ic_arrowdown_24dp"
+                    android:text="$4.28"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDate_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLastCot_btFav"
+                    android:text="2020-03-03"
+                    android:textAlignment="center"
+                    android:textColor="#FB8C00"
+                    android:textSize="13sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/txtLastCot_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtHigh_btFav"
+                    android:layout_marginTop="25dp"
+                    android:text="Atualizado:"
+                    android:textColor="#FB8C00"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/txtPercent_btFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/viewVar_btFav"
+                    android:layout_alignStart="@id/viewVar_btFav"
+                    android:layout_alignEnd="@id/viewVar_btFav"
+                    android:layout_marginTop="5dp"
+                    android:text="0.55%"
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:id="@+id/imgFav_btFav"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@id/txtDate_btFav"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_favorite_red_24dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_detais_btFav"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff">
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressDetails_btFav"
+                    style="@style/SpinKitView.Small.ThreeBounce"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:background="#fff"
+                    app:SpinKit_Color="@color/colorPrimaryDark" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <RelativeLayout
             android:id="@+id/relativeNothing_fav"
@@ -95,214 +307,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerFav_fav"
             android:layout_width="match_parent"
+            android:layout_above="@id/cardDetails_fav"
             android:layout_height="match_parent"
             tools:listitem="@layout/layout_celula_fav" />
 
 
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_alignParentBottom="true"
-        android:id="@+id/cardDetails_fav"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:visibility="gone"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="6dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
-
-            <TextView
-                android:id="@+id/txtName_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dólar Comercial" />
-
-
-            <ImageView
-                android:id="@+id/imgCode_btFav"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_below="@+id/txtName_btFav"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:id="@+id/txtCode_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/imgCode_btFav"
-                android:layout_alignBottom="@id/imgCode_btFav"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/imgCode_btFav"
-                android:gravity="center"
-                android:text="USD"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/txtIn_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/txtCode_btFav"
-                android:layout_alignBottom="@id/txtCode_btFav"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_toEndOf="@id/txtCode_btFav"
-                android:gravity="center"
-                android:text="--->" />
-
-            <ImageView
-                android:id="@+id/imgCodeIn_btFav"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_alignTop="@id/txtCode_btFav"
-                android:layout_alignBottom="@id/txtCode_btFav"
-                android:layout_toEndOf="@id/txtIn_btFav"
-                android:src="@drawable/brl" />
-
-
-            <TextView
-                android:id="@+id/txtCodeIn_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/imgCodeIn_btFav"
-                android:layout_alignBottom="@id/imgCodeIn_btFav"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/imgCodeIn_btFav"
-                android:gravity="center"
-                android:text="BRL"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/txtCoinValue_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/txtName_btFav"
-                android:layout_alignParentEnd="true"
-                android:shadowColor="#AAA9A9"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="13"
-                android:text="$4.39"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/txtHigh_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imgCode_btFav"
-                android:layout_marginTop="20sp"
-                android:drawableStart="@drawable/ic_arrowup_4dp"
-                android:text="$4.41"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/viewVar_btFav"
-                android:layout_alignStart="@id/viewVar_btFav"
-                android:layout_alignEnd="@id/viewVar_btFav"
-                android:layout_marginBottom="5dp"
-                android:text="Variação"
-                android:textAlignment="center"
-                android:textSize="10sp" />
-
-            <View
-                android:id="@+id/viewVar_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="3dp"
-                android:layout_alignBottom="@id/txtHigh_btFav"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_toStartOf="@id/txtLow_btFav"
-                android:layout_toEndOf="@id/txtHigh_btFav"
-                android:background="#DBDBDB" />
-
-            <TextView
-                android:id="@+id/txtLow_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/txtHigh_btFav"
-                android:layout_alignBottom="@id/txtHigh_btFav"
-                android:layout_alignParentEnd="true"
-                android:drawableStart="@drawable/ic_arrowdown_24dp"
-                android:text="$4.28"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtDate_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtLastCot_btFav"
-                android:text="2020-03-03"
-                android:textAlignment="center"
-                android:textColor="#FB8C00"
-                android:textSize="13sp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/txtLastCot_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtHigh_btFav"
-                android:layout_marginTop="25dp"
-                android:text="Atualizado:"
-                android:textColor="#FB8C00"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/txtPercent_btFav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/viewVar_btFav"
-                android:layout_alignStart="@id/viewVar_btFav"
-                android:layout_alignEnd="@id/viewVar_btFav"
-                android:layout_marginTop="5dp"
-                android:text="0.55%"
-                android:textAlignment="center"
-                android:textSize="10sp" />
-
-            <ImageView
-                android:id="@+id/imgFav_btFav"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_alignBottom="@id/txtDate_btFav"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_favorite_red_24dp" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relative_detais_btFav"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff">
-
-            <com.github.ybq.android.spinkit.SpinKitView
-                android:id="@+id/progressDetails_btFav"
-                style="@style/SpinKitView.Small.ThreeBounce"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_centerInParent="true"
-                android:background="#fff"
-                app:SpinKit_Color="@color/colorPrimaryDark" />
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

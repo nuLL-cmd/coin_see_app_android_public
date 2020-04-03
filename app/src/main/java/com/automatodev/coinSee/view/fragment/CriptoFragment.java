@@ -82,7 +82,7 @@ public class CriptoFragment extends Fragment {
         sw = view.findViewById(R.id.swipeCripto_main);
         //progressChart_main = view.findViewById(R.id.progressChart_main);
         //------------------------------
-        anim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_right);
+        anim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_right_fast);
         //---------------------------------
         recyclerCriptoMain.hasFixedSize();
         recyclerCriptoMain.setLayoutManager(new LinearLayoutManager(getActivity()));

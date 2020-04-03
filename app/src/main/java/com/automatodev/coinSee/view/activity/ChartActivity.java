@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 import com.automatodev.coinSee.R;
+import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.CoinRangeEntityAlpha;
 import com.automatodev.coinSee.view.component.ChartLine;
 import com.github.mikephil.charting.charts.LineChart;
 
 import java.util.List;
-
 
 public class ChartActivity extends AppCompatActivity {
     public static boolean status;
@@ -24,6 +24,7 @@ public class ChartActivity extends AppCompatActivity {
     private RelativeLayout relativeChart_chart;
     private ProgressBar progressChart_chart;
     private TextView txtTitleCoin_chart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,24 +40,30 @@ public class ChartActivity extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             List<CoinRangeEntityAlpha> l = (List<CoinRangeEntityAlpha>) bundle.getSerializable("list");
+            List<CoinChildr> c = (List<CoinChildr>) bundle.getSerializable("listAwaesome");
             txtTitleCoin_chart.setText(bundle.getString("dataCoin"));
-            chartLine = new ChartLine(ChartActivity.this, lineChart, l, bundle.getString("dataCoin"));
+            if (l.size() == 0) {
+                chartLine = new ChartLine(ChartActivity.this, lineChart, c, bundle.getString("dataCoin"), 1);
+            } else
+                chartLine = new ChartLine(ChartActivity.this, lineChart, l, bundle.getString("dataCoin"));
             chartLine.makeGraph();
             relativeChart_chart.setVisibility(View.GONE);
             progressChart_chart.setVisibility(View.GONE);
         }
     }
-    public void backDetailsActivity(View view){
+
+    public void backDetailsActivity(View view) {
         NavUtils.navigateUpFromSameTask(ChartActivity.this);
     }
+
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         status = true;
-
     }
+
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         status = false;
     }

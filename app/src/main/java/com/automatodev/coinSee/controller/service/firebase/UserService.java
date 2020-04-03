@@ -74,6 +74,7 @@ public class UserService {
                                 okAnimation_progress.addAnimatorListener(new Animator.AnimatorListener() {
                                     @Override
                                     public void onAnimationStart(Animator animation) {
+
                                     }
 
                                     @Override
@@ -91,6 +92,9 @@ public class UserService {
                                     }
                                 });
 
+                            }
+                            if (okAnimation_progress.getProgress() != 0){
+                                verifyUserAndLogin();
                             }
                         }
                     });
@@ -112,6 +116,7 @@ public class UserService {
         txtLabel_progress.setText("Só um momento...");
         alerta.setCancelable(false);
         alerta.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         alerta.setView(v);
         alerta.show();
         userFirebase.loginUserFirebase(email, pass, new FAuthCallback() {
@@ -124,24 +129,33 @@ public class UserService {
                     okAnimation_progress.addAnimatorListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
+
                         }
 
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             alerta.dismiss();
                             verifyUserAndLogin();
+
                         }
 
                         @Override
                         public void onAnimationCancel(Animator animation) {
+
                         }
 
                         @Override
                         public void onAnimationRepeat(Animator animation) {
                         }
                     });
+                        if (okAnimation_progress.getProgress() != 0){
+                            verifyUserAndLogin();
+                        }
+
+                    }
                 }
-            }
+
+
 
             @Override
             public void onFailure(Exception e) {
@@ -189,11 +203,11 @@ public class UserService {
                     alerta.dismiss();
                     final AlertDialog alertOk = new AlertDialog.Builder(context).create();
                     alertOk.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                    View viewOk = context.getLayoutInflater().inflate(R.layout.layout_message,null);
+                    View viewOk = context.getLayoutInflater().inflate(R.layout.layout_message, null);
                     TextView txtTitle_message = viewOk.findViewById(R.id.txtTitle_message);
                     TextView txtLabel_message = viewOk.findViewById(R.id.txtLabel_message);
                     txtTitle_message.setText("Sucesso!");
-                    txtLabel_message.setText("Um email foi enviado para "+email+ "para a redefinição da senha." +
+                    txtLabel_message.setText("Um email foi enviado para " + email + "para a redefinição da senha." +
                             "\nFavor verifique a lixeira e/ou a caixa de  sapam.");
                     Button btnDismiss_message = viewOk.findViewById(R.id.btnDismiss_message);
                     alertOk.dismiss();
@@ -206,7 +220,6 @@ public class UserService {
                             context.finish();
                         }
                     });
-
                 }
             }
 

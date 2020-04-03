@@ -24,7 +24,6 @@ import com.automatodev.coinSee.controller.callback.API.AwesomeCallback;
 import com.automatodev.coinSee.controller.callback.firebase.FCoinCallback;
 import com.automatodev.coinSee.controller.entity.CoinChildr;
 import com.automatodev.coinSee.controller.entity.UserEntity;
-import com.automatodev.coinSee.controller.service.API.AlphaService;
 import com.automatodev.coinSee.controller.service.API.AwesomeService;
 import com.automatodev.coinSee.controller.service.ConvertDataService;
 import com.automatodev.coinSee.controller.service.firebase.FavCoinService;
@@ -55,10 +54,8 @@ public class FavActivity extends AppCompatActivity {
     private ProgressBar progressFav_fav;
     private UserEntity userEntity;
     private RelativeLayout relativeNothing_fav;
-    private AlphaService alphaService;
     private CardView cardDetails_fav;
     private Animation anim;
-    private Animation anim2;
 
     private TextView txtCoinValue_btFav;
     private TextView txtName_btFav;
@@ -91,13 +88,11 @@ public class FavActivity extends AppCompatActivity {
         txtCodeIn_btFav = findViewById(R.id.txtCodeIn_btFav);
         relative_detais_btFav = findViewById(R.id.relative_detais_btFav);
         awesomeService = new AwesomeService(this);
-        alphaService = new AlphaService(this);
         convertDataService = new ConvertDataService();
         favCoinService = new FavCoinService(this);
         favAdapter = new FavAdapter(this, null);
-        animation = AnimationUtils.loadAnimation(this, R.anim.push_right);
-        anim = AnimationUtils.loadAnimation(this, R.anim.push_right);
-        anim2 = AnimationUtils.loadAnimation(this, R.anim.push_left);
+        animation = AnimationUtils.loadAnimation(this, R.anim.push_right_fast);
+        anim = AnimationUtils.loadAnimation(this, R.anim.push_right_fast);
         ThreeBounce three = new ThreeBounce();
         progressFav_fav.setIndeterminateDrawable(three);
         recyclerFav_fav.hasFixedSize();

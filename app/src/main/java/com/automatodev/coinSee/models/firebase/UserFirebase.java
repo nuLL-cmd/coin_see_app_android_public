@@ -94,6 +94,8 @@ public class UserFirebase {
                                                             public void onAnimationRepeat(Animator animation) {
                                                             }
                                                         });
+                                                        if (okAnimation_progress.getProgress() != 0)
+                                                           alerta.dismiss();
                                                     }
                                                 });
                                     }
