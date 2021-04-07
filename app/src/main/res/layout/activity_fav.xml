@@ -48,14 +48,6 @@
             android:textStyle="bold" />
 
 
-    <RelativeLayout
-        android:id="@+id/relativeDetails_fav"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark">
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_below="@id/txtTitle_profile"

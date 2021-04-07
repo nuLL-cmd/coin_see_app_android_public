@@ -80,7 +80,6 @@ public class CriptoFragment extends Fragment {
         //--------------------------
         recyclerCriptoMain = view.findViewById(R.id.recyclerCripto_main);
         sw = view.findViewById(R.id.swipeCripto_main);
-        //progressChart_main = view.findViewById(R.id.progressChart_main);
         //------------------------------
         anim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.push_right_fast);
         //---------------------------------

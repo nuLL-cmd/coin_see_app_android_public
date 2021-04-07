@@ -14,6 +14,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:padding="20dp"
+        android:animateLayoutChanges="true"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_height="wrap_content">
 
         <TextView
