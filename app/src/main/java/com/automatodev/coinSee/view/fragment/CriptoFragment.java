@@ -54,6 +54,7 @@ public class CriptoFragment extends Fragment {
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fils.png?alt=media&token=902ea792-01b0-44d9-b5d7-d0f974513ab9",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Feth.png?alt=media&token=03e1d490-c897-4a9a-8a96-3245e5297e7d",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fxrp.png?alt=media&token=3a238ebf-9e21-43a5-a193-82790d074d27",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fdog.png?alt=media&token=70704650-5a84-49b1-854d-d31969ec5827"
     };
     private Animation anim2;
     private CoinAdapter coinAdapter;
@@ -101,6 +102,14 @@ public class CriptoFragment extends Fragment {
         task.requestAll(sw,new AwesomeCallback() {
             @Override
             public void onSucces(final List<CoinChildr> coinChildrList) {
+                if (coinChildrList.size() > 16){
+                    List<CoinChildr> child = new ArrayList<>();
+                    for(int i = 0; i<16; i++){
+                        child.add(coinChildrList.get(i));
+                    }
+                    coinChildrList.clear();
+                    coinChildrList.addAll(child);
+                }
                 for (int i = 0; i < coinChildrList.size(); i++)
                     coinChildrList.get(i).setUlrPhoto(urls[i]);
                 favCoinService.getFavCoinService(MainActivity.uid, new FCoinCallback() {
@@ -110,6 +119,7 @@ public class CriptoFragment extends Fragment {
 
                     @Override
                     public void onCompleteReturn(List<CoinChildr> list) {
+
                         for (int i = 0; i < coinChildrList.size(); i++) {
                             for (int j = 0; j < list.size(); j++) {
                                 if (coinChildrList.get(i).getName().equals(list.get(j).getName()))
@@ -118,7 +128,7 @@ public class CriptoFragment extends Fragment {
                         }
                         if (coinCripotList.size() != 0) {
                             for (CoinChildr c : coinChildrList) {
-                                if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC"))
+                                if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC") || c.getCode().equals("DOGE"))
                                     coinCriptoAuxList.add(c);
                             }
 
@@ -136,7 +146,7 @@ public class CriptoFragment extends Fragment {
                             return;
                         }
                         for (CoinChildr c : coinChildrList) {
-                            if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC"))
+                            if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC") || c.getCode().equals("DOGE"))
                                 coinCripotList.add(c);
                         }
                         coinAdapter.setCoinChildrs(coinCripotList);

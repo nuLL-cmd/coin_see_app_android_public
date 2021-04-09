@@ -151,7 +151,7 @@ public class DetailsActivity extends AppCompatActivity {
             card.setAnimation(anim);
             return;
         }
-        if (code.equals("BTC") || code.equals("ETH") || code.equals("XRP") || code.equals("LTC")){
+        if (code.equals("BTC") || code.equals("ETH") || code.equals("XRP") || code.equals("LTC")  || code.equals("DOGE")){
             awesomeService.requestRangeDays(value, new AwesomeCallback() {
                 @Override
                 public void onSucces(List<CoinChildr> coinChildrList) throws InterruptedException {

@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,7 @@ import com.automatodev.coinSee.view.activity.DetailsActivity;
 import com.automatodev.coinSee.view.activity.MainActivity;
 import com.automatodev.coinSee.view.adapter.CoinAdapter;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ import java.util.UUID;
 public class ForexFragment extends Fragment {
    // private ProgressBar progressChart_main;
     private RecyclerView recyclerViewForex;
+    private ConstraintLayout layout;
     private SwipeRefreshLayout sw;
 
     public static boolean status;
@@ -55,6 +58,7 @@ public class ForexFragment extends Fragment {
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fils.png?alt=media&token=902ea792-01b0-44d9-b5d7-d0f974513ab9",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Feth.png?alt=media&token=03e1d490-c897-4a9a-8a96-3245e5297e7d",
             "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fxrp.png?alt=media&token=3a238ebf-9e21-43a5-a193-82790d074d27",
+            "https://firebasestorage.googleapis.com/v0/b/coinsee-7cbb3.appspot.com/o/codCoin%2Fdog.png?alt=media&token=70704650-5a84-49b1-854d-d31969ec5827"
     };
 
     private Animation anim2;
@@ -82,6 +86,7 @@ public class ForexFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //--------------------------
         recyclerViewForex = view.findViewById(R.id.recyclerForex_main);
+        layout = view.findViewById(R.id.constraint_fragmentForex);
         sw = view.findViewById(R.id.swipeForex_main);
         //progressChart_main = view.findViewById(R.id.progressChart_main);
         //------------------------------
@@ -103,70 +108,85 @@ public class ForexFragment extends Fragment {
     public void refreshData() {
         if (coinForexList.size() != 0)
             sw.setRefreshing(true);
-        task.requestAll(sw,new AwesomeCallback() {
-            @Override
-            public void onSucces(final List<CoinChildr> coinChildrList) {
-                for (int i = 0; i < coinChildrList.size(); i++)
-                    coinChildrList.get(i).setUlrPhoto(urls[i]);
-                favCoinService.getFavCoinService(MainActivity.uid, new FCoinCallback() {
-                    @Override
-                    public void onComplete(Task<QuerySnapshot> task) {
-                    }
-
-                    @Override
-                    public void onCompleteReturn(List<CoinChildr> list) {
-                        for (int i = 0; i < coinChildrList.size(); i++) {
-                            for (int j = 0; j < list.size(); j++) {
-                                if (coinChildrList.get(i).getName().equals(list.get(j).getName()))
-                                    coinChildrList.get(i).setFav(list.get(j).isFav());
-                            }
+        try{
+            task.requestAll(sw,new AwesomeCallback() {
+                @Override
+                public void onSucces(final List<CoinChildr> coinChildrList) {
+                    if (coinChildrList.size() > 16){
+                        List<CoinChildr> child = new ArrayList<>();
+                        for(int i = 0; i<16; i++){
+                            child.add(coinChildrList.get(i));
                         }
-                        if (coinForexList.size() != 0) {
+                        coinChildrList.clear();
+                        coinChildrList.addAll(child);
+                    }
+                    for (int i = 0; i < coinChildrList.size(); i++)
+                        coinChildrList.get(i).setUlrPhoto(urls[i]);
+                    favCoinService.getFavCoinService(MainActivity.uid, new FCoinCallback() {
+                        @Override
+                        public void onComplete(Task<QuerySnapshot> task) {
+                        }
+
+                        @Override
+                        public void onCompleteReturn(List<CoinChildr> list) {
+                            for (int i = 0; i < coinChildrList.size(); i++) {
+                                for (int j = 0; j < list.size(); j++) {
+                                    if (coinChildrList.get(i).getName().equals(list.get(j).getName()))
+                                        coinChildrList.get(i).setFav(list.get(j).isFav());
+                                }
+                            }
+                            if (coinForexList.size() != 0) {
+                                for (CoinChildr c : coinChildrList) {
+                                    if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC") || c.getCode().equals("DOGE"))
+                                        coinForexAuxList.add(c);
+                                }
+                                coinChildrList.removeAll(coinForexAuxList);
+
+                                for (int i = 0; i < coinForexList.size(); i++) {
+                                    if (coinForexList.get(i) != coinChildrList.get(i)) {
+                                        coinForexList.remove(i);
+                                        coinForexList.add(i, coinChildrList.get(i));
+                                    }
+                                }
+                                coinAdapter.setCoinChildrs(coinForexList);
+                                coinAdapter.notifyDataSetChanged();
+                                sClick(coinForexList);
+                                sw.setRefreshing(false);
+                                return;
+                            }
                             for (CoinChildr c : coinChildrList) {
-                                if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC"))
+                                if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC") || c.getCode().equals("DOGE"))
                                     coinForexAuxList.add(c);
+
                             }
                             coinChildrList.removeAll(coinForexAuxList);
 
-                            for (int i = 0; i < coinForexList.size(); i++) {
-                                if (coinForexList.get(i) != coinChildrList.get(i)) {
-                                    coinForexList.remove(i);
-                                    coinForexList.add(i, coinChildrList.get(i));
-                                }
-                            }
+                            coinForexList = coinChildrList;
                             coinAdapter.setCoinChildrs(coinForexList);
-                            coinAdapter.notifyDataSetChanged();
+                            recyclerViewForex.setAdapter(coinAdapter);
+                            recyclerViewForex.setAnimation(anim2);
+                            //progressChart_main.setVisibility(View.GONE);
                             sClick(coinForexList);
+                            MainActivity.progressChart_main.setVisibility(View.GONE);
                             sw.setRefreshing(false);
-                            return;
                         }
-                        for (CoinChildr c : coinChildrList) {
-                            if (c.getCode().equals("BTC") || c.getCode().equals("ETH") || c.getCode().equals("XRP") || c.getCode().equals("LTC"))
-                                coinForexAuxList.add(c);
 
+                        @Override
+                        public void onFailure(Exception e) {
                         }
-                        coinChildrList.removeAll(coinForexAuxList);
+                    });
+                }
 
-                        coinForexList = coinChildrList;
-                        coinAdapter.setCoinChildrs(coinForexList);
-                        recyclerViewForex.setAdapter(coinAdapter);
-                        recyclerViewForex.setAnimation(anim2);
-                        //progressChart_main.setVisibility(View.GONE);
-                        sClick(coinForexList);
-                        MainActivity.progressChart_main.setVisibility(View.GONE);
-                        sw.setRefreshing(false);
-                    }
+                @Override
+                public void onSucces(CoinChildr coinChildr0) throws InterruptedException {
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+            Snackbar.make(layout, "Ops! Tivemos um problema ao carregar os dados! Ja estamos providenciao os ajustes.", Snackbar.LENGTH_SHORT).show();
 
-                    @Override
-                    public void onFailure(Exception e) {
-                    }
-                });
-            }
+        }
 
-            @Override
-            public void onSucces(CoinChildr coinChildr0) throws InterruptedException {
-            }
-        });
     }
     private void sClick(final List<CoinChildr> coinChildrList) {
         coinAdapter.setOnItemClickListener(new CoinAdapter.OnItemClickListener() {

@@ -160,7 +160,7 @@ public class AlphaService {
     }
 
     //###########################################
-/*    Ssrviço que manipulara os resultados do intervalo de dias e devolverar em forma de tipo para a view
+/*    Srviço que manipulara os resultados do intervalo de dias e devolverar em forma de tipo para a view
     Por padrao limita em 100 resultados.*/
     public void getSingleDayService(String from, String to, final AlphaCallback callback) {
         Call<String> call = alphaRequest.getSingleRangeDay(DAILY, from, to, APIKEY);
